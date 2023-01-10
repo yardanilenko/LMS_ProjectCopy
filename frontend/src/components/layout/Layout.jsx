@@ -11,10 +11,10 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
+import {NavLink} from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -27,44 +27,33 @@ function Layout({children}) {
 
     const drawer = (
         <div>
-            <Toolbar />
-            <Divider />
+            <Toolbar/>
+            <Divider/>
             <List>
-                {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                    <ListItem key={text} disablePadding>
-                        <ListItemButton>
-                            <ListItemIcon>
-                                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                            </ListItemIcon>
-                            <ListItemText primary={text} />
-                        </ListItemButton>
-                    </ListItem>
-                ))}
+                <NavItem to="/calendar">Календарь</NavItem>
+                <NavItem to="/review">Код ревью</NavItem>
+                <NavItem to="/lectures">Материалы лекции</NavItem>
+                <NavItem to="/chats">Чаты</NavItem>
+                <NavItem to="/votes">Голосования</NavItem>
+                <NavItem to="/pairs">Пары</NavItem>
+                <NavItem to="/groups">Группы</NavItem>
+                <NavItem to="/wiki">Вики</NavItem>
             </List>
-            <Divider />
+            <Divider/>
             <List>
-                {['All mail', 'Trash', 'Spam'].map((text, index) => (
-                    <ListItem key={text} disablePadding>
-                        <ListItemButton>
-                            <ListItemIcon>
-                                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                            </ListItemIcon>
-                            <ListItemText primary={text} />
-                        </ListItemButton>
-                    </ListItem>
-                ))}
+                <NavItem to="/profile">Профиль</NavItem>
             </List>
         </div>
     );
 
     return (
-        <Box sx={{ display: 'flex' }}>
-            <CssBaseline />
+        <Box sx={{display: 'flex'}}>
+            <CssBaseline/>
             <AppBar
                 position="fixed"
                 sx={{
-                    width: { sm: `calc(100% - ${drawerWidth}px)` },
-                    ml: { sm: `${drawerWidth}px` },
+                    width: {sm: `calc(100% - ${drawerWidth}px)`},
+                    ml: {sm: `${drawerWidth}px`},
                 }}
             >
                 <Toolbar>
@@ -73,9 +62,9 @@ function Layout({children}) {
                         aria-label="open drawer"
                         edge="start"
                         onClick={handleDrawerToggle}
-                        sx={{ mr: 2, display: { sm: 'none' } }}
+                        sx={{mr: 2, display: {sm: 'none'}}}
                     >
-                        <MenuIcon />
+                        <MenuIcon/>
                     </IconButton>
                     <Typography variant="h6" noWrap component="div">
                         LMS
@@ -84,7 +73,7 @@ function Layout({children}) {
             </AppBar>
             <Box
                 component="nav"
-                sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+                sx={{width: {sm: drawerWidth}, flexShrink: {sm: 0}}}
                 aria-label="mailbox folders"
             >
                 {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
@@ -96,8 +85,8 @@ function Layout({children}) {
                         keepMounted: true, // Better open performance on mobile.
                     }}
                     sx={{
-                        display: { xs: 'block', sm: 'none' },
-                        '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+                        display: {xs: 'block', sm: 'none'},
+                        '& .MuiDrawer-paper': {boxSizing: 'border-box', width: drawerWidth},
                     }}
                 >
                     {drawer}
@@ -105,8 +94,8 @@ function Layout({children}) {
                 <Drawer
                     variant="permanent"
                     sx={{
-                        display: { xs: 'none', sm: 'block' },
-                        '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+                        display: {xs: 'none', sm: 'block'},
+                        '& .MuiDrawer-paper': {boxSizing: 'border-box', width: drawerWidth},
                     }}
                     open
                 >
@@ -115,13 +104,29 @@ function Layout({children}) {
             </Box>
             <Box
                 component="main"
-                sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
+                sx={{flexGrow: 1, p: 3, width: {sm: `calc(100% - ${drawerWidth}px)`}}}
             >
-                <Toolbar />
+                <Toolbar/>
                 {children}
             </Box>
         </Box>
     );
+}
+
+const NavItem = ({to, children}) => {
+    return (
+        <NavLink to={to} style={{textDecoration: 'none', color: 'inherit'}}>
+            {({isActive}) => (
+                <ListItem disablePadding>
+                    <ListItemButton selected={isActive}>
+                        <ListItemIcon><InboxIcon/>
+                        </ListItemIcon>
+                        <ListItemText primary={children}/>
+                    </ListItemButton>
+                </ListItem>
+            )}
+        </NavLink>
+    )
 }
 
 export default Layout;
