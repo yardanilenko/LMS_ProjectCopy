@@ -38,7 +38,9 @@ app.use(session(sessionConfig));
 
 const PORT = process.env.PORT || 3100;
 
+
 app.listen(PORT, (err) => {
   if (err) return console.log('Ошибка запуска сервера.', err.message);
+
   console.log(`Сервер запущен на http://localhost:${PORT} `);
 });
