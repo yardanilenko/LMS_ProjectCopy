@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       this.belongsTo(models.User, { foreignKey: 'id' });
       this.belongsTo(models.Group, { foreignKey: 'id' });
+      this.hasMany(models.Answer, { foreignKey: 'vote_id' });
     }
   }
   Vote.init({
