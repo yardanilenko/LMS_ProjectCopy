@@ -1,15 +1,39 @@
-import React, {useMemo} from 'react'
-import moment from 'moment'
+import React, {useMemo, useEffect} from 'react'
 import {
     Calendar,
     Views,
-    momentLocalizer,
+    dateFnsLocalizer,
 } from 'react-big-calendar'
 import 'react-big-calendar/lib/css/react-big-calendar.css';
-import {useEffect} from "react";
+import format from 'date-fns/format'
+import parse from 'date-fns/parse'
+import startOfWeek from 'date-fns/startOfWeek'
+import getDay from 'date-fns/getDay'
+import ru from 'date-fns/locale/ru'
 
+const locales = {
+    'ru': ru,
+}
 
-const mLocalizer = momentLocalizer(moment)
+const localizer = dateFnsLocalizer({
+    format,
+    parse,
+    startOfWeek,
+    getDay,
+    locales,
+})
+
+const messages = {
+        week: 'Неделя',
+        work_week: 'Рабочая неделя',
+        day: 'День',
+        month: 'Месяц',
+        previous: 'Предыдущий',
+        next: 'Следующий',
+        today: 'Сегодня',
+        agenda: 'Повестка дня',
+        showMore: (total) => `+${total} еще`,
+    }
 
 const ColoredDateCellWrapper = ({children}) =>
     React.cloneElement(React.Children.only(children), {
@@ -19,7 +43,7 @@ const ColoredDateCellWrapper = ({children}) =>
     })
 
 
-function DatePicker({ localizer = mLocalizer, ...props }) {
+function DatePicker({...props }) {
     const {components, defaultDate, views} = useMemo(
         () => ({
             components: {
@@ -48,6 +72,7 @@ function DatePicker({ localizer = mLocalizer, ...props }) {
                     description: member.Event.description,
                     //TODO: add output of description
                 }))
+                console.log(events)
                setEvents(events)
             })
     }, []);
@@ -56,6 +81,7 @@ function DatePicker({ localizer = mLocalizer, ...props }) {
     return (
         <div className="height600" {...props}>
             <Calendar
+                culture="ru"
                 components={components}
                 defaultDate={defaultDate}
                 events={events}
@@ -65,6 +91,7 @@ function DatePicker({ localizer = mLocalizer, ...props }) {
                 step={60}
                 views={views}
                 style={{height: 500}}
+                messages={messages}
             />
         </div>
     );

@@ -11,3 +11,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.rbc-calendar .rbc-header {
+  padding: 10px 0;
+}
+
+.rbc-calendar .rbc-toolbar-label::before {
+  content: "События ";
+}
