@@ -12,7 +12,6 @@ exports.allEvents = async (req, res) => {
                     model: Event,
 
                 },
-            attributes: ['Event.id']
             }
         );
         console.log(allEvents);
