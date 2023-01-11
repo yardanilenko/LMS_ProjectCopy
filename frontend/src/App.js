@@ -1,12 +1,13 @@
 import './App.css';
 import {Routes, Route} from "react-router-dom";
 import Layout from "./components/layout/Layout";
+import DatePicker from "./components/datepicker/DatePicker";
 
 function App() {
   return (
     <Layout>
       <Routes>
-          <Route path="/calendar" element={<div>Календарь</div>}/>
+          <Route path="/calendar" element={<DatePicker />}/>
           <Route path="/review" element={<div>Код ревью</div>}/>
           <Route path="/profile" element={<div>Профиль</div>}/>
           <Route path="/lectures" element={<div>Материалы лекции</div>}/>
