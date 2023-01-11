@@ -18,6 +18,8 @@ module.exports = {
           model: "Users",
           key: "id",
         },
+        onDelete: 'cascade',
+        onUpdate: 'cascade',
       },
       createdAt: {
         allowNull: false,
@@ -29,7 +31,7 @@ module.exports = {
       }
     });
   },
-  async down(queryInterface, Sequelize) {
+  async down(queryInterface,) {
     await queryInterface.dropTable('Answers');
   }
 };

@@ -12,18 +12,15 @@ const dbCheck = require('./db/dbCheck');
 const eventsRouter = require('./routes/events');
 const groupsRouter = require('./routes/groups');
 const groupRouter = require('./routes/group');
+const votesRouter = require('./routes/votes');
 
 // вызов функции проверки соединения с базой данных
 dbCheck();
-
-
 
 app.use(express.static(path.resolve('public')));
 app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
-
 
 const sessionConfig = {
   name: 'myLmsCookie',
@@ -40,6 +37,7 @@ const sessionConfig = {
 app.use(session(sessionConfig));
 
 app.use('/', eventsRouter);
+app.use('/', votesRouter);
 app.use('/', groupsRouter);
 app.use('/', groupRouter);
 

@@ -4,6 +4,8 @@ import Layout from "./components/layout/Layout";
 import DatePicker from "./components/datepicker/DatePicker";
 import Groups from './pages/Groups/Groups';
 import Group from './pages/Group/Group';
+import VoteList from "./components/vote/VoteList";
+import VoteForm from "./components/vote/VoteForm";
 
 function App() {
   let { id } = useParams();
@@ -15,7 +17,8 @@ function App() {
           <Route path="/profile" element={<div>Профиль</div>}/>
           <Route path="/lectures" element={<div>Материалы лекции</div>}/>
           <Route path="/chats" element={<div>Чаты</div>}/>
-          <Route path="/votes" element={<div>Голосования</div>}/>
+          <Route path="/votes" element={<VoteList />}/>
+          <Route path="/votes/create" element={<VoteForm />}/>
           <Route path="/pairs" element={<div>Пары</div>}/>
           <Route path="/groups" element={<Groups/>}/>
           <Route path="/groups">
