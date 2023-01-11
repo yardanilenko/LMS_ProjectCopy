@@ -42,11 +42,11 @@ function DatePicker({ localizer = mLocalizer, ...props }) {
         }).then(res => res.json())
             .then(data => {
                 const events = data.map((member) => ({
-                    id: member.Event.id,
                     title: member.Event.name,
                     start: new Date(member.Event.start),
                     end: new Date(member.Event.finish),
                     description: member.Event.description,
+                    //TODO: add output of description
                 }))
                setEvents(events)
             })
