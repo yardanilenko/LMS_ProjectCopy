@@ -9,19 +9,21 @@ const session = require('express-session');
 const FileStore = require('session-file-store')(session);
 const dbCheck = require('./db/dbCheck');
 // импорт роутов
-// const globTable = require('./routes/globTable');
+const eventsRouter = require('./routes/events');
+const groupsRouter = require('./routes/groups');
+const groupRouter = require('./routes/group');
 
 // вызов функции проверки соединения с базой данных
 dbCheck();
 
-const eventsRouter = require('./routes/events');
+
 
 app.use(express.static(path.resolve('public')));
 app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.use('/', eventsRouter);
+
 
 const sessionConfig = {
   name: 'myLmsCookie',
@@ -37,7 +39,9 @@ const sessionConfig = {
 
 app.use(session(sessionConfig));
 
-// app.use('/', globTable);
+app.use('/', eventsRouter);
+app.use('/', groupsRouter);
+app.use('/', groupRouter);
 
 const PORT = process.env.PORT || 3100;
 
