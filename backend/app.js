@@ -15,10 +15,16 @@ const userinfoRoutes = require('./routes/userinfoRoutes');
 // вызов функции проверки соединения с базой данных
 dbCheck();
 
+const eventsRouter = require('./routes/events');
+const votesRouter = require('./routes/votes');
+
 app.use(express.static(path.resolve('public')));
 app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+app.use('/', eventsRouter);
+app.use('/', votesRouter);
 
 const sessionConfig = {
   name: 'myLmsCookie',
