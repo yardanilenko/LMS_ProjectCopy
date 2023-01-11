@@ -15,6 +15,9 @@ import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import LastPageIcon from '@mui/icons-material/LastPage';
 import { useTheme } from '@mui/material/styles';
 import { useEffect } from "react";
+import Button from '@mui/material/Button';
+import AddIcon from '@mui/icons-material/Add';
+import {useNavigate} from "react-router-dom";
 
 function TablePaginationActions(props) {
     const theme = useTheme();
@@ -70,7 +73,7 @@ function TablePaginationActions(props) {
     );
 }
 
-function VoteList(props) {
+function VoteList() {
 
     const [page, setPage] = React.useState(1);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -102,7 +105,13 @@ function VoteList(props) {
         setPage(0);
     };
 
+    const navigate = useNavigate();
+
     return (
+        <div>
+        <Button onClick={() => navigate("/votes/create")} variant="contained" startIcon={<AddIcon />}>
+            ADD
+        </Button>
         <TableContainer component={Paper}>
             <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
                 <TableBody>
@@ -151,6 +160,7 @@ function VoteList(props) {
                 </TableFooter>
             </Table>
         </TableContainer>
+        </div>
     );
 }
 

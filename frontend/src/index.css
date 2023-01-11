@@ -19,3 +19,7 @@ code {
 .rbc-calendar .rbc-toolbar-label::before {
   content: "События ";
 }
+
+h1 {
+  text-align: center;
+}

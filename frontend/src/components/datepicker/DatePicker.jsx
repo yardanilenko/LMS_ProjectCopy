@@ -90,7 +90,7 @@ function DatePicker({...props }) {
                 showMultiDayTimes
                 step={60}
                 views={views}
-                style={{height: 500}}
+                style={{height: 700}}
                 messages={messages}
             />
         </div>
