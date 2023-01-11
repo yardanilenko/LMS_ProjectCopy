@@ -12,11 +12,11 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       this.belongsTo(models.User, { foreignKey: 'id' });
       this.belongsTo(models.Group, { foreignKey: 'id' });
-      this.hasMany(models.Question, { foreignKey: "vote_id" });
     }
   }
   Vote.init({
     name: DataTypes.TEXT,
+    data: DataTypes.TEXT,
     user_id: DataTypes.INTEGER,
     group_id: DataTypes.INTEGER
   }, {
