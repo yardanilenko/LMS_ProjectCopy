@@ -6,6 +6,7 @@ import {
     momentLocalizer,
 } from 'react-big-calendar'
 import 'react-big-calendar/lib/css/react-big-calendar.css';
+import {useEffect} from "react";
 
 
 const mLocalizer = momentLocalizer(moment)
@@ -30,17 +31,34 @@ function DatePicker({ localizer = mLocalizer, ...props }) {
         []
     )
 
+    const [events, setEvents] = React.useState([]);
+
+    useEffect(() => {
+        fetch('/events', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(res => res.json())
+            .then(data => {
+                const events = data.map((member) => ({
+                    id: member.Event.id,
+                    title: member.Event.name,
+                    start: new Date(member.Event.start),
+                    end: new Date(member.Event.finish),
+                    description: member.Event.description,
+                }))
+               setEvents(events)
+            })
+    }, []);
+
+
     return (
         <div className="height600" {...props}>
             <Calendar
                 components={components}
                 defaultDate={defaultDate}
-                events={[{
-                    id: 1,
-                    title: 'All Day Event very long title',
-                    start: new Date(2023, 0, 11, 10, 30, 0),
-                    end: new Date(2023, 0, 11, 12, 30, 0),
-                }]}
+                events={events}
                 localizer={localizer}
                 // max={max}
                 showMultiDayTimes
