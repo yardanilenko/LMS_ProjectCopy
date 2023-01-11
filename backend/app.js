@@ -8,6 +8,7 @@ const path = require('path');
 const session = require('express-session');
 const FileStore = require('session-file-store')(session);
 const dbCheck = require('./db/dbCheck');
+const userinfoRoutes = require('./routes/userinfoRoutes');
 // импорт роутов
 // const globTable = require('./routes/globTable');
 
@@ -34,6 +35,7 @@ const sessionConfig = {
 app.use(session(sessionConfig));
 
 // app.use('/', globTable);
+app.use('/', userinfoRoutes);
 
 const PORT = process.env.PORT || 3100;
 

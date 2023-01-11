@@ -1,6 +1,7 @@
 import './App.css';
 import {Routes, Route} from "react-router-dom";
 import Layout from "./components/layout/Layout";
+import Profile from "./components/profile/Profile";
 
 function App() {
   return (
@@ -8,7 +9,7 @@ function App() {
       <Routes>
           <Route path="/calendar" element={<div>Календарь</div>}/>
           <Route path="/review" element={<div>Код ревью</div>}/>
-          <Route path="/profile" element={<div>Профиль</div>}/>
+          <Route path="/profile" element={<Profile/>}/>
           <Route path="/lectures" element={<div>Материалы лекции</div>}/>
           <Route path="/chats" element={<div>Чаты</div>}/>
           <Route path="/votes" element={<div>Голосования</div>}/>
