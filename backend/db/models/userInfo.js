@@ -21,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
     telegram: DataTypes.TEXT,
     github: DataTypes.TEXT,
     photo: DataTypes.TEXT,
+    email: DataTypes.TEXT,
     user_id: DataTypes.INTEGER,
   }, {
     sequelize,

@@ -30,6 +30,9 @@ module.exports = {
       photo: {
         type: Sequelize.TEXT
       },
+      email: {
+        type: Sequelize.TEXT
+      },
       user_id: {
         type: Sequelize.INTEGER,
         references: {

@@ -19,13 +19,6 @@ module.exports = {
           key: "id",
         },
       },
-      question_id: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: "Questions",
-          key: "id",
-        },
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
