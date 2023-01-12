@@ -75,9 +75,10 @@ function TablePaginationActions(props) {
 
 function VoteList() {
 
-    const [page, setPage] = React.useState(1);
+    const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
     const [votes, setVotes] = React.useState([]);
+
 
     useEffect(() => {
         fetch('/votes', {
@@ -87,7 +88,7 @@ function VoteList() {
             }
         }).then(res => res.json())
             .then(data => {
-                console.log(data);
+                setVotes(data);
             })
     }, []);
 
@@ -107,6 +108,18 @@ function VoteList() {
 
     const navigate = useNavigate();
 
+    const handleDelete = (id) => {
+        fetch(`/votes/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(res => res.json())
+            .then(data => {
+                setVotes(data => data.filter(vote => vote.id !== id));
+            })
+    }
+
     return (
         <div>
         <Button onClick={() => navigate("/votes/create")} variant="contained" startIcon={<AddIcon />}>
@@ -118,16 +131,13 @@ function VoteList() {
                     {(rowsPerPage > 0
                             ? votes.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                             : votes
-                    ).map((row) => (
-                        <TableRow key={row.name}>
+                    ).map((vote) => (
+                        <TableRow key={vote.id}>
                             <TableCell component="th" scope="row">
-                                {row.name}
+                                {vote.name}
                             </TableCell>
                             <TableCell style={{ width: 160 }} align="right">
-                                {row.calories}
-                            </TableCell>
-                            <TableCell style={{ width: 160 }} align="right">
-                                {row.fat}
+                                <Button variant="contained" onClick={() => handleDelete(vote.id)}>Удалить</Button>
                             </TableCell>
                         </TableRow>
                     ))}

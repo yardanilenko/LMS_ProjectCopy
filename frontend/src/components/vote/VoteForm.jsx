@@ -8,6 +8,8 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
+import {useNavigate} from "react-router-dom";
+import ButtonGroup from '@mui/material/ButtonGroup';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -44,6 +46,8 @@ function VoteForm() {
 
     const [groups, setGroups] = React.useState([]);
 
+    const navigate = useNavigate();
+
     const onSubmit = (data) => {
         fetch('/votes', {
             method: 'POST',
@@ -61,7 +65,7 @@ function VoteForm() {
             })
         }).then(res => res.json())
             .then(data => {
-                console.log(data);
+                navigate('/votes');
             })
     };
 
@@ -93,19 +97,23 @@ function VoteForm() {
                     label="Тема голосования"
                     {...register(`title`, {required: true})}
                 />
+                <div style={{margin: "30px 0",display:"flex",justifyContent:"space-between"}}>
                 <TextField
+                    sx={{width: "45%"}}
                     required
                     id="outlined-required"
-                    label="Минимальное количество голосов"
+                    label="Минимальное кол-во голосов"
                     {...register(`min`, {required: true})}
                 />
                 <TextField
+                    sx={{width: "45%"}}
                     required
                     id="outlined-required"
-                    label="Максимальное количество голосов"
+                    label="Максимальное кол-во голосов"
                     {...register(`max`, {required: true})}
                 />
-                <div style={{margin: "30px 0"}}>
+                </div>
+                <div  style={{marginBottom: "20px"}}>
                     {fields.map((item, index) => {
                         return (
                             <div key={item.id} style={{display: "flex"}}>
@@ -118,6 +126,7 @@ function VoteForm() {
                                             value={field.value}
                                             onChange={field.onChange}
                                             fullWidth
+                                            style={{marginBottom: "10px"}}
                                             placeholder="Введите вариант ответа"
                                         />
                                     )}
@@ -129,7 +138,7 @@ function VoteForm() {
                         );
                     })}
                 </div>
-                <section>
+                <ButtonGroup variant="contained" aria-label="outlined primary button group">
                     <Button
                         variant="contained"
                         type="button"
@@ -165,7 +174,7 @@ function VoteForm() {
                     >
                         reset
                     </Button>
-                </section>
+                </ButtonGroup>
                 <Controller
                     name={`access`}
                     control={control}
