@@ -5,22 +5,22 @@ import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
 import { Grid } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
-import IconButton from '@mui/material/IconButton';
-import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
-import { Link } from 'react-router-dom'
 import TextField from '@mui/material/TextField';
 import { useNavigate } from 'react-router-dom'
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
+import Profileeditphoto from '../profileeditphoto/profileeditphoto';
 
 export default function Profileedit() {
-  
   let navigate = useNavigate()
 
     const [data, setData] = useState();
     const initialState = { city: '', phone: '', telegram: '', email: '', github: '' }
     const [datainput, setDatainput] = useState(initialState);
+    const [img, setImg] = useState(null)
+    const [avatar, setAvatar] = useState(null)
+    const [ImgSrc, setImgSrc] = useState('');
 
     const formHandler = (e) => {
       // console.log('=====>', e.target.value, e.target.name)
@@ -28,6 +28,20 @@ export default function Profileedit() {
       setDatainput((preMy) => ({ ...preMy, [e.target.name]: e.target.value }))
     }
 
+    const sendFile = async () => {
+      try {
+        const data = new FormData()
+        data.append('avatar', img, img.name)
+        console.log(img)
+        await fetch('/uploadavatar', {
+          method: 'POST',
+          body: data,
+      })
+      .then(res => setAvatar(res.data.path))
+      } catch (error) {
+        
+      }
+    }
     const updateInfo = async () => {
         await fetch(
             "/updateinfo",
@@ -46,6 +60,7 @@ export default function Profileedit() {
                 }),
             }
         )
+        navigate('/profile')
     };
     
 
@@ -59,15 +74,19 @@ export default function Profileedit() {
           ).json();
           // set state when the data received
           setData(data);
-          console.log(data.Group.name)
+          setImgSrc(`/images/${data?.photo}`)
+          // console.log(data.photo)
         };
         dataFetch();
       }, []);
 
       // let myCity = data?.city !== undefined ? data?.city : "загрузка..."
 
+       function handleChange (event) {
+        setImg(event.target.files[0])
+      }
+
   return (
-    <>
     <Box>
     <Grid container spacing={2} columns={16}>
     <Grid item xs={8}>
@@ -155,17 +174,19 @@ export default function Profileedit() {
   <Grid item xs={8}>
   <Avatar
         alt="Remy Sharp"
-        src={data?.photo}
+        src={ImgSrc}
         sx={{ width: 250, height: 250 }}
       />
-            <IconButton color="primary" aria-label="upload picture" component="label">
+      {/* <Profileeditphoto ImgSrc = {ImgSrc}/> */}
+            {/* <IconButton color="primary" aria-label="upload picture" component="label">
         <input hidden accept="image/*" type="file" />
         <PhotoCamera />
-      </IconButton>
-      <Button variant="contained" color="success" component={Link} to="/profile" onClick={updateInfo}>Cохранить</Button>
+      </IconButton> */}
+      <input type="file" onChange={handleChange}/>
+      <button onClick={sendFile}>Изменить аватар</button>
+      <Button variant="contained" color="success" onClick={updateInfo}>Cохранить</Button>
   </Grid>
   </Grid>
   </Box>
-  </>
   )
 }
