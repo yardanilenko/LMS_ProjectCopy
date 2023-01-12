@@ -8,6 +8,8 @@ import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import { Link } from 'react-router-dom'
 import TextField from '@mui/material/TextField';
 import { useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react';
@@ -15,7 +17,37 @@ import { useState, useEffect } from 'react';
 export default function Profileedit() {
   
   let navigate = useNavigate()
+
     const [data, setData] = useState();
+    const initialState = { city: '', phone: '', telegram: '', email: '', github: '' }
+    const [datainput, setDatainput] = useState(initialState);
+
+    const formHandler = (e) => {
+      // console.log('=====>', e.target.value, e.target.name)
+      console.log(datainput)
+      setDatainput((preMy) => ({ ...preMy, [e.target.name]: e.target.value }))
+    }
+
+    const updateInfo = async () => {
+        await fetch(
+            "/updateinfo",
+            {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    user_id: 6,
+                    city: datainput.city,
+                    phone: datainput.phone,
+                    telegram: datainput.telegram,
+                    github: datainput.github,
+                    email: datainput.email
+                }),
+            }
+        )
+    };
+    
 
     useEffect(() => {
         // fetch data
@@ -32,10 +64,11 @@ export default function Profileedit() {
         dataFetch();
       }, []);
 
-      let myCity = data?.city !== undefined ? data?.city : "загрузка..."
+      // let myCity = data?.city !== undefined ? data?.city : "загрузка..."
 
   return (
     <>
+    <Box>
     <Grid container spacing={2} columns={16}>
     <Grid item xs={8}>
     <List
@@ -62,8 +95,10 @@ export default function Profileedit() {
       <TextField
           id="filled-helperText"
           label="Город"
-          defaultValue={myCity}
+          defaultValue=""
           variant="filled"
+          onChange={formHandler}
+          name="city"
         />
     </ListItem>
     <Divider component="li" />
@@ -74,6 +109,8 @@ export default function Profileedit() {
           label="Телефон"
           defaultValue=""
           variant="filled"
+          onChange={formHandler}
+          name="phone"
         />
     </ListItem>
     <Divider component="li" />
@@ -84,6 +121,8 @@ export default function Profileedit() {
           label="Телеграм"
           defaultValue=""
           variant="filled"
+          onChange={formHandler}
+          name="telegram"
         />
     </ListItem>
     <Divider component="li" />
@@ -94,6 +133,8 @@ export default function Profileedit() {
           label="Email"
           defaultValue=""
           variant="filled"
+          onChange={formHandler}
+          name="email"
         />
     </ListItem>
     <Divider component="li" />
@@ -104,6 +145,8 @@ export default function Profileedit() {
           label="Github"
           defaultValue=""
           variant="filled"
+          onChange={formHandler}
+          name="github"
         />
     </ListItem>
     <Divider component="li" />
@@ -119,9 +162,10 @@ export default function Profileedit() {
         <input hidden accept="image/*" type="file" />
         <PhotoCamera />
       </IconButton>
-      <Button variant="contained" color="success" onClick={() => navigate("/profile")}>Cохранить</Button>
+      <Button variant="contained" color="success" component={Link} to="/profile" onClick={updateInfo}>Cохранить</Button>
   </Grid>
   </Grid>
+  </Box>
   </>
   )
 }
