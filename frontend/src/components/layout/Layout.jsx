@@ -12,6 +12,14 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import MenuIcon from '@mui/icons-material/Menu';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import MarkUnreadChatAltIcon from '@mui/icons-material/MarkUnreadChatAlt';
+import AutoStoriesIcon from '@mui/icons-material/AutoStories';
+import GroupsIcon from '@mui/icons-material/Groups';
+import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
+import ThumbsUpDownIcon from '@mui/icons-material/ThumbsUpDown';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import {NavLink} from "react-router-dom";
@@ -30,18 +38,18 @@ function Layout({children}) {
             <Toolbar/>
             <Divider/>
             <List>
-                <NavItem to="/calendar">Календарь</NavItem>
-                <NavItem to="/review">Код ревью</NavItem>
+                <NavItem to="/calendar" icon={<CalendarMonthIcon />}>Календарь</NavItem>
+                <NavItem to="/review" icon={<RemoveRedEyeIcon />}>Код ревью</NavItem>
                 <NavItem to="/lectures">Материалы лекции</NavItem>
-                <NavItem to="/chats">Чаты</NavItem>
-                <NavItem to="/votes">Голосования</NavItem>
-                <NavItem to="/pairs">Пары</NavItem>
-                <NavItem to="/groups">Группы</NavItem>
-                <NavItem to="/wiki">Вики</NavItem>
+                <NavItem to="/chats" icon={<MarkUnreadChatAltIcon />}>Чаты</NavItem>
+                <NavItem to="/votes" icon={<ThumbsUpDownIcon />}>Голосования</NavItem>
+                <NavItem to="/pairs" icon={<PeopleAltIcon />}>Пары</NavItem>
+                <NavItem to="/groups" icon={<GroupsIcon />}>Группы</NavItem>
+                <NavItem to="/wiki" icon={<AutoStoriesIcon />}>Вики</NavItem>
             </List>
             <Divider/>
             <List>
-                <NavItem to="/profile">Профиль</NavItem>
+                <NavItem to="/profile" icon={<AccountCircleIcon />}>Профиль</NavItem>
             </List>
         </div>
     );
@@ -113,13 +121,14 @@ function Layout({children}) {
     );
 }
 
-const NavItem = ({to, children}) => {
+const NavItem = ({to, children, icon}) => {
     return (
         <NavLink to={to} style={{textDecoration: 'none', color: 'inherit'}}>
             {({isActive}) => (
                 <ListItem disablePadding>
                     <ListItemButton selected={isActive}>
-                        <ListItemIcon><InboxIcon/>
+                        <ListItemIcon>
+                            {icon || <InboxIcon/>}
                         </ListItemIcon>
                         <ListItemText primary={children}/>
                     </ListItemButton>
