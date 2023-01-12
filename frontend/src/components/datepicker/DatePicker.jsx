@@ -58,7 +58,7 @@ function DatePicker({...props }) {
     const [events, setEvents] = React.useState([]);
 
     useEffect(() => {
-        fetch('/events', {
+        fetch('/api/events', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'

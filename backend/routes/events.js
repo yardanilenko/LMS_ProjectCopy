@@ -3,7 +3,7 @@ const route = express.Router();
 const { allEvents } = require('../controllers/events')
 
 route
-    .get('/events', allEvents)
+    .get('/api/events', allEvents)
 
 
 module.exports = route;

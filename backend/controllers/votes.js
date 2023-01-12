@@ -1,4 +1,4 @@
-const { Vote } = require("../db/models");
+const {Vote, Answer} = require("../db/models");
 
 exports.allVotes = async (req, res) => {
     // const user_id = req.params.user_id;
@@ -35,7 +35,7 @@ exports.deleteVote = async (req, res) => {
     try {
         const vote = await Vote.findByPk(req.params.id);
         await vote.destroy();
-         // TODO: user id from session
+        // TODO: user id from session
         const user_id = 1;
         const allVotes = await Vote.findAll({
                 where: {
@@ -46,5 +46,31 @@ exports.deleteVote = async (req, res) => {
         res.json(allVotes)
     } catch (error) {
         console.log('ERROR DELETE==>', error.message);
+    }
+}
+
+exports.getVoteById = async (req, res) => {
+    try {
+        const vote = await Vote.findByPk(req.params.id);
+        res.json(vote);
+    } catch (error) {
+        console.log('ERROR GET==>', error.message);
+    }
+};
+
+exports.createVoteAnswer = async (req, res) => {
+    const user_id = 1;
+    //TODO: user id from session
+    const {id} = req.params;
+    const data = JSON.stringify(req.body.data);
+    try {
+        const answer = await Answer.create({
+            data,
+            user_id,
+            vote_id: id
+        });
+        res.status(201).json(answer);
+    } catch (error) {
+        console.log('ERROR CREATE ANSWER==>', error.message);
     }
 }

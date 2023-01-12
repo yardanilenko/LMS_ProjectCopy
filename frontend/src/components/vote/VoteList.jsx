@@ -81,7 +81,7 @@ function VoteList() {
 
 
     useEffect(() => {
-        fetch('/votes', {
+        fetch('/api/votes', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -109,13 +109,13 @@ function VoteList() {
     const navigate = useNavigate();
 
     const handleDelete = (id) => {
-        fetch(`/votes/${id}`, {
+        fetch(`/api/votes/${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
             }
         }).then(res => res.json())
-            .then(data => {
+            .then(() => {
                 setVotes(data => data.filter(vote => vote.id !== id));
             })
     }
@@ -133,7 +133,7 @@ function VoteList() {
                             : votes
                     ).map((vote) => (
                         <TableRow key={vote.id}>
-                            <TableCell component="th" scope="row">
+                            <TableCell style={{cursor:"pointer"}} component="th" scope="row" onClick={() => navigate(`/votes/${vote.id}`)}>
                                 {vote.name}
                             </TableCell>
                             <TableCell style={{ width: 160 }} align="right">

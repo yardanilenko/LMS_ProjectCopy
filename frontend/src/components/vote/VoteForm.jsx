@@ -49,7 +49,7 @@ function VoteForm() {
     const navigate = useNavigate();
 
     const onSubmit = (data) => {
-        fetch('/votes', {
+        fetch('/api/votes', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -64,7 +64,7 @@ function VoteForm() {
                 }
             })
         }).then(res => res.json())
-            .then(data => {
+            .then(() => {
                 navigate('/votes');
             })
     };
@@ -138,6 +138,7 @@ function VoteForm() {
                         );
                     })}
                 </div>
+                <section style={{textAlign:"center"}}>
                 <ButtonGroup variant="contained" aria-label="outlined primary button group">
                     <Button
                         variant="contained"
@@ -175,11 +176,13 @@ function VoteForm() {
                         reset
                     </Button>
                 </ButtonGroup>
+                </section>
+                <div style={{display:"flex", justifyContent:"center"}}>
                 <Controller
                     name={`access`}
                     control={control}
                     render={({field}) => (
-                <FormControl sx={{m: 1, width: 300}}>
+                <FormControl sx={{m: 1, width: 300, margin:"30px 0"}}>
                     <InputLabel id="groupSelectLabel">Доступ</InputLabel>
                     <Select
                         labelId="groupSelectLabel"
@@ -207,7 +210,8 @@ function VoteForm() {
                 </FormControl>
                         )}
                     />
-                <div>
+                </div>
+                <div style={{textAlign:"center"}}>
                 <Button variant="contained" type="submit">Создать</Button>
                 </div>
             </form>
