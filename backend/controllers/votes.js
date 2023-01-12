@@ -50,9 +50,27 @@ exports.deleteVote = async (req, res) => {
 }
 
 exports.getVoteById = async (req, res) => {
+    // TODO: user id from session
+    const user_id = 1;
     try {
         const vote = await Vote.findByPk(req.params.id);
-        res.json(vote);
+        const answer = await Answer.findOne({
+            where: {
+                vote_id: req.params.id,
+                user_id,
+            }
+        });
+        const allAnswers = await Answer.findAll({
+            where: {
+                vote_id: req.params.id,
+            }
+        });
+        res.json({
+            ...vote.dataValues,
+            isAnswered: !!answer,
+            answer: answer ? answer.dataValues : null,
+            allAnswers: allAnswers.map(item => JSON.parse(item.dataValues.data))
+        });
     } catch (error) {
         console.log('ERROR GET==>', error.message);
     }
