@@ -1,12 +1,16 @@
 const { Vote } = require("../db/models");
 
 exports.allVotes = async (req, res) => {
-
+    // const user_id = req.params.user_id;
+    const user_id = 1;
     try {
-        const allEvents = await Vote.findAll({}
+        const allVotes = await Vote.findAll({
+                where: {
+                    user_id
+                }
+            }
         );
-        console.log(allEvents);
-        res.json(allEvents)
+        res.json(allVotes)
     } catch (error) {
         console.log('ERROR LIST==>', error.message);
     }
@@ -24,5 +28,23 @@ exports.createVote = async (req, res) => {
         res.status(201).json(newVote);
     } catch (error) {
         console.log('ERROR CREATE==>', error.message);
+    }
+}
+
+exports.deleteVote = async (req, res) => {
+    try {
+        const vote = await Vote.findByPk(req.params.id);
+        await vote.destroy();
+         // TODO: user id from session
+        const user_id = 1;
+        const allVotes = await Vote.findAll({
+                where: {
+                    user_id
+                }
+            }
+        );
+        res.json(allVotes)
+    } catch (error) {
+        console.log('ERROR DELETE==>', error.message);
     }
 }
