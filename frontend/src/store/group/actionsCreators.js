@@ -1,7 +1,6 @@
 import {INIT_GROUP} from "./actionsTypes";
 
 export const initGroupAC = (id) => async (dispatch) => {
-  console.log("Hello");
     try {
         const response = await fetch(`/groups/${id}`);
         const group = await response.json();
