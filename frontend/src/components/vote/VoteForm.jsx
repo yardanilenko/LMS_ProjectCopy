@@ -1,11 +1,9 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useForm, useFieldArray, Controller} from "react-hook-form";
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Select from '@mui/material/Select';
-import Chip from '@mui/material/Chip';
-import {useTheme} from '@mui/material/styles';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
@@ -21,15 +19,6 @@ const MenuProps = {
         },
     },
 };
-
-function getStyles(name, personName, theme) {
-    return {
-        fontWeight:
-            personName.indexOf(name) === -1
-                ? theme.typography.fontWeightRegular
-                : theme.typography.fontWeightMedium,
-    };
-}
 
 function VoteForm() {
 
@@ -53,21 +42,41 @@ function VoteForm() {
         name: "options"
     });
 
-    const theme = useTheme();
-    const [personName, setPersonName] = React.useState([]);
-    const [groups, setGroups] = React.useState(['bears', 'tigers', 'bunnies', 'kittens', 'puppies']);
+    const [groups, setGroups] = React.useState([]);
 
-    const handleChange = (event) => {
-        const {
-            target: {value},
-        } = event;
-        setPersonName(
-            // On autofill we get a stringified value.
-            typeof value === 'string' ? value.split(',') : value,
-        );
+    const onSubmit = (data) => {
+        fetch('/votes', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                name: data.title,
+                group_id: data.access,
+                data: {
+                    min: data.min,
+                    max: data.max,
+                    options: data.options
+                }
+            })
+        }).then(res => res.json())
+            .then(data => {
+                console.log(data);
+            })
     };
 
-    const onSubmit = (data) => console.log("data", data);
+    useEffect(() => {
+        fetch('/groups', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(res => res.json())
+            .then(data => {
+                console.log(data);
+                setGroups(data);
+            })
+    }, [])
 
     return (
         <Box sx={{
@@ -157,37 +166,38 @@ function VoteForm() {
                         reset
                     </Button>
                 </section>
+                <Controller
+                    name={`access`}
+                    control={control}
+                    render={({field}) => (
                 <FormControl sx={{m: 1, width: 300}}>
-                    <InputLabel id="demo-multiple-chip-label">Доступ</InputLabel>
+                    <InputLabel id="groupSelectLabel">Доступ</InputLabel>
                     <Select
-                        labelId="demo-multiple-chip-label"
-                        id="demo-multiple-chip"
-                        multiple
-                        value={personName}
-                        onChange={handleChange}
-
-                        input={<OutlinedInput id="select-multiple-chip" label="Доступ"/>}
-                        renderValue={(selected) => (
-                            <Box sx={{display: 'flex', flexWrap: 'wrap', gap: 0.5}}>
-                                {selected.map((value) => (
-                                    <Chip key={value} label={value} />
-                                ))}
-                            </Box>
-                        )}
+                        labelId="groupSelectLabel"
+                        value={field.value}
+                        onChange={field.onChange}
+                        input={<OutlinedInput label="Доступ"/>}
+                        // renderValue={() => (
+                        //     <Box sx={{display: 'flex', flexWrap: 'wrap', gap: 0.5}}>
+                        //         {selected.map((value) => (
+                        //             <Chip key={value} label={groups.find(i => i.id === value).name} />
+                        //         ))}
+                        //     </Box>
+                        // )}
                         MenuProps={MenuProps}
                     >
                         {groups.map((group) => (
                             <MenuItem
-                                key={group}
-                                value={group}
-                                style={getStyles(group, personName, theme)}
-
+                                key={group.id}
+                                value={group.id}
                             >
-                                {group}
+                                {group.name}
                             </MenuItem>
                         ))}
                     </Select>
                 </FormControl>
+                        )}
+                    />
                 <div>
                 <Button variant="contained" type="submit">Создать</Button>
                 </div>
