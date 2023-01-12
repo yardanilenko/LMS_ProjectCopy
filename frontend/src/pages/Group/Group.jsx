@@ -11,6 +11,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import BackButton from '../../components/backButton/BackButton';
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -55,7 +56,7 @@ export default function Group() {
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell>{nameGroup}</StyledTableCell>
+            <StyledTableCell><BackButton id={id}/>{nameGroup}</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
