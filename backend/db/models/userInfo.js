@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       this.belongsTo(models.User, { foreignKey: 'id' });
+      this.belongsTo(models.Group, { foreignKey: 'id' });
     }
   }
   UserInfo.init({
@@ -23,6 +24,7 @@ module.exports = (sequelize, DataTypes) => {
     photo: DataTypes.TEXT,
     email: DataTypes.TEXT,
     user_id: DataTypes.INTEGER,
+    group_id: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'UserInfo',

@@ -8,11 +8,12 @@ import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
 import { useNavigate } from 'react-router-dom'
-// import TextField from '@mui/material/TextField';
 import { useState, useEffect } from 'react';
 
-export default function Profile() {
+export default function Profileedit() {
+  
   let navigate = useNavigate()
     const [data, setData] = useState();
 
@@ -30,6 +31,8 @@ export default function Profile() {
         };
         dataFetch();
       }, []);
+
+      let myCity = data?.city !== undefined ? data?.city : "загрузка..."
 
   return (
     <>
@@ -55,30 +58,53 @@ export default function Profile() {
     </ListItem>
     <Divider component="li" />
     <ListItem>
-      <ListItemText primary="Город" secondary={data?.city} />
+      {/* <ListItemText primary="Город" secondary={data?.city} /> */}
+      <TextField
+          id="filled-helperText"
+          label="Город"
+          defaultValue={myCity}
+          variant="filled"
+        />
     </ListItem>
     <Divider component="li" />
     <ListItem>
-      <ListItemText primary="Телефон" secondary={data?.phone} />
+      {/* <ListItemText primary="Телефон" secondary={data?.phone} /> */}
+      <TextField
+          id="filled-helperText"
+          label="Телефон"
+          defaultValue=""
+          variant="filled"
+        />
     </ListItem>
     <Divider component="li" />
     <ListItem>
-      <ListItemText primary="Телеграм" secondary={data?.telegram} />
+      {/* <ListItemText primary="Телеграм" secondary={data?.telegram} /> */}
+      <TextField
+          id="filled-helperText"
+          label="Телеграм"
+          defaultValue=""
+          variant="filled"
+        />
     </ListItem>
     <Divider component="li" />
     <ListItem>
-      <ListItemText primary="Email" secondary={data?.email} />
+      {/* <ListItemText primary="Email" secondary={data?.email} /> */}
+      <TextField
+          id="filled-helperText"
+          label="Email"
+          defaultValue=""
+          variant="filled"
+        />
     </ListItem>
     <Divider component="li" />
     <ListItem>
-      <ListItemText primary="Github" secondary={data?.github} />
-      {/* <TextField
-          id="standard-helperText"
-          label="Helper text"
-          defaultValue="Default Value"
-          helperText="Some important text"
-          variant="standard"
-        /> */}
+      {/* <ListItemText primary="Github" secondary={data?.github} /> */}
+      <TextField
+          id="filled-helperText"
+          label="Github"
+          defaultValue=""
+          variant="filled"
+        />
     </ListItem>
     <Divider component="li" />
   </List>
@@ -93,7 +119,7 @@ export default function Profile() {
         <input hidden accept="image/*" type="file" />
         <PhotoCamera />
       </IconButton>
-      <Button variant="contained" onClick={() => navigate("/profileedit")}>Изменить информацию</Button>
+      <Button variant="contained" color="success" onClick={() => navigate("/profile")}>Cохранить</Button>
   </Grid>
   </Grid>
   </>

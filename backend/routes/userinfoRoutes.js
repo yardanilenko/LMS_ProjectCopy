@@ -4,6 +4,6 @@ const route = express.Router();
 const { listUserinfo } = require('../controllers/listUserinfoControllers');
 
 route
-  .get('/', listUserinfo)
+  .get('/userinfo', listUserinfo)
 
 module.exports = route;

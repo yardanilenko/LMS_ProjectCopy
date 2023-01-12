@@ -1,20 +1,26 @@
-// const {Flight} = require('../db/models/index');
+const { UserInfo, Group } = require("../db/models");
 
-// const renderProfile = async (req, res) => {
-//     const userId = req.session.userId 
-//     try {
-//         const flights = await Flight.findAll({where: {
-//             user_id: userId }} );
-//         const nameCurrentUser = req.session?.nameCurrentUser
-//         if (nameCurrentUser){
-//             render(Profile, {nameCurrentUser, flights, codesCities, codesAero, codesAirCompany}, res)
-//         } else {
-//             res.redirect('/')
-//         }  
-//     } catch (error) {
-//     console.log('error', error);
-//     res.status(500).json({ error: error.message });
-//     }
-//   };
+exports.listUserinfo = async (req, res) => {
 
-//   module.exports = { renderProfile };
+    // try {
+    //     const userinform = await UserInfo.findOne({where: {user_id : 6}}
+    //     );
+    //     console.log(userinform);
+    //     res.json(userinform)
+    // } catch (error) {
+    //     console.log('ERROR LIST==>', error.message);
+    // }
+        try {
+        const userinform = await UserInfo.findOne({where: {user_id : 6},
+            include: { 
+              model : Group , 
+            },
+      
+            }
+        );
+        console.log(userinform);
+        res.json(userinform)
+    } catch (error) {
+        console.log('ERROR LIST==>', error.message);
+    }
+}
