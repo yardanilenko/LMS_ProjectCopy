@@ -1,9 +1,9 @@
 const express = require('express');
 const route = express.Router();
-const { allVotes } = require('../controllers/votes');
+const { allVotes, createVote } = require('../controllers/votes');
 
 route
-    .get('/events', allVotes)
-
+    .get('/votes', allVotes)
+    .post('/votes', createVote)
 
 module.exports = route;

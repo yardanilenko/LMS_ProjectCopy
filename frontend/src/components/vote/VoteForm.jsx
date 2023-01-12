@@ -4,7 +4,6 @@ import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Select from '@mui/material/Select';
-import Chip from '@mui/material/Chip';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
@@ -51,7 +50,15 @@ function VoteForm() {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(data)
+            body: JSON.stringify({
+                name: data.title,
+                group_id: data.access,
+                data: {
+                    min: data.min,
+                    max: data.max,
+                    options: data.options
+                }
+            })
         }).then(res => res.json())
             .then(data => {
                 console.log(data);
@@ -167,18 +174,16 @@ function VoteForm() {
                     <InputLabel id="groupSelectLabel">Доступ</InputLabel>
                     <Select
                         labelId="groupSelectLabel"
-                        multiple
                         value={field.value}
                         onChange={field.onChange}
-
                         input={<OutlinedInput label="Доступ"/>}
-                        renderValue={(selected) => (
-                            <Box sx={{display: 'flex', flexWrap: 'wrap', gap: 0.5}}>
-                                {selected.map((value) => (
-                                    <Chip key={value} label={groups.find(i => i.id === value).name} />
-                                ))}
-                            </Box>
-                        )}
+                        // renderValue={() => (
+                        //     <Box sx={{display: 'flex', flexWrap: 'wrap', gap: 0.5}}>
+                        //         {selected.map((value) => (
+                        //             <Chip key={value} label={groups.find(i => i.id === value).name} />
+                        //         ))}
+                        //     </Box>
+                        // )}
                         MenuProps={MenuProps}
                     >
                         {groups.map((group) => (
