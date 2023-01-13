@@ -65,15 +65,14 @@ function DatePicker({...props }) {
             }
         }).then(res => res.json())
             .then(data => {
-                const events = data.map((member) => ({
-                    title: member.Event.name,
-                    start: new Date(member.Event.start),
-                    end: new Date(member.Event.finish),
-                    description: member.Event.description,
-                    //TODO: add output of description
+                console.log(data)
+                const res = data.map((item) => ({
+                    title: item.name,
+                    start: new Date(item.start),
+                    end: new Date(item.finish)
                 }))
-                console.log(events)
-               setEvents(events)
+                // TODO: map all string dates to Date objects
+               setEvents(res)
             })
     }, []);
 
