@@ -9,6 +9,7 @@ import Profile from "./components/profile/Profile";
 import Profileedit from "./components/profileedit/Profileedit";
 import VoteForm from "./components/vote/VoteForm";
 import VoteBlank from "./components/vote/VoteBlank";
+import Codereview from './components/codereview/Codereview';
 import PrivateRoutes from "./components/privateRoutes/PrivateRoutes";
 import Login from "./pages/login/Login";
 
@@ -24,7 +25,7 @@ function App() {
                         <Layout>
                             <Routes>
                                 <Route path="/calendar" element={<DatePicker/>}/>
-                                <Route path="/review" element={<div>Код ревью</div>}/>
+                                <Route path="/review" element={<Codereview/>}/>
                                 <Route path="/profile" element={<Profile/>}/>
                                 <Route path="profileedit" element={<Profileedit/>}/>
                                 <Route path="/lectures" element={<div>Материалы лекции</div>}/>

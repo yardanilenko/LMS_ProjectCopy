@@ -18,6 +18,7 @@ const userinfoRoutes = require('./routes/userinfoRoutes');
 const loginRoutes = require('./routes/login');
 const logoutRoutes = require('./routes/logout');
 const avatarupload = require('./routes/avatarupload');
+const createEventsRoutes = require('./routes/createEvents');
 
 // вызов функции проверки соединения с базой данных
 dbCheck();
@@ -50,6 +51,7 @@ app.use('/', userinfoRoutes);
 app.use('/', loginRoutes);
 app.use('/', logoutRoutes);
 app.use('/', avatarupload);
+app.use('/', createEventsRoutes);
 
 
 const PORT = process.env.PORT || 3100;
