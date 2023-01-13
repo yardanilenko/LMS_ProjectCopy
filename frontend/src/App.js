@@ -25,7 +25,7 @@ function App() {
                         <Layout>
                             <Routes>
                                 <Route path="/calendar" element={<DatePicker/>}/>
-                                <Route path="/review" element={<div>Код ревью</div>}/>
+                                <Route path="/review" element={<Codereview/>}/>
                                 <Route path="/profile" element={<Profile/>}/>
                                 <Route path="profileedit" element={<Profileedit/>}/>
                                 <Route path="/lectures" element={<div>Материалы лекции</div>}/>
