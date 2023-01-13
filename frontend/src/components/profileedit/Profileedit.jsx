@@ -9,8 +9,7 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { useNavigate } from 'react-router-dom'
-import { useState, useEffect, useCallback } from 'react';
-import Profileeditphoto from '../profileeditphoto/profileeditphoto';
+import { useState, useEffect} from 'react';
 
 export default function Profileedit() {
   let navigate = useNavigate()
@@ -39,7 +38,7 @@ export default function Profileedit() {
       })
       .then(res => setAvatar(res.data.path))
       } catch (error) {
-        
+
       }
     }
     const updateInfo = async () => {
@@ -62,7 +61,7 @@ export default function Profileedit() {
         )
         navigate('/profile')
     };
-    
+
 
     useEffect(() => {
         // fetch data
