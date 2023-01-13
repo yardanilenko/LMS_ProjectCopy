@@ -5,16 +5,17 @@ import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
 import { Grid } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
-import IconButton from '@mui/material/IconButton';
-import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom'
 // import TextField from '@mui/material/TextField';
 import { useState, useEffect } from 'react';
 
+
 export default function Profile() {
+  
   let navigate = useNavigate()
     const [data, setData] = useState();
+    const [ImgSrc, setImgSrc] = useState('');
 
     useEffect(() => {
         // fetch data
@@ -26,13 +27,14 @@ export default function Profile() {
           ).json();
           // set state when the data received
           setData(data);
+          setImgSrc(`/images/${data.photo}`)
           console.log(data.Group.name)
         };
         dataFetch();
       }, []);
 
+      // const imgSrc = `/images/${ImgSrc}.jpg`
   return (
-    <>
     <Grid container spacing={2} columns={16}>
     <Grid item xs={8}>
     <List
@@ -86,16 +88,11 @@ export default function Profile() {
   <Grid item xs={8}>
   <Avatar
         alt="Remy Sharp"
-        src={data?.photo}
+        src={ImgSrc}
         sx={{ width: 250, height: 250 }}
       />
-            <IconButton color="primary" aria-label="upload picture" component="label">
-        <input hidden accept="image/*" type="file" />
-        <PhotoCamera />
-      </IconButton>
       <Button variant="contained" onClick={() => navigate("/profileedit")}>Изменить информацию</Button>
   </Grid>
   </Grid>
-  </>
   )
 }
