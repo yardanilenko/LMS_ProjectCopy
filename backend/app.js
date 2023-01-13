@@ -8,6 +8,7 @@ const path = require('path');
 const session = require('express-session');
 const FileStore = require('session-file-store')(session);
 const dbCheck = require('./db/dbCheck');
+const cors = require("cors");
 
 // импорт роутов
 const eventsRouter = require('./routes/events');
@@ -15,6 +16,7 @@ const groupsRouter = require('./routes/groups');
 const groupRouter = require('./routes/group');
 const votesRouter = require('./routes/votes');
 const userinfoRoutes = require('./routes/userinfoRoutes');
+const arrayPairs = require('./routes/arrayPairs');
 
 // вызов функции проверки соединения с базой данных
 dbCheck();
@@ -37,6 +39,7 @@ const sessionConfig = {
 };
 
 app.use(session(sessionConfig));
+app.use(cors());
 
 
 app.use('/', eventsRouter);
@@ -44,6 +47,7 @@ app.use('/', votesRouter);
 app.use('/', groupsRouter);
 app.use('/', groupRouter);
 app.use('/', userinfoRoutes);
+app.use('/', arrayPairs);
 
 
 const PORT = process.env.PORT || 3100;

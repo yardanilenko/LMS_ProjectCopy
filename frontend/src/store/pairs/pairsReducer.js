@@ -1,12 +1,12 @@
-import {INIT_GROUPS, INIT_GROUP} from "./actionsTypes";
+import {INIT_PAIR, INIT_ARRAY_PAIR } from "./actionsTypes";
 
 const initialState = [];
-export default function groupsReducer(state = initialState, action) {
+export default function pairsReducer(state = initialState, action) {
     switch (action.type) {
-        case INIT_GROUPS : {
+        case INIT_PAIR : {
             return action.payload;
         }
-        case INIT_GROUP : {
+        case INIT_ARRAY_PAIR : {
             return action.payload;
         }
         default :

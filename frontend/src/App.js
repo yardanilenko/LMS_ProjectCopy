@@ -8,6 +8,8 @@ import VoteList from "./components/vote/VoteList";
 import Profile from "./components/profile/Profile";
 import Profileedit from "./components/profileedit/Profileedit";
 import VoteForm from "./components/vote/VoteForm";
+import Pairs2 from './pages/Pairs2/Pairs2';
+import GroupsFromPairs from './pages/GroupsFromPairs/GroupsFromPairs';
 
 
 function App() {
@@ -23,7 +25,10 @@ function App() {
           <Route path="/chats" element={<div>Чаты</div>}/>
           <Route path="/votes" element={<VoteList />}/>
           <Route path="/votes/create" element={<VoteForm />}/>
-          <Route path="/pairs" element={<div>Пары</div>}/>
+          <Route path="/pairs" element={<GroupsFromPairs/>}/>
+          <Route path="/pairs">
+          <Route path=":id" element={<Pairs2/>}/>
+          </Route>
           <Route path="/groups" element={<Groups/>}/>
           <Route path="/groups">
           <Route path=":id" element={<Group/>}/>

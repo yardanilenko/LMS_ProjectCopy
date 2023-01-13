@@ -35,7 +35,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 
-export default function Groups() {
+export default function GroupsFromPairs() {
     const dispatch = useDispatch();
 
     const navigate = useNavigate();
@@ -56,14 +56,14 @@ export default function Groups() {
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: "#44014C", width: "100%", minHeight: "50px"}}>{"Группы"}</StyledTableCell>
+            <StyledTableCell style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: "#44014C", width: "100%", minHeight: "50px"}}>{"Планировщик групп"}</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {groups.map((item, idx) =>
             {return (
             <StyledTableRow key={item.id}>
-                <StyledTableCell align="center" component="th" scope="row" onClick={() => {navigate(`/groups/${item.id}`); getGroup(item.id)}}>
+                <StyledTableCell align="center" component="th" scope="row" onClick={() => {navigate(`/pairs/${item.id}`); getGroup(item.id)}}>
                     {item.name}
                 </StyledTableCell>
             </StyledTableRow>

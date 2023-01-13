@@ -1,1 +1,1 @@
-export const INIT_GROUP= 'INIT_GROUP';
+export const INIT_GROUP = 'INIT_GROUP';

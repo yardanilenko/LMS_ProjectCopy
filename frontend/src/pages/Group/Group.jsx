@@ -55,9 +55,14 @@ export default function Group() {
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
-          <TableRow>
-            <StyledTableCell><BackButton id={id}/>{nameGroup}</StyledTableCell>
-          </TableRow>
+        <div style={{ display: 'flex', alignItems: 'center', width: "100%", minHeight: "50px"}}>
+            <div>
+              <BackButton/>
+            </div>
+            <TableRow style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: "#44014C", width: "400%", minHeight: "50px"}}>
+              <StyledTableCell style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: "#44014C", width: "400%", minHeight: "50px"}}>{nameGroup}</StyledTableCell>
+            </TableRow>
+          </div>
         </TableHead>
         <TableBody>
           {myGroup.map((item, idx) =>
