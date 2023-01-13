@@ -15,6 +15,8 @@ const groupsRouter = require('./routes/groups');
 const groupRouter = require('./routes/group');
 const votesRouter = require('./routes/votes');
 const userinfoRoutes = require('./routes/userinfoRoutes');
+const loginRoutes = require('./routes/login');
+const logoutRoutes = require('./routes/logout');
 const avatarupload = require('./routes/avatarupload');
 
 // вызов функции проверки соединения с базой данных
@@ -45,6 +47,8 @@ app.use('/', votesRouter);
 app.use('/', groupsRouter);
 app.use('/', groupRouter);
 app.use('/', userinfoRoutes);
+app.use('/', loginRoutes);
+app.use('/', logoutRoutes);
 app.use('/', avatarupload);
 
 

@@ -10,7 +10,7 @@ router.post('/uploadavatar', fileMiddleware.single('avatar'), async (req,res) =>
         if (req.file){
             res.json(req.file)
             console.log(req.file.filename)
-            const update = await UserInfo.update(
+           await UserInfo.update(
                 { photo: req.file.filename },
                 { where: { user_id: userID } },
             )
@@ -18,6 +18,6 @@ router.post('/uploadavatar', fileMiddleware.single('avatar'), async (req,res) =>
     } catch (error) {
         console.log(error)
     }
-}) 
+})
 
 module.exports = router
