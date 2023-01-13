@@ -1,8 +1,7 @@
 const {Vote, Answer} = require("../db/models");
 
 exports.allVotes = async (req, res) => {
-    // const user_id = req.params.user_id;
-    const user_id = 1;
+   const user_id = req.session.currentUserId
     try {
         const allVotes = await Vote.findAll({
                 where: {
@@ -17,10 +16,11 @@ exports.allVotes = async (req, res) => {
 }
 
 exports.createVote = async (req, res) => {
+    const user_id = req.session.currentUserId
     try {
         const newVote = await Vote.create({
             // TODO: user is from session
-            user_id: 1,
+            user_id,
             name: req.body.name,
             data: JSON.stringify(req.body.data),
             group_id: req.body.group_id
@@ -32,11 +32,10 @@ exports.createVote = async (req, res) => {
 }
 
 exports.deleteVote = async (req, res) => {
+    const user_id = req.session.currentUserId
     try {
         const vote = await Vote.findByPk(req.params.id);
         await vote.destroy();
-        // TODO: user id from session
-        const user_id = 1;
         const allVotes = await Vote.findAll({
                 where: {
                     user_id
