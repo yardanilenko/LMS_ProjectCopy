@@ -10,6 +10,6 @@ export default combineReducers({
     groups: groupsReducer,
     group: groupReducer,
     pair: pairsReducer,
-    button: buttonReducer
+    button: buttonReducer,
     profile: profileReducer,
 });
