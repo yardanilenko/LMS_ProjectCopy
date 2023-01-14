@@ -40,11 +40,10 @@ export default function ShowPairs() {
   
   const pairs = useSelector((store) => store.pair);
 
-  console.log("🚀 ~ file: Pairs2.jsx:75 ~ Pairs2 ~ pairs!!!!!!!!", pairs)
-
   React.useEffect(() => {
     dispatch(initPairsAC(id));
   }, []);
+  
 
   function createData(week1, week2, week3, week4) {
     return { week1, week2, week3, week4 };
@@ -74,18 +73,10 @@ return firstRows;
 
 const firstArr = getfirstRowsArr();
 
-let getArr 
+let myArray
 
 if (pairs !== undefined && pairs.length > 0) {
-  getArr = pairs; 
-} else {
-  getArr = [[["Loading","Loading","Loading"],["Loading","Loading"]],[["Loading","Loading","Loading"],["Loading","Loading"]],[["Loading","Loading","Loading"],["Loading","Loading"]],[["Loading","Loading","Loading"],["Loading","Loading"]],[["Loading","Loading","Loading"],["Loading","Loading"]],[["Loading","Loading","Loading"],["Loading","Loading"]],[["Loading","Loading","Loading"],["Loading","Loading"]],[["Loading","Loading","Loading"],["Loading","Loading"]],[["Loading","Loading","Loading"],["Loading","Loading"]],[["Loading","Loading","Loading"],["Loading","Loading"]],[["Loading","Loading","Loading"],["Loading","Loading"]],[["Loading","Loading","Loading"],["Loading","Loading"]]];
-}
-
-for (let index = 0; index < getArr.length; index++) {
-  console.log("🚀 ~ file: showPairs.jsx:77 ~ ShowPairs ~ getArr", getArr[index])
-  
-}
+let getArr = JSON.parse(pairs); 
 
 let getRowUl = (row) => {
     console.log("🚀 ~ file: showPairs.jsx:77 ~ getRowUl ~ row", row)
@@ -111,11 +102,12 @@ let getRowsArr = () => {
 return myRows;
 }
 
-let myArray = getRowsArr();
+myArray = getRowsArr();
 // console.log("🚀 ~ file: Pairs2.jsx:144 ~ Pairs2 ~ myArray", myArray)
+}
 
 
-let rows = pairs !== undefined ? myArray : firstArr;
+let rows = (pairs !== undefined && pairs.length > 0) ? myArray : firstArr;
 
 
 

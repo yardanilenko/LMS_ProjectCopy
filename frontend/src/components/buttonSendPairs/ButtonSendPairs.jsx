@@ -56,6 +56,7 @@ export default function ButtonSendPairs() {
       }
     
       const getArr = getMyPairs();
+      console.log("🚀 ~ file: ButtonSendPairs.jsx:59 ~ ButtonSendPairs ~ getArr", getArr)
       
       const putCurrentArr = async () => {
           

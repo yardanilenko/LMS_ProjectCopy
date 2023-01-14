@@ -10,9 +10,9 @@ import { initPairsAC } from '../../store/pairs/actionsCreators';
 function Pairs2() {
   const dispatch = useDispatch();
 
-//   useEffect(() => {
-//     dispatch(initPairsAC());
-// }, []);
+  useEffect(() => {
+    dispatch(initPairsAC());
+}, []);
     return (
         <>
             <ShowPairs/>
