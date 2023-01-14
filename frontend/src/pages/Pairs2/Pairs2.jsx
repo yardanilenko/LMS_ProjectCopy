@@ -10,13 +10,17 @@ import { initPairsAC } from '../../store/pairs/actionsCreators';
 function Pairs2() {
   const dispatch = useDispatch();
 
+  const thisHandleClick = () => {
+    dispatch(initPairsAC());
+  }
+
   useEffect(() => {
     dispatch(initPairsAC());
 }, []);
     return (
         <>
             <ShowPairs/>
-            <ButtonSendPairs/>
+            <ButtonSendPairs thisHandleClick={thisHandleClick}/>
         </>
     );
 }

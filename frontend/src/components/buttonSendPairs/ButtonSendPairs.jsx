@@ -3,6 +3,7 @@ import Button from '@mui/material/Button';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { initGroupAC } from '../../store/group/actionsCreators';
+import { initPairsAC } from '../../store/pairs/actionsCreators';
 
 function getShuffledArr(array) {
     let result = [], source = array.concat([]);
@@ -34,7 +35,7 @@ function getShuffledArr(array) {
       return pairs;
   }
 
-export default function ButtonSendPairs() {
+export default function ButtonSendPairs({thisHandleClick}) {
 
     const dispatch = useDispatch();
 
@@ -64,7 +65,7 @@ export default function ButtonSendPairs() {
             // console.log("🚀 ~ file: ButtonSendPairs.jsx:60 ~ ButtonSendPairs ~ getArr", getArr)
             
           const response = await fetch(
-            `http://localhost:3100/pairs/:id`,
+            `http://localhost:3100/pairs`,
               {
                   method: "POST",
                   headers: {
@@ -90,11 +91,12 @@ export default function ButtonSendPairs() {
       }
 
       React.useEffect(() => {
-        dispatch(initGroupAC(id));
+        dispatch(initGroupAC());
+        dispatch(initPairsAC());
     }, []);
 
   return (
-        <Button size="small" onClick={() => handleClick()}>
+        <Button size="small" onClick={() => {handleClick(); thisHandleClick()}}>
           Создать пары
         </Button>
   );

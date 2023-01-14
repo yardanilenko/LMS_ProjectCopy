@@ -2,7 +2,7 @@ const route = require("express").Router();
 const { ArrayPair } = require('../db/models');
 
 
-route.post("/pairs/:id", async (req, res) => {
+route.post("/pairs/", async (req, res) => {
 
     const { data, group_id } = req.body;
     const stringArr = JSON.stringify(data);
@@ -17,13 +17,10 @@ route.post("/pairs/:id", async (req, res) => {
     }
 })
 
-route.get(`/pairs/:id`, async (req, res) => {
+route.get(`/pairs`, async (req, res) => {
     try {
-      const group_id = req.params.id;
-        console.log("🚀 ~ file: arrayPairs.js:25 ~ route.get ~ group_id", group_id)
-      const allPairs = await ArrayPair.findAll({ where: { group_id }, raw: true });
-      const pairs = allPairs.pop()
-      res.send(pairs);
+      const allPairs = await ArrayPair.findAll({ raw: true });
+      res.send(allPairs);
     } catch (error) {
       console.log("Error ==>", error);
     }

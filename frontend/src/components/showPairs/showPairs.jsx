@@ -37,13 +37,14 @@ export default function ShowPairs() {
   const dispatch = useDispatch();
 
   const {id} = useParams();
+
+  const myId = +id;
+
+  console.log("🚀 ~ file: showPairs.jsx:40 ~ ShowPairs ~ id", id)
   
   const pairs = useSelector((store) => store.pair);
 
-  React.useEffect(() => {
-    dispatch(initPairsAC(id));
-  }, []);
-  
+  console.log("🚀 ~ file: showPairs.jsx:42 ~ ShowPairs ~ pairs", pairs)
 
   function createData(week1, week2, week3, week4) {
     return { week1, week2, week3, week4 };
@@ -75,8 +76,17 @@ const firstArr = getfirstRowsArr();
 
 let myArray
 
-if (pairs !== undefined && pairs.length > 0) {
-let getArr = JSON.parse(pairs); 
+let a = pairs.filter(el => el.group_id === myId);
+
+console.log("🚀 ~ PAIRS_A", a)
+
+
+if (pairs !== undefined && pairs.length > 0 && a.length) {
+  let b = a.pop();
+  
+  let c = b.data;
+
+let getArr = JSON.parse(c); 
 
 let getRowUl = (row) => {
     console.log("🚀 ~ file: showPairs.jsx:77 ~ getRowUl ~ row", row)
@@ -107,9 +117,12 @@ myArray = getRowsArr();
 }
 
 
-let rows = (pairs !== undefined && pairs.length > 0) ? myArray : firstArr;
+let rows = (pairs !== undefined && myArray !== undefined && pairs.length > 0) ? myArray : firstArr;
+console.log("🚀 ~ file: showPairs.jsx:118 ~ ShowPairs ~ rows", rows)
 
-
+React.useEffect(() => {
+  dispatch(initPairsAC());
+}, []);
 
   return (
     <TableContainer component={Paper}>
