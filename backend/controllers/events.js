@@ -16,10 +16,10 @@ exports.allEvents = async (req, res) => {
                 }
             );
             const data = allEvents.map((member) => ({
-                name: member.dataValues.Event.name,
-                start: member.dataValues.Event.start,
-                finish: member.dataValues.Event.finish,
-                description: member.dataValues.Event.description,
+                name: member?.dataValues?.Event?.name,
+                start: member?.dataValues?.Event?.start,
+                finish: member?.dataValues?.Event?.finish,
+                description: member?.dataValues?.Event?.description,
                 //TODO: add output of description
             }))
             res.json(data)

@@ -5,7 +5,6 @@ import { Navigate } from "react-router-dom";
 function PrivateRoutes(props) {
 
     const profile = useSelector((store) => store.profile)
-    console.log(profile)
 
     if (!profile) {
         return <Navigate to="/login" />;

@@ -33,7 +33,6 @@ function VoteBlank() {
             }
         ).then(res => res.json())
             .then(response => {
-                console.log(response);
                 const data = response.data ? JSON.parse(response.data) : {};
                 setVote({
                     ...response,
