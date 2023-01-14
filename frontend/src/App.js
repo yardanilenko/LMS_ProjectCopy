@@ -18,35 +18,6 @@ import Logout from "./pages/logout/Logout";
 
 
 function App() {
-  let { id } = useParams();
-  return (
-    <Layout>
-      <Routes>
-          <Route path="/calendar" element={<DatePicker />}/>
-          <Route path="/review" element={<div>Код ревью</div>}/>
-          <Route path="/profile" element={<Profile/>}/>
-          <Route path="profileedit" element={<Profileedit/>}/>
-          <Route path="/lectures" element={<div>Материалы лекции</div>}/>
-          <Route path="/chats" element={<div>Чаты</div>}/>
-          <Route path="/votes" element={<VoteList />}/>
-          <Route path="/votes/create" element={<VoteForm />}/>
-          <Route path="/pairs" element={<GroupsFromPairs/>}/>
-          <Route path="/pairs">
-          <Route path=":id" element={<Pairs2/>}/>
-          </Route>
-          <Route path="/groups" element={<Groups/>}/>
-          <Route path="/groups">
-          <Route path=":id" element={<Group/>}/>
-          </Route>
-          <Route path="/wiki" element={<div>Вики</div>}/>
-      </Routes>
-    </Layout>
-  );
-=======
-
-
-
-function App() {
     return (
         <Routes>
             <Route path="/login" element={<Login/>}/>
