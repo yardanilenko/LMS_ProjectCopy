@@ -42,7 +42,7 @@ export default function ButtonSendPairs({thisHandleClick}) {
     const {id} = useParams();
     
     const group = useSelector((store) => store.group);
-    // console.log("🚀 ~ file: ButtonSendPairs.jsx:45 ~ ButtonSendPairs ~ group!!!!!!!!!!!>>>>", group)
+    console.log("🚀 ~ file: ButtonSendPairs.jsx:45 ~ ButtonSendPairs ~ group!!!e!!!!!!!!>>>>", group)
 
     const myGroup = group[0]?.Users;
     // group[0] !== undefined ? group[0].Users : [{login: "testLogin"}, {login: "testLogin2"}, {login: "testLogin3"}, {login: "testLogin4"}, {login: "testLogin5"}, {login: "testLogin6"}];
@@ -100,9 +100,10 @@ export default function ButtonSendPairs({thisHandleClick}) {
         console.log("HELLO");
       }
 
-    //   React.useEffect(() => {
-    //     dispatch(initGroupAC());
-    // }, []);
+      React.useEffect(() => {
+        dispatch(initGroupAC(id));
+        dispatch(initPairsAC());
+      }, []);
 
   return (
         <Button size="small" onClick={() => {handleClick()}}>
