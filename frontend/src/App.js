@@ -12,6 +12,7 @@ import VoteBlank from "./components/vote/VoteBlank";
 import Codereview from './components/codereview/Codereview';
 import PrivateRoutes from "./components/privateRoutes/PrivateRoutes";
 import Login from "./pages/login/Login";
+import Logout from "./pages/logout/Logout";
 
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
                                 <Route path="/groups" element={<Groups/>}/>
                                 <Route path="/groups/:id" element={<Group/>}/>
                                 <Route path="/wiki" element={<div>Вики</div>}/>
+                                <Route path="/logout" element={<Logout />}/>
                             </Routes>
                         </Layout>
                     </PrivateRoutes>

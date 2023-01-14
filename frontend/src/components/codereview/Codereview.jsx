@@ -3,13 +3,10 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import { useState, useEffect } from 'react';
 import dayjs from 'dayjs';
-import Stack from '@mui/material/Stack';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
-import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
-import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 import Button from '@mui/material/Button';
 
 export default function Codereview() {
@@ -19,7 +16,7 @@ export default function Codereview() {
         {label: 'Выберите группу', id: 14}])
     const [studentsinput, setStudentsinput] = useState()
 
-    
+
 
     const userId = 6
     const createEvent = async () => {
@@ -121,7 +118,7 @@ export default function Codereview() {
     <Autocomplete
       disablePortal
       id="combo-box-demo"
-      options={students} 
+      options={students}
       onChange={formHandlerStudent}
       sx={{ width: 300 }}
       renderInput={(params) => <TextField {...params} label="Студент" />}
@@ -155,7 +152,7 @@ export default function Codereview() {
           label="Тема код-ревью"
           multiline
           maxRows={4}
-          
+
         />
               <Button variant="contained" color="success" onClick={createEvent}>
         Назначить встречу
