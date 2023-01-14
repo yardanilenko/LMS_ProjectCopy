@@ -10,10 +10,8 @@ import Paper from '@mui/material/Paper';
 import BackButton from '../../components/backButton/BackButton';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { initGroupAC } from '../../store/group/actionsCreators';
 import { initPairsAC } from '../../store/pairs/actionsCreators';
-import { useState } from 'react';
-import { Button } from '@mui/material';
+
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -35,59 +33,23 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-function getShuffledArr(array) {
-  let result = [], source = array.concat([]);
-
-  while (source.length) {
-    let index = Math.floor((Math.random()-0.5) * source.length);
-    result.push(source.splice(index, 1)[0]);
- }
-
-  if(result === array){
-      result.reverse();
-  }
- 
-
-  return result;
-}
-
-function getPairs(arr){
-    const res = getShuffledArr(arr)
-    const pairs = [];
-    for (let i = 0; i < res.length/2; i++) { 
-      if(res.length % 2 === 0){
-        pairs.push([res[2*i].login, res[2*i+1].login])
-      } else {
-        const popped = res.pop();
-        pairs.push([res[2*i].login, res[2*i+1].login])
-        pairs.at(-1).push(popped.login)
-      }
-    }
-    return pairs;
-}
-
-export default function Pairs2() {
+export default function ShowPairs() {
   const dispatch = useDispatch();
 
   const {id} = useParams();
   
-  const group = useSelector((store) => store.group);
-  // const pairs = useSelector((store) => store.pairs);
+  const pairs = useSelector((store) => store.pair);
+
+  console.log("🚀 ~ file: Pairs2.jsx:75 ~ Pairs2 ~ pairs!!!!!!!!", pairs)
 
   React.useEffect(() => {
-    dispatch(initGroupAC(id));
-    // dispatch(initPairsAC(id));
-}, []);
-
-  // console.log("🚀 ~ file: Pairs2.jsx:75 ~ Pairs2 ~ pairs", pairs)
-  
+    dispatch(initPairsAC(id));
+  }, []);
 
   function createData(week1, week2, week3, week4) {
     return { week1, week2, week3, week4 };
   }
   
-  const myGroup = group[0] !== undefined ? group[0].Users : [{login: "testLogin"}, {login: "testLogin2"}, {login: "testLogin3"}, {login: "testLogin4"}, {login: "testLogin5"}, {login: "testLogin6"}];
-  console.log("🚀 ~ file: Pairs2.jsx:90 ~ Pairs2 ~ myGroup ", myGroup )
 
 const getfirstRowsArr = () => {
   const phrase = 'Расписание ещё не составлено';
@@ -110,29 +72,28 @@ const getfirstRowsArr = () => {
 return firstRows;
 }
 
-const initialState = getfirstRowsArr();
+const firstArr = getfirstRowsArr();
 
-const[rows, setRows] = useState([])
+let getArr 
 
-const[myData, setData] = useState([])
+if (pairs !== undefined && pairs.length > 0) {
+  getArr = pairs; 
+} else {
+  getArr = [[["Loading","Loading","Loading"],["Loading","Loading"]],[["Loading","Loading","Loading"],["Loading","Loading"]],[["Loading","Loading","Loading"],["Loading","Loading"]],[["Loading","Loading","Loading"],["Loading","Loading"]],[["Loading","Loading","Loading"],["Loading","Loading"]],[["Loading","Loading","Loading"],["Loading","Loading"]],[["Loading","Loading","Loading"],["Loading","Loading"]],[["Loading","Loading","Loading"],["Loading","Loading"]],[["Loading","Loading","Loading"],["Loading","Loading"]],[["Loading","Loading","Loading"],["Loading","Loading"]],[["Loading","Loading","Loading"],["Loading","Loading"]],[["Loading","Loading","Loading"],["Loading","Loading"]]];
+}
 
-  const getMyPairs = () => {
-    let myArrPairs = [];
-    for (let index = 0; index < 12; index++) {
-      let row = getPairs(myGroup);
-      myArrPairs.push(row)
-    }
-    return myArrPairs;
-  }
+for (let index = 0; index < getArr.length; index++) {
+  console.log("🚀 ~ file: showPairs.jsx:77 ~ ShowPairs ~ getArr", getArr[index])
+  
+}
 
-  const getArr = getMyPairs();
-
-  const getRowUl = (row) => {
+let getRowUl = (row) => {
+    console.log("🚀 ~ file: showPairs.jsx:77 ~ getRowUl ~ row", row)
     let ul = <ul>{row.map((el) => <li>{el.join('-')}</li> )}</ul>;
     return ul;
   }
 
-const getRowsArr = () => {
+let getRowsArr = () => {
   const days = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница'];
   let myRows = [];
     myRows = [
@@ -150,40 +111,12 @@ const getRowsArr = () => {
 return myRows;
 }
 
-const myArray = getRowsArr();
-console.log("🚀 ~ file: Pairs2.jsx:144 ~ Pairs2 ~ myArray", myArray)
-
-const putCurrentArr = async () => {
-
-  if (group[0] !== undefined) {
-    const response = await fetch(
-      `http://localhost:3100/arrayPairs`,
-        {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                data: getArr,
-                group_id: id
-            }),
-        }
-        )
-        console.log();
-        const data = await response.json();
-        const arrBack = JSON.parse(data.data);
-        console.log("🚀 ~ file: Pairs2.jsx:134 ~ putCurrentArr ~ arrBack", arrBack)
-        setData(arrBack);
-  }
-};
-
-console.log("-------", getRowsArr());
+let myArray = getRowsArr();
+// console.log("🚀 ~ file: Pairs2.jsx:144 ~ Pairs2 ~ myArray", myArray)
 
 
-const handleClick = () => {
-  putCurrentArr();
-  setRows(myArray);
-}
+let rows = pairs !== undefined ? myArray : firstArr;
+
 
 
   return (
@@ -219,7 +152,6 @@ const handleClick = () => {
           ))}
         </TableBody>
       </Table>
-      <Button onClick={handleClick}>Сгруппировать</Button>
     </TableContainer>
   );
 }

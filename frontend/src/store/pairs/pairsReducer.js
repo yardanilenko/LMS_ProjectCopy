@@ -6,9 +6,6 @@ export default function pairsReducer(state = initialState, action) {
         case INIT_PAIR : {
             return action.payload;
         }
-        case INIT_ARRAY_PAIR : {
-            return action.payload;
-        }
         default :
             return state
     }
