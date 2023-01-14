@@ -1,9 +1,9 @@
-import {INIT_GROUP} from "./actionsTypes";
+import {INIT_BUTTON} from "./actionsTypes";
 
 const initialState = [];
-export default function groupReducer(state = initialState, action) {
+export default function buttonReducer(state = initialState, action) {
     switch (action.type) {
-        case INIT_GROUP : {
+        case INIT_BUTTON : {
             return action.payload;
         }
         default :

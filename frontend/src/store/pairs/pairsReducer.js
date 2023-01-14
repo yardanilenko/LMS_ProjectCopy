@@ -1,9 +1,9 @@
-import {INIT_GROUP} from "./actionsTypes";
+import {INIT_PAIR} from "./actionsTypes";
 
 const initialState = [];
-export default function groupReducer(state = initialState, action) {
+export default function pairsReducer(state = initialState, action) {
     switch (action.type) {
-        case INIT_GROUP : {
+        case INIT_PAIR : {
             return action.payload;
         }
         default :

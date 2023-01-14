@@ -3,7 +3,7 @@ import Button from '@mui/material/Button';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import { useNavigate } from 'react-router-dom';
 
-export default function DotsMobileStepper({id}) {
+export default function BackButton() {
 
   const navigate = useNavigate();
 
