@@ -15,6 +15,7 @@ import Codereview from './components/codereview/Codereview';
 import PrivateRoutes from "./components/privateRoutes/PrivateRoutes";
 import Login from "./pages/login/Login";
 import Logout from "./pages/logout/Logout";
+import Materials from './components/materials/Materials';
 
 
 function App() {
@@ -31,7 +32,7 @@ function App() {
                                 <Route path="/review" element={<Codereview/>}/>
                                 <Route path="/profile" element={<Profile/>}/>
                                 <Route path="profileedit" element={<Profileedit/>}/>
-                                <Route path="/lectures" element={<div>Материалы лекции</div>}/>
+                                <Route path="/lectures" element={<Materials/>}/>
                                 <Route path="/chats" element={<div>Чаты</div>}/>
                                 <Route path="/votes" element={<VoteList/>}/>
                                 <Route path="/votes/create" element={<VoteForm/>}/>
