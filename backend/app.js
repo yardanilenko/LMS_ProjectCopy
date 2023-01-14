@@ -16,11 +16,17 @@ const groupsRouter = require('./routes/groups');
 const groupRouter = require('./routes/group');
 const votesRouter = require('./routes/votes');
 const userinfoRoutes = require('./routes/userinfoRoutes');
+
 const arrayPairs = require('./routes/arrayPairs');
+const loginRoutes = require('./routes/login');
+const logoutRoutes = require('./routes/logout');
+const avatarupload = require('./routes/avatarupload');
+const createEventsRoutes = require('./routes/createEvents');
+
 
 // вызов функции проверки соединения с базой данных
 dbCheck();
-
+app.use('/images', express.static(path.join(__dirname, 'images')))
 app.use(express.static(path.resolve('public')));
 app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: true }));
@@ -47,7 +53,12 @@ app.use('/', votesRouter);
 app.use('/', groupsRouter);
 app.use('/', groupRouter);
 app.use('/', userinfoRoutes);
+
 app.use('/', arrayPairs);
+app.use('/', loginRoutes);
+app.use('/', logoutRoutes);
+app.use('/', avatarupload);
+app.use('/', createEventsRoutes);
 
 
 const PORT = process.env.PORT || 3100;

@@ -23,6 +23,7 @@ import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import {NavLink} from "react-router-dom";
+import LogoutIcon from '@mui/icons-material/Logout';
 
 const drawerWidth = 240;
 
@@ -50,6 +51,7 @@ function Layout({children}) {
             <Divider/>
             <List>
                 <NavItem to="/profile" icon={<AccountCircleIcon />}>Профиль</NavItem>
+                <NavItem to="/logout" icon={<LogoutIcon />}>Выйти</NavItem>
             </List>
         </div>
     );

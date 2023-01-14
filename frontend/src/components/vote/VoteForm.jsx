@@ -8,6 +8,8 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
+import {useNavigate} from "react-router-dom";
+import ButtonGroup from '@mui/material/ButtonGroup';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -44,8 +46,10 @@ function VoteForm() {
 
     const [groups, setGroups] = React.useState([]);
 
+    const navigate = useNavigate();
+
     const onSubmit = (data) => {
-        fetch('/votes', {
+        fetch('/api/votes', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -60,8 +64,8 @@ function VoteForm() {
                 }
             })
         }).then(res => res.json())
-            .then(data => {
-                console.log(data);
+            .then(() => {
+                navigate('/votes');
             })
     };
 
@@ -73,7 +77,6 @@ function VoteForm() {
             }
         }).then(res => res.json())
             .then(data => {
-                console.log(data);
                 setGroups(data);
             })
     }, [])
@@ -93,19 +96,23 @@ function VoteForm() {
                     label="Тема голосования"
                     {...register(`title`, {required: true})}
                 />
+                <div style={{margin: "30px 0",display:"flex",justifyContent:"space-between"}}>
                 <TextField
+                    sx={{width: "45%"}}
                     required
                     id="outlined-required"
-                    label="Минимальное количество голосов"
+                    label="Минимальное кол-во голосов"
                     {...register(`min`, {required: true})}
                 />
                 <TextField
+                    sx={{width: "45%"}}
                     required
                     id="outlined-required"
-                    label="Максимальное количество голосов"
+                    label="Максимальное кол-во голосов"
                     {...register(`max`, {required: true})}
                 />
-                <div style={{margin: "30px 0"}}>
+                </div>
+                <div  style={{marginBottom: "20px"}}>
                     {fields.map((item, index) => {
                         return (
                             <div key={item.id} style={{display: "flex"}}>
@@ -118,6 +125,7 @@ function VoteForm() {
                                             value={field.value}
                                             onChange={field.onChange}
                                             fullWidth
+                                            style={{marginBottom: "10px"}}
                                             placeholder="Введите вариант ответа"
                                         />
                                     )}
@@ -129,7 +137,8 @@ function VoteForm() {
                         );
                     })}
                 </div>
-                <section>
+                <section style={{textAlign:"center"}}>
+                <ButtonGroup variant="contained" aria-label="outlined primary button group">
                     <Button
                         variant="contained"
                         type="button"
@@ -165,12 +174,14 @@ function VoteForm() {
                     >
                         reset
                     </Button>
+                </ButtonGroup>
                 </section>
+                <div style={{display:"flex", justifyContent:"center"}}>
                 <Controller
                     name={`access`}
                     control={control}
                     render={({field}) => (
-                <FormControl sx={{m: 1, width: 300}}>
+                <FormControl sx={{m: 1, width: 300, margin:"30px 0"}}>
                     <InputLabel id="groupSelectLabel">Доступ</InputLabel>
                     <Select
                         labelId="groupSelectLabel"
@@ -198,7 +209,8 @@ function VoteForm() {
                 </FormControl>
                         )}
                     />
-                <div>
+                </div>
+                <div style={{textAlign:"center"}}>
                 <Button variant="contained" type="submit">Создать</Button>
                 </div>
             </form>

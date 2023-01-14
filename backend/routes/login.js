@@ -1,9 +1,9 @@
 const express = require('express');
 const route = express.Router();
-const { allEvents } = require('../controllers/events')
+const { loginUser } = require('../controllers/login');
 
 route
-    .get('/api/events', allEvents)
+    .post('/api/login', loginUser)
 
 
 module.exports = route;
