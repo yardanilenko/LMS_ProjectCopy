@@ -15,7 +15,8 @@ module.exports = (sequelize, DataTypes) => {
   }
   ArrayPair.init({
     data: DataTypes.JSON,
-    group_id: DataTypes.INTEGER
+    group_id: DataTypes.INTEGER,
+    group_name: DataTypes.TEXT,
   }, {
     sequelize,
     modelName: 'ArrayPair',

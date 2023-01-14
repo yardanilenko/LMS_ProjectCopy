@@ -4,11 +4,11 @@ const { ArrayPair } = require('../db/models');
 
 route.post("/pairs/", async (req, res) => {
 
-    const { data, group_id } = req.body;
+    const { data, group_name, group_id } = req.body;
     const stringArr = JSON.stringify(data);
     
     try {
-        const {data} = await ArrayPair.create({data: stringArr, group_id});
+        const {data} = await ArrayPair.create({data: stringArr, group_name, group_id});
         res.json({data});        
     } catch
         (error) {

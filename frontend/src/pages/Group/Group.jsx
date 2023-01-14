@@ -41,6 +41,7 @@ export default function Group() {
     const {id} = useParams();
     
     const group = useSelector((store) => store.group);
+    console.log("🚀 ~ file: Group.jsx:44 ~ Group ~ group", group)
 
     useEffect(() => {
         dispatch(initGroupAC(id));
@@ -55,20 +56,28 @@ export default function Group() {
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
-        <div style={{ display: 'flex', alignItems: 'center', width: "100%", minHeight: "50px"}}>
+        {/* <div style={{ display: 'flex', alignItems: 'center', width: "100%", minHeight: "50px"}}>
             <div>
               <BackButton/>
             </div>
             <TableRow style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: "#44014C", width: "400%", minHeight: "50px"}}>
               <StyledTableCell style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: "#44014C", width: "400%", minHeight: "50px"}}>{nameGroup}</StyledTableCell>
             </TableRow>
-          </div>
+          </div> */}
+          <TableRow>
+              <TableCell style={{ display: 'table-cell', alignItems: 'center', width: "10%", minHeight: "50px"}} align="left" colSpan={0}>
+              <BackButton/>
+              </TableCell>
+              <TableCell style={{ display: 'table-cell', color: "white", backgroundColor: "black", alignItems: 'center', width: "90%", minHeight: "50px"}} align="center" colSpan={4}>
+              {nameGroup}
+              </TableCell>
+            </TableRow>
         </TableHead>
         <TableBody>
           {myGroup.map((item, idx) =>
             {return (
             <StyledTableRow key={item.id}>
-                <StyledTableCell component="th" scope="row">
+                <StyledTableCell style={{ display: 'table-cell', justifyContent: 'center', alignItems: 'center', width: "100%", minHeight: "50px"}} align="center" colSpan={5} component="th" scope="row">
                     {item.login}
                 </StyledTableCell>
             </StyledTableRow>

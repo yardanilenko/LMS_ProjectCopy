@@ -40,11 +40,11 @@ export default function ShowPairs() {
 
   const myId = +id;
 
-  console.log("🚀 ~ file: showPairs.jsx:40 ~ ShowPairs ~ id", id)
+  // console.log("🚀 ~ file: showPairs.jsx:40 ~ ShowPairs ~ id", id)
   
   const pairs = useSelector((store) => store.pair);
 
-  console.log("🚀 ~ file: showPairs.jsx:42 ~ ShowPairs ~ pairs", pairs)
+  console.log("pairs ???????", pairs)
 
   function createData(week1, week2, week3, week4) {
     return { week1, week2, week3, week4 };
@@ -76,12 +76,15 @@ const firstArr = getfirstRowsArr();
 
 let myArray
 
-let a = pairs.filter(el => el.group_id === myId);
+let a = pairs !== undefined ? pairs.filter(el => el.group_id === myId) : [];
 
-console.log("🚀 ~ PAIRS_A", a)
+// console.log("🚀 ~ PAIRS_A", a)
 
 
 if (pairs !== undefined && pairs.length > 0 && a.length) {
+
+
+
   let b = a.pop();
   
   let c = b.data;
@@ -89,8 +92,8 @@ if (pairs !== undefined && pairs.length > 0 && a.length) {
 let getArr = JSON.parse(c); 
 
 let getRowUl = (row) => {
-    console.log("🚀 ~ file: showPairs.jsx:77 ~ getRowUl ~ row", row)
-    let ul = <ul>{row.map((el) => <li>{el.join('-')}</li> )}</ul>;
+    // console.log("🚀 ~ file: showPairs.jsx:77 ~ getRowUl ~ row", row)
+    let ul = <ul>{row?.map((el) => <li>{el.join('-')}</li> )}</ul>;
     return ul;
   }
 
@@ -118,39 +121,47 @@ myArray = getRowsArr();
 
 
 let rows = (pairs !== undefined && myArray !== undefined && pairs.length > 0) ? myArray : firstArr;
-console.log("🚀 ~ file: showPairs.jsx:118 ~ ShowPairs ~ rows", rows)
+// console.log("🚀 ~ file: showPairs.jsx:118 ~ ShowPairs ~ rows", rows)
 
-React.useEffect(() => {
-  dispatch(initPairsAC());
-}, []);
+// React.useEffect(() => {
+//   dispatch(initPairsAC());
+// }, []);
 
   return (
     <TableContainer component={Paper}>
       
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
-          <TableRow style={{ display: 'flex', alignItems: 'center', width: "100%", minHeight: "50px"}}>
-            <div>
+          {/* <TableRow style={{ display: 'flex', alignItems: 'center', width: "100%", minHeight: "50px"}}>
+            <TableCell align="center" colSpan={1}>
               <BackButton/>
-            </div>
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: "#44014C", width: "100%", minHeight: "50px"}}>
+            </TableCell>
+            <TableCell align="center" colSpan={4} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: "#44014C", width: "100%", minHeight: "50px"}}>
               <div style={{ backgroundColor: "#44014C"}} align="center"><h1>Hello</h1></div>
-            </div>
-          </TableRow >
+            </TableCell>
+          </TableRow > */}
+          <TableRow >
+              <TableCell style={{ display: 'table-cell', alignItems: 'center', width: "20%", minHeight: "50px"}} align="left" colSpan={0}>
+              <BackButton/>
+              </TableCell>
+              <TableCell style={{ display: 'table-cell', color: "white", backgroundColor: "black", alignItems: 'center', width: "80%", minHeight: "50px"}} align="center" colSpan={4}>
+                {a[0]?.group_name}
+              </TableCell>
+            </TableRow>
           <TableRow>
             <StyledTableCell style={{ backgroundColor: "#44014C"}}>Неделя 1</StyledTableCell>
-            <StyledTableCell style={{ backgroundColor: "#44014C"}} align="left">Неделя 2</StyledTableCell>
+            <StyledTableCell style={{ backgroundColor: "#44014C"}} align="center">Неделя 2</StyledTableCell>
             <StyledTableCell style={{ backgroundColor: "#44014C"}} align="center">Неделя 3</StyledTableCell>
             <StyledTableCell style={{ backgroundColor: "#44014C"}} align="right">Неделя 4</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.map((row) => (
-            <StyledTableRow key={row.week1}>
+            <StyledTableRow key={crypto.randomUUID()}>
               <StyledTableCell component="th" scope="row">
                 {row.week1}
               </StyledTableCell>
-              <StyledTableCell align="left">{row.week2}</StyledTableCell>
+              <StyledTableCell align="center">{row.week2}</StyledTableCell>
               <StyledTableCell align="center">{row.week3}</StyledTableCell>
               <StyledTableCell align="right">{row.week4}</StyledTableCell>
             </StyledTableRow>

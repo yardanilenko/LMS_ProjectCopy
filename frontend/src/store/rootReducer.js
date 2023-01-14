@@ -2,9 +2,11 @@ import {combineReducers} from 'redux';
 import groupsReducer from "./groups/groupsReducer";
 import groupReducer from "./group/groupReducer";
 import pairsReducer from "./pairs/pairsReducer";
+import buttonReducer from "./button/buttonReducer";
 
 export default combineReducers({
     groups: groupsReducer,
     group: groupReducer,
-    pair: pairsReducer
+    pair: pairsReducer,
+    button: buttonReducer
 });

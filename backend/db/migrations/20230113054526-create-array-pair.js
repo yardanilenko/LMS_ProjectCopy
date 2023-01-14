@@ -12,6 +12,9 @@ module.exports = {
       data: {
         type: Sequelize.JSON
       },
+      group_name: {
+        type: Sequelize.TEXT,
+      },
       group_id: {
         type: Sequelize.INTEGER,
         references: {

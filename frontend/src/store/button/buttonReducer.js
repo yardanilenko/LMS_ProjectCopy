@@ -1,9 +1,9 @@
-import {INIT_PAIR} from "./actionsTypes";
+import {INIT_BUTTON} from "./actionsTypes";
 
 const initialState = [];
-export default function pairsReducer(state = initialState, action) {
+export default function buttonReducer(state = initialState, action) {
     switch (action.type) {
-        case INIT_PAIR : {
+        case INIT_BUTTON : {
             return action.payload;
         }
         default :

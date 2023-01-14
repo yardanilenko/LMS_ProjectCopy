@@ -42,12 +42,18 @@ export default function ButtonSendPairs({thisHandleClick}) {
     const {id} = useParams();
     
     const group = useSelector((store) => store.group);
+    // console.log("🚀 ~ file: ButtonSendPairs.jsx:45 ~ ButtonSendPairs ~ group!!!!!!!!!!!>>>>", group)
 
-    const myGroup = group[0] !== undefined ? group[0].Users : [{login: "testLogin"}, {login: "testLogin2"}, {login: "testLogin3"}, {login: "testLogin4"}, {login: "testLogin5"}, {login: "testLogin6"}];
+    const myGroup = group[0]?.Users;
+    // group[0] !== undefined ? group[0].Users : [{login: "testLogin"}, {login: "testLogin2"}, {login: "testLogin3"}, {login: "testLogin4"}, {login: "testLogin5"}, {login: "testLogin6"}];
   // console.log("🚀 ~ file: Pairs2.jsx:90 ~ Pairs2 ~ myGroup ", myGroup )
+
+  const myGroupName = group[0]?.name;
+  // console.log("🚀 ~ file: ButtonSendPairs.jsx:50 ~ ButtonSendPairs ~ myGroupName", myGroupName)
 
 
     const getMyPairs = () => {
+      if (group.length) {
         let myArrPairs = [];
         for (let index = 0; index < 12; index++) {
           let row = getPairs(myGroup);
@@ -55,15 +61,16 @@ export default function ButtonSendPairs({thisHandleClick}) {
         }
         return myArrPairs;
       }
+      }
     
-      const getArr = getMyPairs();
-      console.log("🚀 ~ file: ButtonSendPairs.jsx:59 ~ ButtonSendPairs ~ getArr", getArr)
       
       const putCurrentArr = async () => {
-          
-          if (group[0] !== undefined) {
+        
+        const getArr = getMyPairs();
+        console.log("=====>>>>>>>> getArr", getArr)
+          // if (getArr && myGroupName) {
             // console.log("🚀 ~ file: ButtonSendPairs.jsx:60 ~ ButtonSendPairs ~ getArr", getArr)
-            
+          
           const response = await fetch(
             `http://localhost:3100/pairs`,
               {
@@ -72,31 +79,33 @@ export default function ButtonSendPairs({thisHandleClick}) {
                       "Content-Type": "application/json",
                   },
                   body: JSON.stringify({
-                      data: getArr,
-                      group_id: id
+                      data: getArr?.length ? getArr : [],
+                      group_id: id,
+                      group_name: myGroupName || "TestName",
                   }),
               }
               )
               console.log();
               const data = await response.json();
               const arrBack = JSON.parse(data.data);
+              dispatch(initPairsAC())
               // console.log("🚀 ~ file: Pairs2.jsx:134 ~ putCurrentArr ~ arrBack", arrBack)
-        }
+        // }
       };
       
       
       const handleClick = () => {
         putCurrentArr();
+        dispatch(initPairsAC());
         console.log("HELLO");
       }
 
-      React.useEffect(() => {
-        dispatch(initGroupAC());
-        dispatch(initPairsAC());
-    }, []);
+    //   React.useEffect(() => {
+    //     dispatch(initGroupAC());
+    // }, []);
 
   return (
-        <Button size="small" onClick={() => {handleClick(); thisHandleClick()}}>
+        <Button size="small" onClick={() => {handleClick()}}>
           Создать пары
         </Button>
   );
