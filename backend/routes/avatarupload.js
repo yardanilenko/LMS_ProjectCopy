@@ -8,8 +8,11 @@ router.post('/uploadavatar', fileMiddleware.single('avatar'), async (req,res) =>
     const userID = 6
     try {
         if (req.file){
-            res.json(req.file)
-            console.log(req.file.filename)
+            // res.json(req.file)
+            // res.json({ user: 'geek' })
+            // res.send(res.body{ title: 'GeeksforGeeks' })
+            // res.append('Content-Length', '5089990');
+            res.json(req.file.filename)
            await UserInfo.update(
                 { photo: req.file.filename },
                 { where: { user_id: userID } },

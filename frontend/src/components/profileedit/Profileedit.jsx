@@ -10,6 +10,7 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { useNavigate } from 'react-router-dom'
 import { useState, useEffect} from 'react';
+import Profileeditphoto from '../profileeditphoto/profileeditphoto';
 
 export default function Profileedit() {
   let navigate = useNavigate()
@@ -20,27 +21,31 @@ export default function Profileedit() {
     const [img, setImg] = useState(null)
     const [avatar, setAvatar] = useState(null)
     const [ImgSrc, setImgSrc] = useState('');
+    const [city, setCity] = useState('')
 
     const formHandler = (e) => {
       // console.log('=====>', e.target.value, e.target.name)
-      console.log(datainput)
+      // e.preventDefault();
       setDatainput((preMy) => ({ ...preMy, [e.target.name]: e.target.value }))
     }
 
-    const sendFile = async () => {
-      try {
-        const data = new FormData()
-        data.append('avatar', img, img.name)
-        console.log(img)
-        await fetch('/uploadavatar', {
-          method: 'POST',
-          body: data,
-      })
-      .then(res => setAvatar(res.data.path))
-      } catch (error) {
+const sendFile = async () => {
+  try {
+    const data = new FormData()
+    data.append('avatar', img, img.name)
+    setAvatar(img.name)
+    await fetch('/uploadavatar', {
+      method: 'POST',
+      body: data,
+  })
+  .then(res => res.json())
+  .then(res => setAvatar(`/images/${res}`))
+  // setAvatar(send.json())
+  } catch (error) {
+  }
+}
 
-      }
-    }
+
     const updateInfo = async () => {
         await fetch(
             "/updateinfo",
@@ -74,7 +79,8 @@ export default function Profileedit() {
           // set state when the data received
           setData(data);
           setImgSrc(`/images/${data?.photo}`)
-          // console.log(data.photo)
+          setCity(data.city)
+          // setDatainput({data.city})
         };
         dataFetch();
       }, []);
@@ -84,7 +90,7 @@ export default function Profileedit() {
        function handleChange (event) {
         setImg(event.target.files[0])
       }
-
+      console.log(city)
   return (
     <Box>
     <Grid container spacing={2} columns={16}>
@@ -113,7 +119,9 @@ export default function Profileedit() {
       <TextField
           id="filled-helperText"
           label="Город"
-          defaultValue=""
+          // defaultValue={city || ''}
+          type="text"
+          value = {datainput?.city}
           variant="filled"
           onChange={formHandler}
           name="city"
@@ -171,12 +179,7 @@ export default function Profileedit() {
   </List>
   </Grid>
   <Grid item xs={8}>
-  <Avatar
-        alt="Remy Sharp"
-        src={ImgSrc}
-        sx={{ width: 250, height: 250 }}
-      />
-      {/* <Profileeditphoto ImgSrc = {ImgSrc}/> */}
+      <Profileeditphoto avatar = {avatar} ImgSrc = {ImgSrc}/>
             {/* <IconButton color="primary" aria-label="upload picture" component="label">
         <input hidden accept="image/*" type="file" />
         <PhotoCamera />

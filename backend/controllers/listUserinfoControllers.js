@@ -18,7 +18,7 @@ exports.listUserinfo = async (req, res) => {
       
             }
         );
-        console.log(userinform);
+        console.log('11111',userinform);
         res.json(userinform)
     } catch (error) {
         console.log('ERROR LIST==>', error.message);
