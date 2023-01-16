@@ -1,6 +1,6 @@
 import {INIT_BUTTON } from "./actionsTypes";
 
-export const initButtonAC = ({getArr, id}) => async (dispatch) => {
+export const initButtonAC = ({getArr, id, myGroupName}) => async (dispatch) => {
     try {
         const response = await fetch(`/pairs`,
         {
@@ -10,7 +10,8 @@ export const initButtonAC = ({getArr, id}) => async (dispatch) => {
             },
             body: JSON.stringify({
                 data: getArr,
-                group_id: id
+                group_id: id,
+                group_name: myGroupName
             }),
         }
         )

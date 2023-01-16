@@ -10,6 +10,9 @@ import { initPairsAC } from '../../store/pairs/actionsCreators';
 function Pairs2() {
   const dispatch = useDispatch();
 
+  const userRole = localStorage.getItem('userRole');;
+  console.log("🚀 ~ file: Pairs2.jsx:14 ~ Pairs2 ~ userRole", userRole)
+
   // const thisHandleClick = useCallback(
   //     () => {
   //       dispatch(initPairsAC());
@@ -23,8 +26,18 @@ function Pairs2() {
 
     return (
         <>
+        { 
+        userRole === 'teacher' ? (
+            <>
             <ShowPairs/>
             <ButtonSendPairs />
+            </>
+        ) : (
+            <>
+            <ShowPairs/>
+            </>           
+        )
+        }
         </>
     );
 }
