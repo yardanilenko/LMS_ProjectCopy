@@ -1,13 +1,17 @@
 import React from 'react';
+import ContactsInfo from '../../components/contactsInfo/ContactsInfo';
 import MapMsk from '../../components/mapMsk/MapMsk';
-import MapPsb from '../../components/mapPsb/MapPsb';
+import MapSpb from '../../components/mapSpb/MapSpb';
 
 export default function Contacts() {
 
   return (
-    <div style={{ display: "flex", flexDirection: "row", alignItems: 'end', alignContent: 'flex-end', margin: 'auto', justifyContent: 'space-between', minHeight: '800px', }}>
+    <>
+    <ContactsInfo/>
+    <div style={{ display: "flex", flexDirection: "row", alignItems: 'end', alignContent: 'center', margin: 'auto', justifyContent: 'space-between', maxHeight: '600px', }}>
         <MapMsk/>
-        <MapPsb/>
+        <MapSpb/>
     </div>
+    </>
   )
 }
