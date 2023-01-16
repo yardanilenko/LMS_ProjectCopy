@@ -9,7 +9,7 @@ export default function MapMsk() {
           const map = new ymaps.Map('map', {
             center: [55.706573, 37.597091],
             zoom: 10,
-            // controls: ['routeButtonControl']
+            controls: ['routeButtonControl', 'trafficControl', 'typeSelector', 'fullscreenControl']
           }, {
             searchControlProvider: 'yandex#search',
             suppressMapOpenBlock: true,
