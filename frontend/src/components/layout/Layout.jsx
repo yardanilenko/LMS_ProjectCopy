@@ -1,9 +1,8 @@
 import React from 'react';
-import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
 import Divider from '@mui/material/Divider';
-import Drawer from '@mui/material/Drawer';
+import MuiDrawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import List from '@mui/material/List';
@@ -24,34 +23,108 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import {NavLink} from "react-router-dom";
 import LogoutIcon from '@mui/icons-material/Logout';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import { styled, useTheme } from '@mui/material/styles';
+import MuiAppBar from '@mui/material/AppBar';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+
 
 const drawerWidth = 240;
 
-function Layout({children}) {
-    const [mobileOpen, setMobileOpen] = React.useState(false);
+const openedMixin = (theme) => ({
+    width: drawerWidth,
+    transition: theme.transitions.create('width', {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.enteringScreen,
+    }),
+    overflowX: 'hidden',
+});
 
-    const handleDrawerToggle = () => {
-        setMobileOpen(!mobileOpen);
+const closedMixin = (theme) => ({
+    transition: theme.transitions.create('width', {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen,
+    }),
+    overflowX: 'hidden',
+    width: `calc(${theme.spacing(7)} + 1px)`,
+    [theme.breakpoints.up('sm')]: {
+        width: `calc(${theme.spacing(8)} + 1px)`,
+    },
+});
+
+const DrawerHeader = styled('div')(({ theme }) => ({
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    padding: theme.spacing(0, 1),
+    // necessary for content to be below app bar
+    ...theme.mixins.toolbar,
+}));
+
+const AppBar = styled(MuiAppBar, {
+    shouldForwardProp: (prop) => prop !== 'open',
+})(({ theme, open }) => ({
+    zIndex: theme.zIndex.drawer + 1,
+    transition: theme.transitions.create(['width', 'margin'], {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen,
+    }),
+    ...(open && {
+        marginLeft: drawerWidth,
+        width: `calc(100% - ${drawerWidth}px)`,
+        transition: theme.transitions.create(['width', 'margin'], {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.enteringScreen,
+        }),
+    }),
+}));
+
+const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
+    ({ theme, open }) => ({
+        width: drawerWidth,
+        flexShrink: 0,
+        whiteSpace: 'nowrap',
+        boxSizing: 'border-box',
+        ...(open && {
+            ...openedMixin(theme),
+            '& .MuiDrawer-paper': openedMixin(theme),
+        }),
+        ...(!open && {
+            ...closedMixin(theme),
+            '& .MuiDrawer-paper': closedMixin(theme),
+        }),
+    }),
+);
+
+function Layout({children}) {
+    const theme = useTheme();
+    const [open, setOpen] = React.useState(false);
+
+    const handleDrawerOpen = () => {
+        setOpen(true);
     };
 
+    const handleDrawerClose = () => {
+        setOpen(false);
+    };
     const drawer = (
         <div>
             <Toolbar/>
             <Divider/>
             <List>
-                <NavItem to="/calendar" icon={<CalendarMonthIcon />}>Календарь</NavItem>
-                <NavItem to="/review" icon={<RemoveRedEyeIcon />}>Код ревью</NavItem>
-                <NavItem to="/lectures">Материалы лекции</NavItem>
-                <NavItem to="/chats" icon={<MarkUnreadChatAltIcon />}>Чаты</NavItem>
-                <NavItem to="/votes" icon={<ThumbsUpDownIcon />}>Голосования</NavItem>
-                <NavItem to="/pairs" icon={<PeopleAltIcon />}>Пары</NavItem>
-                <NavItem to="/groups" icon={<GroupsIcon />}>Группы</NavItem>
-                <NavItem to="/wiki" icon={<AutoStoriesIcon />}>Вики</NavItem>
+                <NavItem open={open} to="/calendar" icon={<CalendarMonthIcon />}>Календарь</NavItem>
+                <NavItem open={open} to="/review" icon={<RemoveRedEyeIcon />}>Код ревью</NavItem>
+                <NavItem open={open} to="/chats" icon={<MarkUnreadChatAltIcon />}>Чаты</NavItem>
+                <NavItem open={open} to="/lectures">Материалы лекции</NavItem>
+                <NavItem open={open} to="/votes" icon={<ThumbsUpDownIcon />}>Голосования</NavItem>
+                <NavItem open={open} to="/pairs" icon={<PeopleAltIcon />}>Пары</NavItem>
+                <NavItem open={open} to="/groups" icon={<GroupsIcon />}>Группы</NavItem>
+                <NavItem open={open} to="/wiki" icon={<AutoStoriesIcon />}>Вики</NavItem>
             </List>
             <Divider/>
             <List>
-                <NavItem to="/profile" icon={<AccountCircleIcon />}>Профиль</NavItem>
-                <NavItem to="/logout" icon={<LogoutIcon />}>Выйти</NavItem>
+                <NavItem open={open} to="/profile" icon={<AccountCircleIcon />}>Профиль</NavItem>
+                <NavItem open={open} to="/logout" icon={<LogoutIcon />}>Выйти</NavItem>
             </List>
         </div>
     );
@@ -60,19 +133,16 @@ function Layout({children}) {
         <Box sx={{display: 'flex'}}>
             <CssBaseline/>
             <AppBar
-                position="fixed"
-                sx={{
-                    width: {sm: `calc(100% - ${drawerWidth}px)`},
-                    ml: {sm: `${drawerWidth}px`},
-                }}
+                position="fixed" open={open}
             >
                 <Toolbar>
                     <IconButton
                         color="inherit"
                         aria-label="open drawer"
                         edge="start"
-                        onClick={handleDrawerToggle}
-                        sx={{mr: 2, display: {sm: 'none'}}}
+                        onClick={handleDrawerOpen}
+                        sx={{ marginRight: 5,
+                            ...(open && { display: 'none' }),}}
                     >
                         <MenuIcon/>
                     </IconButton>
@@ -81,61 +151,47 @@ function Layout({children}) {
                     </Typography>
                 </Toolbar>
             </AppBar>
-            <Box
-                component="nav"
-                sx={{width: {sm: drawerWidth}, flexShrink: {sm: 0}}}
-                aria-label="mailbox folders"
-            >
-                {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-                <Drawer
-                    variant="temporary"
-                    open={mobileOpen}
-                    onClose={handleDrawerToggle}
-                    ModalProps={{
-                        keepMounted: true, // Better open performance on mobile.
-                    }}
-                    sx={{
-                        display: {xs: 'block', sm: 'none'},
-                        '& .MuiDrawer-paper': {boxSizing: 'border-box', width: drawerWidth},
-                    }}
-                >
-                    {drawer}
-                </Drawer>
-                <Drawer
+            <Drawer
                     variant="permanent"
-                    sx={{
-                        display: {xs: 'none', sm: 'block'},
-                        '& .MuiDrawer-paper': {boxSizing: 'border-box', width: drawerWidth},
-                    }}
-                    open
+                    open={open}
                 >
+                    <DrawerHeader>
+                        <IconButton onClick={handleDrawerClose}>
+                            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+                        </IconButton>
+                    </DrawerHeader>
                     {drawer}
                 </Drawer>
-            </Box>
             <Box
                 component="main"
-                sx={{flexGrow: 1, p: 3, width: {sm: `calc(100% - ${drawerWidth}px)`}}}
+                sx={{flexGrow: 1, p: 3}}
             >
-                <Toolbar/>
+                <DrawerHeader />
                 {children}
             </Box>
         </Box>
     );
 }
 
-const NavItem = ({to, children, icon}) => {
+const NavItem = ({to, children, icon, open}) => {
     return (
         <NavLink to={to} style={{textDecoration: 'none', color: 'inherit'}}>
-            {({isActive}) => (
-                <ListItem disablePadding>
-                    <ListItemButton selected={isActive}>
-                        <ListItemIcon>
+                <ListItem disablePadding sx={{ display: 'block' }}>
+                    <ListItemButton  sx={{
+                        minHeight: 48,
+                        justifyContent: open ? 'initial' : 'center',
+                        px: 2.5,
+                    }}>
+                        <ListItemIcon sx={{
+                            minWidth: 0,
+                            mr: open ? 3 : 'auto',
+                            justifyContent: 'center',
+                        }}>
                             {icon || <InboxIcon/>}
                         </ListItemIcon>
-                        <ListItemText primary={children}/>
+                        <ListItemText primary={children} sx={{ opacity: open ? 1 : 0 }}/>
                     </ListItemButton>
                 </ListItem>
-            )}
         </NavLink>
     )
 }
