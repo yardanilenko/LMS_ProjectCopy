@@ -9,7 +9,7 @@ export default function MapSpb() {
           const map = new ymaps.Map('map', {
             center: [59.943701, 30.360101],
             zoom: 10,
-            // controls: ['routeButtonControl']
+            controls: ['routeButtonControl', 'trafficControl', 'typeSelector', 'fullscreenControl']
           }, {
             searchControlProvider: 'yandex#search',
             suppressMapOpenBlock: true,
