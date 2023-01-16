@@ -14,15 +14,24 @@ export default function MapSpb() {
             searchControlProvider: 'yandex#search',
             suppressMapOpenBlock: true,
           });
-        //   map.controls.remove('searchControl'); // удаляем поиск
-        //   map.controls.remove('trafficControl'); // удаляем контроль трафика
-        //   map.controls.remove('typeSelector'); // удаляем тип
-        //   map.controls.remove('fullscreenControl'); // удаляем кнопку перехода в полноэкранный режим
-          // map.controls.remove('zoomControl'); // удаляем контрол зуммирования
-        //   map.controls.remove('rulerControl'); // удаляем контрол правил
-        //   map.controls.remove('zoomControl');
-          // dispatch(getPlacesThunk());
-          // setMyMap(map);
+                    let control = map.controls.get('routeButtonControl');
+          control.routePanel.state.set({
+            // Тип маршрутизации.
+          type: 'masstransit',
+          fromEnabled: true,
+          to: 'ул. Кирочная 19, этаж 4, офис 28, (м. Чернышевская (закрыта), м. Площадь Восстания)',
+          toEnabled: true
+        });
+        control.routePanel.options.set({
+          // Запрещаем показ кнопки, позволяющей менять местами начальную и конечную точки маршрута.
+          allowSwitch: false,
+          // Включим определение адреса по координатам клика.
+          // Адрес будет автоматически подставляться в поле ввода на панели, а также в подпись метки маршрута.
+          reverseGeocoding: true,
+          // Зададим виды маршрутизации, которые будут доступны пользователям для выбора.
+          types: { masstransit: true, pedestrian: true, taxi: true }
+      });
+
         // eslint-disable-next-line no-undef
         let myPlacemark = new ymaps.Placemark([59.943701, 30.360101], {
             balloonContent: `
