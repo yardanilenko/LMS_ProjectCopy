@@ -23,7 +23,7 @@ function Search({handleOpenChat}) {
                 value={null}
                 loadOptions={promiseOptions}
                 placeholder={'Поиск ...'}
-                getOptionLabel={(option) => option.userName}
+                getOptionLabel={(option) => option.login}
                 getOptionValue={(option) => option.id}
                 onChange={(option) => {
                     fetch(`/api/chats`, {
