@@ -17,6 +17,7 @@ import Login from "./pages/login/Login";
 import Logout from "./pages/logout/Logout";
 import Materials from './components/materials/Materials';
 import Contacts from './pages/Contacts/Contacts';
+import Universalprofile from './components/universalprofile/universalprofile';
 
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
                                 <Route path="/votes/:id" element={<VoteBlank/>}/>
                                 <Route path="/pairs" element={<GroupsFromPairs/>}/>
                                 <Route path="/pairs/:id" element={<Pairs/>}/>
+                                <Route path="/userinfo/:id" element={<Universalprofile/>}/>
                                 <Route path="/groups" element={<Groups/>}/>
                                 <Route path="/groups/:id" element={<Group/>}/>
                                 <Route path="/wiki" element={<div>Вики</div>}/>
