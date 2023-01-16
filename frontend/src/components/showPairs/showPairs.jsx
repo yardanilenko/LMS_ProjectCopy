@@ -8,9 +8,8 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import BackButton from '../../components/backButton/BackButton';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { initPairsAC } from '../../store/pairs/actionsCreators';
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -34,17 +33,17 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 export default function ShowPairs() {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const {id} = useParams();
 
   const myId = +id;
 
-  // console.log("🚀 ~ file: showPairs.jsx:40 ~ ShowPairs ~ id", id)
   
   const pairs = useSelector((store) => store.pair);
+  const groups = useSelector((store) => store.group);
 
-  console.log("pairs ???????", pairs)
+  const groupName = groups[0]?.name;
 
   function createData(week1, week2, week3, week4) {
     return { week1, week2, week3, week4 };
@@ -78,12 +77,8 @@ let myArray
 
 let a = pairs !== undefined ? pairs.filter(el => el.group_id === myId) : [];
 
-// console.log("🚀 ~ PAIRS_A", a)
-
 
 if (pairs !== undefined && pairs.length > 0 && a.length) {
-
-
 
   let b = a.pop();
   
@@ -92,8 +87,7 @@ if (pairs !== undefined && pairs.length > 0 && a.length) {
 let getArr = JSON.parse(c); 
 
 let getRowUl = (row) => {
-    // console.log("🚀 ~ file: showPairs.jsx:77 ~ getRowUl ~ row", row)
-    let ul = <ul>{row?.map((el) => <li>{el.join('-')}</li> )}</ul>;
+    let ul = <ul key={crypto.randomUUID()}>{row?.map((el) => <li key={crypto.randomUUID()}>{el.join('-')}</li> )}</ul>;
     return ul;
   }
 
@@ -116,12 +110,11 @@ return myRows;
 }
 
 myArray = getRowsArr();
-// console.log("🚀 ~ file: Pairs2.jsx:144 ~ Pairs2 ~ myArray", myArray)
 }
 
 
 let rows = (pairs !== undefined && myArray !== undefined && pairs.length > 0) ? myArray : firstArr;
-// console.log("🚀 ~ file: showPairs.jsx:118 ~ ShowPairs ~ rows", rows)
+
 
 // React.useEffect(() => {
 //   dispatch(initPairsAC());
@@ -132,20 +125,12 @@ let rows = (pairs !== undefined && myArray !== undefined && pairs.length > 0) ? 
       
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
-          {/* <TableRow style={{ display: 'flex', alignItems: 'center', width: "100%", minHeight: "50px"}}>
-            <TableCell align="center" colSpan={1}>
-              <BackButton/>
-            </TableCell>
-            <TableCell align="center" colSpan={4} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: "#44014C", width: "100%", minHeight: "50px"}}>
-              <div style={{ backgroundColor: "#44014C"}} align="center"><h1>Hello</h1></div>
-            </TableCell>
-          </TableRow > */}
           <TableRow >
               <TableCell style={{ display: 'table-cell', alignItems: 'center', width: "20%", minHeight: "50px"}} align="left" colSpan={0}>
               <BackButton/>
               </TableCell>
               <TableCell style={{ display: 'table-cell', color: "white", backgroundColor: "black", alignItems: 'center', width: "80%", minHeight: "50px"}} align="center" colSpan={4}>
-                {a[0]?.group_name}
+                {groupName}
               </TableCell>
             </TableRow>
           <TableRow>
