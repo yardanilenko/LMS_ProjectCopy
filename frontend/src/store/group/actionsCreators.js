@@ -5,7 +5,7 @@ export const initGroupAC = (id) => async (dispatch) => {
     try {
         const response = await fetch(`/groups/${id}`);
         const group = await response.json();
-        console.log("🚀 ~ file: actionsCreators.js:8 ~ initGroupAC ~ response", response)
+        console.log("🚀!!!!! ~ file: actionsCreators.js:8 ~ initGroupAC ~ response", group)
         dispatch({type: INIT_GROUP, payload: group});        
     } catch (error) {
         console.log(error)
