@@ -27,7 +27,8 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { styled, useTheme } from '@mui/material/styles';
 import MuiAppBar from '@mui/material/AppBar';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-
+import ContactsIcon from '@mui/icons-material/Contacts';
+import Contacts from '../../pages/Contacts/Contacts';
 
 const drawerWidth = 240;
 
@@ -120,6 +121,7 @@ function Layout({children}) {
                 <NavItem open={open} to="/pairs" icon={<PeopleAltIcon />}>Пары</NavItem>
                 <NavItem open={open} to="/groups" icon={<GroupsIcon />}>Группы</NavItem>
                 <NavItem open={open} to="/wiki" icon={<AutoStoriesIcon />}>Вики</NavItem>
+                <NavItem open={open} to="/contacts" icon={<ContactsIcon />}>Контакты</NavItem>
             </List>
             <Divider/>
             <List>

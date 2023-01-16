@@ -5,7 +5,7 @@ exports.updateinfo = async (req, res) => {
     try {
         const update = await UserInfo.update(
           { city: req.body.city, phone: req.body.phone, telegram: req.body.telegram, github: req.body.github, email: req.body.email  },
-          { where: { user_id: req.body.user_id } },
+          { where: { user_id: req.session.currentUserId } },
         );
         res.json(update);
         console.log(update)

@@ -1,11 +1,17 @@
 import React from 'react'
 import Avatar from '@mui/material/Avatar';
 
-export default function profileeditphoto({ImgSrc}) {
+
+
+export default function Profileeditphoto({avatar, ImgSrc}) {
+  // useEffect(() => {
+  //   console.log(ImgSrc)
+  // }, [ImgSrc]);
+  // const [data, setData] = useState(ImgSrc);
   return (
     <Avatar
     alt="Remy Sharp"
-    src={ImgSrc}
+    src={avatar ? avatar : ImgSrc}
     sx={{ width: 250, height: 250 }}
   />
   )

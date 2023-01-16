@@ -66,7 +66,7 @@ function DatePicker({...props }) {
         }).then(res => res.json())
             .then(data => {
                 const res = data.map((item) => ({
-                    title: item.name,
+                    title: `${item.description ? item.name + '(' + item.description + ')' : item.name}`,
                     start: new Date(item.start),
                     end: new Date(item.finish)
                 }))

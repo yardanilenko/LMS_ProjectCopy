@@ -7,10 +7,10 @@ import { initPairsAC } from '../../store/pairs/actionsCreators';
 
 
 
-function Pairs2() {
+function Pairs() {
   const dispatch = useDispatch();
 
-  const userRole = localStorage.getItem('userRole');;
+  const userRole = localStorage.getItem('userRole');
 
     
   useEffect(() => {
@@ -35,4 +35,4 @@ function Pairs2() {
     );
 }
 
-export default Pairs2;
+export default Pairs;

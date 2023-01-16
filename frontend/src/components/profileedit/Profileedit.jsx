@@ -1,46 +1,51 @@
-import React from 'react'
+import React from 'react';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
 import { Grid } from '@mui/material';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { useNavigate } from 'react-router-dom'
 import { useState, useEffect} from 'react';
+import Profileeditphoto from '../profileeditphoto/profileeditphoto';
 
 export default function Profileedit() {
   let navigate = useNavigate()
 
     const [data, setData] = useState();
     const initialState = { city: '', phone: '', telegram: '', email: '', github: '' }
+    // const [form, setForm] = useState({ city: '', phone: '', telegram: '', email: '', github: '' })
     const [datainput, setDatainput] = useState(initialState);
     const [img, setImg] = useState(null)
     const [avatar, setAvatar] = useState(null)
     const [ImgSrc, setImgSrc] = useState('');
+    const [city, setCity] = useState('')
 
     const formHandler = (e) => {
       // console.log('=====>', e.target.value, e.target.name)
-      console.log(datainput)
+      // e.preventDefault();
       setDatainput((preMy) => ({ ...preMy, [e.target.name]: e.target.value }))
     }
 
-    const sendFile = async () => {
-      try {
-        const data = new FormData()
-        data.append('avatar', img, img.name)
-        console.log(img)
-        await fetch('/uploadavatar', {
-          method: 'POST',
-          body: data,
-      })
-      .then(res => setAvatar(res.data.path))
-      } catch (error) {
+const sendFile = async () => {
+  try {
+    const data = new FormData()
+    data.append('avatar', img, img.name)
+    setAvatar(img.name)
+    await fetch('/uploadavatar', {
+      method: 'POST',
+      body: data,
+  })
+  .then(res => res.json())
+  .then(res => setAvatar(`/images/${res}`))
+  // setAvatar(send.json())
+  } catch (error) {
+  }
+}
 
-      }
-    }
+
     const updateInfo = async () => {
         await fetch(
             "/updateinfo",
@@ -50,7 +55,7 @@ export default function Profileedit() {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    user_id: 6,
+                    // user_id: 6,
                     city: datainput.city,
                     phone: datainput.phone,
                     telegram: datainput.telegram,
@@ -74,7 +79,8 @@ export default function Profileedit() {
           // set state when the data received
           setData(data);
           setImgSrc(`/images/${data?.photo}`)
-          // console.log(data.photo)
+          // setCity(data.city)
+          setDatainput(data)
         };
         dataFetch();
       }, []);
@@ -84,7 +90,7 @@ export default function Profileedit() {
        function handleChange (event) {
         setImg(event.target.files[0])
       }
-
+      console.log(city)
   return (
     <Box>
     <Grid container spacing={2} columns={16}>
@@ -113,7 +119,9 @@ export default function Profileedit() {
       <TextField
           id="filled-helperText"
           label="Город"
-          defaultValue=""
+          // defaultValue={city || ''}
+          type="text"
+          value={datainput.city || ''}
           variant="filled"
           onChange={formHandler}
           name="city"
@@ -124,6 +132,7 @@ export default function Profileedit() {
       {/* <ListItemText primary="Телефон" secondary={data?.phone} /> */}
       <TextField
           id="filled-helperText"
+          value={datainput.phone || ''}
           label="Телефон"
           defaultValue=""
           variant="filled"
@@ -136,6 +145,7 @@ export default function Profileedit() {
       {/* <ListItemText primary="Телеграм" secondary={data?.telegram} /> */}
       <TextField
           id="filled-helperText"
+          value={datainput.telegram || ''}
           label="Телеграм"
           defaultValue=""
           variant="filled"
@@ -148,6 +158,7 @@ export default function Profileedit() {
       {/* <ListItemText primary="Email" secondary={data?.email} /> */}
       <TextField
           id="filled-helperText"
+          value={datainput.email || ''}
           label="Email"
           defaultValue=""
           variant="filled"
@@ -160,6 +171,7 @@ export default function Profileedit() {
       {/* <ListItemText primary="Github" secondary={data?.github} /> */}
       <TextField
           id="filled-helperText"
+          value={datainput.github || ''}
           label="Github"
           defaultValue=""
           variant="filled"
@@ -171,19 +183,22 @@ export default function Profileedit() {
   </List>
   </Grid>
   <Grid item xs={8}>
-  <Avatar
-        alt="Remy Sharp"
-        src={ImgSrc}
-        sx={{ width: 250, height: 250 }}
-      />
-      {/* <Profileeditphoto ImgSrc = {ImgSrc}/> */}
+  <ListItem>
+  <Profileeditphoto avatar = {avatar} ImgSrc = {ImgSrc}/>
+  </ListItem>
             {/* <IconButton color="primary" aria-label="upload picture" component="label">
         <input hidden accept="image/*" type="file" />
         <PhotoCamera />
       </IconButton> */}
+      <ListItem>
       <input type="file" onChange={handleChange}/>
-      <button onClick={sendFile}>Изменить аватар</button>
+      </ListItem>
+      {/* <button onClick={sendFile}>Изменить аватар</button> */}
+      <Button variant="contained" color="success" onClick={sendFile}>Изменить аватар</Button>
+      <Divider />
+
       <Button variant="contained" color="success" onClick={updateInfo}>Cохранить</Button>
+
   </Grid>
   </Grid>
   </Box>
