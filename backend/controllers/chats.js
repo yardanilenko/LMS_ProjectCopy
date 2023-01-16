@@ -69,7 +69,7 @@ exports.findAllChatsForCurrentUser = async (req, res) => {
     try {
         if (req.session.currentUserName) {
             const chats = await UserChat.findAll({
-                attributes: ['id', 'chat_name'],
+                attributes: ['id', 'name'],
                 where: {
                     user_id: req.session.currentUserId
                 }

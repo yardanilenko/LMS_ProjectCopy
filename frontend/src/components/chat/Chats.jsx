@@ -36,8 +36,8 @@ function Chats({handleOpenChat}) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                room_id: id,
-                room_name: name,
+                id: id,
+                name: name,
             })
         }).then((resp) => {
             if (resp.status === 200) {
@@ -66,14 +66,14 @@ function ChatItem({chat, handleOpenGroupChat}) {
     return (
         <ListItem key={chat.id}
                   onClick={() => {
-            handleOpenGroupChat(chat.id, chat.room_name);
+            handleOpenGroupChat(chat.id, chat.name);
         }}>
             <ListItemAvatar>
                 <Avatar>
                     <ImageIcon />
                 </Avatar>
             </ListItemAvatar>
-            <ListItemText primary={chat.room_name} secondary="Recently" />
+            <ListItemText primary={chat.name} secondary="Recently" />
         </ListItem>
     );
 }

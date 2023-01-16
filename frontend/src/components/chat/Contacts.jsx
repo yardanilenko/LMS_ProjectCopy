@@ -44,14 +44,14 @@ function ContactItem({chat, handleOpenChat}) {
     return (
         <ListItem key={chat.id}
                   onClick={() => {
-                      handleOpenChat(chat.id, chat.room_name);
+                      handleOpenChat(chat.id, chat.name);
                   }}>
             <ListItemAvatar>
                 <Avatar>
                     <ImageIcon />
                 </Avatar>
             </ListItemAvatar>
-            <ListItemText primary={chat.room_name} secondary="Recently" />
+            <ListItemText primary={chat.name} secondary="Recently" />
         </ListItem>
     );
 }
