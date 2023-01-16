@@ -9,7 +9,7 @@ export default function MapMsk() {
           const map = new ymaps.Map('map', {
             center: [55.706573, 37.597091],
             zoom: 10,
-            controls: ['routeButtonControl']
+            // controls: ['routeButtonControl']
           }, {
             searchControlProvider: 'yandex#search',
             suppressMapOpenBlock: true,
@@ -28,8 +28,8 @@ export default function MapMsk() {
             balloonContent: `
                       <div class="balloon">
                         <div class="balloon__title">Elbrus Bootcamp</div>
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_-EhNBfCFQQ3CZ21N7-ianNNb3Z-WDoNTEg&usqp=CAU" alt="..." height="100" width="150"> </br>
-                        <a href='https://elbrusboot.camp/'>Подробнее</a>
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_-EhNBfCFQQ3CZ21N7-ianNNb3Z-WDoNTEg&usqp=CAU" alt="..." height="100" width="150"/> </br>
+                        <a href='https://elbrusboot.camp/' target="_blank">Подробнее</a>
                       </div>
                       `,
           }, {
@@ -49,7 +49,7 @@ export default function MapMsk() {
           id="map"
           className="map"
           style={{
-            display: "flex", width: '400px', height: '350px',
+            display: "flex", width: '800px', height: '400px',
           }}
         />
 

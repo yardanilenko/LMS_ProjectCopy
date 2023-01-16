@@ -39,6 +39,7 @@ export default function Group() {
     const dispatch = useDispatch();
 
     const {id} = useParams();
+    console.log("🚀 ~ file: Group.jsx:42 ~ Group ~ id", id)
     
     const group = useSelector((store) => store.group);
     console.log("🚀 ~ file: Group.jsx:44 ~ Group ~ group", group)
@@ -66,9 +67,9 @@ export default function Group() {
             </TableRow>
         </TableHead>
         <TableBody>
-          {myGroup.map((item, idx) =>
+          {myGroup.map((item) =>
             {return (
-            <StyledTableRow key={item.id}>
+            <StyledTableRow key={crypto.randomUUID()}>
                 <StyledTableCell style={{ display: 'table-cell', justifyContent: 'center', alignItems: 'center', width: "100%", minHeight: "50px"}} align="center" colSpan={5} component="th" scope="row">
                     {item.login}
                 </StyledTableCell>

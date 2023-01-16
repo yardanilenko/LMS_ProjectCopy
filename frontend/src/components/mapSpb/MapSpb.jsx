@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 
 
-export default function MapPsb() {
+export default function MapSpb() {
 
     useEffect(() => {
         function init() {
@@ -9,7 +9,7 @@ export default function MapPsb() {
           const map = new ymaps.Map('map', {
             center: [59.943701, 30.360101],
             zoom: 10,
-            controls: ['routeButtonControl']
+            // controls: ['routeButtonControl']
           }, {
             searchControlProvider: 'yandex#search',
             suppressMapOpenBlock: true,
@@ -21,15 +21,15 @@ export default function MapPsb() {
           // map.controls.remove('zoomControl'); // удаляем контрол зуммирования
         //   map.controls.remove('rulerControl'); // удаляем контрол правил
         //   map.controls.remove('zoomControl');
-        //   dispatch(getPlacesThunk());
-        //   setMyMap(map);
+          // dispatch(getPlacesThunk());
+          // setMyMap(map);
         // eslint-disable-next-line no-undef
         let myPlacemark = new ymaps.Placemark([59.943701, 30.360101], {
             balloonContent: `
                       <div class="balloon">
                         <div class="balloon__title">Elbrus Bootcamp</div>
                         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_-EhNBfCFQQ3CZ21N7-ianNNb3Z-WDoNTEg&usqp=CAU" alt="..." height="100" width="150"> </br>
-                        <a href='https://elbrusboot.camp/'>Подробнее</a>
+                        <a href='https://elbrusboot.camp/' target="_blank">Подробнее</a>
                       </div>
                       `,
           }, {
@@ -50,7 +50,7 @@ export default function MapPsb() {
           id="map"
           className="map"
           style={{
-            display: "flex", width: '400px', height: '350px',
+            display: "flex", width: '800px', height: '400px',
           }}
         />
 
