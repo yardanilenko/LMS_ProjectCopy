@@ -1,5 +1,5 @@
 import {SET_USERNAME} from "./actionsTypes";
 
-export function setUsernameAC (name)  {
-    return {type: SET_USERNAME, payload: name}
+export function setUsernameAC (object)  {
+    return {type: SET_USERNAME, payload: object}
 }

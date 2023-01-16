@@ -9,7 +9,7 @@ function Logout() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        fetch("/logout", {
+        fetch("/api/logout", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -17,7 +17,8 @@ function Logout() {
         }).then(() => {
             localStorage.removeItem('userName');
             localStorage.removeItem('userId');
-            dispatch(setUsernameAC(''));
+            localStorage.removeItem("userRole")
+            dispatch(setUsernameAC({}));
         });
     }, []);
 

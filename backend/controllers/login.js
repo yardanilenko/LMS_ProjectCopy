@@ -11,10 +11,11 @@ exports.loginUser = async (req, res) => {
         }
         const passCheck = await bcrypt.compare(password, user.password);
         if (passCheck) {
-            req.session.currentUserName = user.name;
+            req.session.currentUserName = user.login;
             req.session.currentUserId = user.id;
+            req.session.currentRole = user.role;
             req.session.save(() => {
-                res.json({ userName: user.login, userId: user.id });
+                res.json({ userName: user.login, userId: user.id , userRole: user.role});
             });
         } else {
             res.status(401).send({ message: "Incorrect email or password" });
