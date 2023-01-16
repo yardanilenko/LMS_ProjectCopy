@@ -10,8 +10,10 @@ exports.listUserinfo = async (req, res) => {
     // } catch (error) {
     //     console.log('ERROR LIST==>', error.message);
     // }
+    // console.log('111111!!!!!',req.session.currentUserId)
+    const userId = req.session.currentUserId
         try {
-        const userinform = await UserInfo.findOne({where: {user_id : 6},
+        const userinform = await UserInfo.findOne({where: {user_id : userId},
             include: { 
               model : Group , 
             },

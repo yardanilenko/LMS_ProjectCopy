@@ -17,6 +17,7 @@ export default function Profileedit() {
 
     const [data, setData] = useState();
     const initialState = { city: '', phone: '', telegram: '', email: '', github: '' }
+    // const [form, setForm] = useState({ city: '', phone: '', telegram: '', email: '', github: '' })
     const [datainput, setDatainput] = useState(initialState);
     const [img, setImg] = useState(null)
     const [avatar, setAvatar] = useState(null)
@@ -55,7 +56,7 @@ const sendFile = async () => {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    user_id: 6,
+                    // user_id: 6,
                     city: datainput.city,
                     phone: datainput.phone,
                     telegram: datainput.telegram,
@@ -79,8 +80,8 @@ const sendFile = async () => {
           // set state when the data received
           setData(data);
           setImgSrc(`/images/${data?.photo}`)
-          setCity(data.city)
-          // setDatainput({data.city})
+          // setCity(data.city)
+          setDatainput(data)
         };
         dataFetch();
       }, []);
@@ -121,7 +122,7 @@ const sendFile = async () => {
           label="Город"
           // defaultValue={city || ''}
           type="text"
-          value = {datainput?.city}
+          value={datainput.city || ''}
           variant="filled"
           onChange={formHandler}
           name="city"
@@ -132,6 +133,7 @@ const sendFile = async () => {
       {/* <ListItemText primary="Телефон" secondary={data?.phone} /> */}
       <TextField
           id="filled-helperText"
+          value={datainput.phone || ''}
           label="Телефон"
           defaultValue=""
           variant="filled"
@@ -144,6 +146,7 @@ const sendFile = async () => {
       {/* <ListItemText primary="Телеграм" secondary={data?.telegram} /> */}
       <TextField
           id="filled-helperText"
+          value={datainput.telegram || ''}
           label="Телеграм"
           defaultValue=""
           variant="filled"
@@ -156,6 +159,7 @@ const sendFile = async () => {
       {/* <ListItemText primary="Email" secondary={data?.email} /> */}
       <TextField
           id="filled-helperText"
+          value={datainput.email || ''}
           label="Email"
           defaultValue=""
           variant="filled"
@@ -168,6 +172,7 @@ const sendFile = async () => {
       {/* <ListItemText primary="Github" secondary={data?.github} /> */}
       <TextField
           id="filled-helperText"
+          value={datainput.github || ''}
           label="Github"
           defaultValue=""
           variant="filled"
@@ -179,14 +184,22 @@ const sendFile = async () => {
   </List>
   </Grid>
   <Grid item xs={8}>
-      <Profileeditphoto avatar = {avatar} ImgSrc = {ImgSrc}/>
+  <ListItem>
+  <Profileeditphoto avatar = {avatar} ImgSrc = {ImgSrc}/>
+  </ListItem>
             {/* <IconButton color="primary" aria-label="upload picture" component="label">
         <input hidden accept="image/*" type="file" />
         <PhotoCamera />
       </IconButton> */}
+      <ListItem>
       <input type="file" onChange={handleChange}/>
-      <button onClick={sendFile}>Изменить аватар</button>
+      </ListItem>
+      {/* <button onClick={sendFile}>Изменить аватар</button> */}
+      <Button variant="contained" color="success" onClick={sendFile}>Изменить аватар</Button>
+      <Divider />
+      
       <Button variant="contained" color="success" onClick={updateInfo}>Cохранить</Button>
+
   </Grid>
   </Grid>
   </Box>
