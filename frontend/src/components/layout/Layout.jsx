@@ -24,6 +24,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import {NavLink} from "react-router-dom";
 import LogoutIcon from '@mui/icons-material/Logout';
+import Contacts from '../../pages/Contacts/Contacts';
 
 const drawerWidth = 240;
 
@@ -46,6 +47,7 @@ function Layout({children}) {
                 <NavItem to="/votes" icon={<ThumbsUpDownIcon />}>Голосования</NavItem>
                 <NavItem to="/pairs" icon={<PeopleAltIcon />}>Пары</NavItem>
                 <NavItem to="/groups" icon={<GroupsIcon />}>Группы</NavItem>
+                <NavItem to="/contacts">Контакты</NavItem>
                 <NavItem to="/wiki" icon={<AutoStoriesIcon />}>Вики</NavItem>
             </List>
             <Divider/>
