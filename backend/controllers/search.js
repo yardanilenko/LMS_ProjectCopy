@@ -23,8 +23,8 @@ exports.searchUsers = async (req, res) => {
             const users = await User.findAll({
                 attributes: ['id', 'login'],
                 where: {
-                    userName: {
-                        [Op.like]: `%${req.query.query}%`
+                    login: {
+                        [Op.iLike]: `%${req.query.query}%`
                     }
                 },
                 limit: parseInt(req.query.limit) || 10
