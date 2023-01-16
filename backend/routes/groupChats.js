@@ -5,8 +5,8 @@ const {findOrCreateGroup, getPublicRooms} = require("../controllers/groupChats")
 
 
 router
-    .post('/api//groupChats', findOrCreateGroup)
-    .get('/api//groupChats', getPublicRooms)
+    .post('/api/groupChats', findOrCreateGroup)
+    .get('/api/groupChats', getPublicRooms)
 
 
 module.exports = router;
