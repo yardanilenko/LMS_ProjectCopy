@@ -4,7 +4,6 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
 import { Grid } from '@mui/material';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
@@ -197,7 +196,7 @@ const sendFile = async () => {
       {/* <button onClick={sendFile}>Изменить аватар</button> */}
       <Button variant="contained" color="success" onClick={sendFile}>Изменить аватар</Button>
       <Divider />
-      
+
       <Button variant="contained" color="success" onClick={updateInfo}>Cохранить</Button>
 
   </Grid>

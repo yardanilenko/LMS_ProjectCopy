@@ -5,15 +5,12 @@ import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
 import { Grid } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import { useNavigate } from 'react-router-dom'
-// import TextField from '@mui/material/TextField';
 import { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
 
 
 export default function Universalprofile() {
-  
+
     const { id } = useParams();
     console.log(id)
 
@@ -21,7 +18,7 @@ export default function Universalprofile() {
     const [ImgSrc, setImgSrc] = useState('');
 
     useEffect(() => {
-        
+
         // fetch data
         const dataFetch = async () => {
           const data = await (
