@@ -31,7 +31,7 @@ function Contacts({handleOpenChat}) {
     return (
         <div>
             <h3>Contacts</h3>
-            <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+            <List sx={{ width: '100%', maxWidth: 360}}>
                 {chats && chats.map((chat) => (
                     <ContactItem chat={chat} handleOpenChat={handleOpenChat}/>
                 ))}

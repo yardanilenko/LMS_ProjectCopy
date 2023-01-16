@@ -20,6 +20,9 @@ const groupsRouter = require('./routes/groups');
 const groupRouter = require('./routes/group');
 const votesRouter = require('./routes/votes');
 const userinfoRoutes = require('./routes/userinfoRoutes');
+const groupChatsRouter = require('./routes/groupChats');
+const chatsRouter = require('./routes/chats');
+const searchRouter = require('./routes/search');
 
 const arrayPairs = require('./routes/arrayPairs');
 const loginRoutes = require('./routes/login');
@@ -88,6 +91,9 @@ app.use('/', votesRouter);
 app.use('/', groupsRouter);
 app.use('/', groupRouter);
 app.use('/', userinfoRoutes);
+app.use('/', groupChatsRouter);
+app.use('/', chatsRouter);
+app.use('/', searchRouter);
 
 app.use('/', arrayPairs);
 app.use('/', loginRoutes);

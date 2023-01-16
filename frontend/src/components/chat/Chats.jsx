@@ -53,7 +53,7 @@ function Chats({handleOpenChat}) {
     return (
         <div>
             <h3>Chats</h3>
-            <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+            <List sx={{ width: '100%', maxWidth: 360 }}>
             {chats && chats.map((chat) => (
                 <ChatItem chat={chat} handleOpenGroupChat={handleOpenGroupChat}/>
             ))}
