@@ -16,6 +16,7 @@ import PrivateRoutes from "./components/privateRoutes/PrivateRoutes";
 import Login from "./pages/login/Login";
 import Logout from "./pages/logout/Logout";
 import Materials from './components/materials/Materials';
+import Contacts from './pages/Contacts/Contacts';
 
 
 function App() {
@@ -42,6 +43,7 @@ function App() {
                                 <Route path="/groups" element={<Groups/>}/>
                                 <Route path="/groups/:id" element={<Group/>}/>
                                 <Route path="/wiki" element={<div>Вики</div>}/>
+                                <Route path="/contacts" element={<Contacts/>}/>
                                 <Route path="/logout" element={<Logout />}/>
                             </Routes>
                         </Layout>
