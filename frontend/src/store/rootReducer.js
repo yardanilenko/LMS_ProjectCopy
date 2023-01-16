@@ -4,6 +4,7 @@ import groupReducer from "./group/groupReducer";
 import pairsReducer from "./pairs/pairsReducer";
 import profileReducer from "./profile/profileReducer";
 import materialsReducer from "./materials/materialsReducer"
+import userInfoReducer from "./userInfo/userInfoReducer"
 
 
 export default combineReducers({
@@ -11,5 +12,6 @@ export default combineReducers({
     group: groupReducer,
     pair: pairsReducer,
     profile: profileReducer,
-    materials: materialsReducer
+    materials: materialsReducer,
+    userInfo: userInfoReducer
 });

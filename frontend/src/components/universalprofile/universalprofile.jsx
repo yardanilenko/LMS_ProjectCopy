@@ -3,13 +3,14 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
-import { Grid } from '@mui/material';
+import { Grid, TableCell } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom'
 // import TextField from '@mui/material/TextField';
 import { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
+import BackButton from '../backButton/BackButton';
 
 
 export default function Universalprofile() {
@@ -40,6 +41,10 @@ export default function Universalprofile() {
 
       // const imgSrc = `/images/${ImgSrc}.jpg`
   return (
+  <>
+    <TableCell style={{ display: 'table-cell', alignItems: 'center', width: "10%", minHeight: "50px"}} align="left" colSpan={0}>
+      <BackButton/>
+    </TableCell>
     <Grid container spacing={2} columns={16}>
     <Grid item xs={8}>
     <List
@@ -98,5 +103,6 @@ export default function Universalprofile() {
       />
   </Grid>
   </Grid>
+  </>
   )
 }
