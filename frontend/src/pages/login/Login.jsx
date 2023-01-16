@@ -37,8 +37,10 @@ function Login() {
             }
         })
             .then(data => {
-                dispatch(setUsernameAC(data.userName));
+                dispatch(setUsernameAC(data));
                 localStorage.setItem("userName", data.userName);
+                localStorage.setItem("userId", data.userId);
+                localStorage.setItem("userRole", data.userRole);
                 navigate("/calendar");
             });
     }

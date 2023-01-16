@@ -2,7 +2,7 @@ exports.userLogout = (req, res) => {
     try {
         if (req.session.currentUserName) {
             req.session.destroy(() => {
-                res.clearCookie("myGameCookie");
+                res.clearCookie("myLmsCookie");
                 res.send({ message: "Logout successful" });
             });
         } else {
