@@ -8,7 +8,7 @@ import VoteList from "./components/vote/VoteList";
 import Profile from "./components/profile/Profile";
 import Profileedit from "./components/profileedit/Profileedit";
 import VoteForm from "./components/vote/VoteForm";
-import Pairs2 from './pages/Pairs2/Pairs2';
+import Pairs from './pages/Pairs/Pairs';
 import GroupsFromPairs from './pages/GroupsFromPairs/GroupsFromPairs';
 import VoteBlank from "./components/vote/VoteBlank";
 import Codereview from './components/codereview/Codereview';
@@ -38,7 +38,7 @@ function App() {
                                 <Route path="/votes/create" element={<VoteForm/>}/>
                                 <Route path="/votes/:id" element={<VoteBlank/>}/>
                                 <Route path="/pairs" element={<GroupsFromPairs/>}/>
-                                <Route path="/pairs/:id" element={<Pairs2/>}/>
+                                <Route path="/pairs/:id" element={<Pairs/>}/>
                                 <Route path="/groups" element={<Groups/>}/>
                                 <Route path="/groups/:id" element={<Group/>}/>
                                 <Route path="/wiki" element={<div>Вики</div>}/>

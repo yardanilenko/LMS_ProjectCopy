@@ -42,14 +42,10 @@ export default function ButtonSendPairs({thisHandleClick}) {
     const {id} = useParams();
     
     const group = useSelector((store) => store.group);
-    console.log("🚀 ~ file: ButtonSendPairs.jsx:45 ~ ButtonSendPairs ~ group!!!e!!!!!!!!>>>>", group)
 
     const myGroup = group[0]?.Users;
-    // group[0] !== undefined ? group[0].Users : [{login: "testLogin"}, {login: "testLogin2"}, {login: "testLogin3"}, {login: "testLogin4"}, {login: "testLogin5"}, {login: "testLogin6"}];
-  // console.log("🚀 ~ file: Pairs2.jsx:90 ~ Pairs2 ~ myGroup ", myGroup )
 
-  const myGroupName = group[0]?.name;
-  // console.log("🚀 ~ file: ButtonSendPairs.jsx:50 ~ ButtonSendPairs ~ myGroupName", myGroupName)
+    const myGroupName = group[0]?.name;
 
 
     const getMyPairs = () => {
@@ -67,9 +63,7 @@ export default function ButtonSendPairs({thisHandleClick}) {
       const putCurrentArr = async () => {
         
         const getArr = getMyPairs();
-        console.log("=====>>>>>>>> getArr", getArr)
-          // if (getArr && myGroupName) {
-            // console.log("🚀 ~ file: ButtonSendPairs.jsx:60 ~ ButtonSendPairs ~ getArr", getArr)
+
           
           const response = await fetch(
             `http://localhost:3100/pairs`,
@@ -85,19 +79,13 @@ export default function ButtonSendPairs({thisHandleClick}) {
                   }),
               }
               )
-              console.log();
-              const data = await response.json();
-              const arrBack = JSON.parse(data.data);
               dispatch(initPairsAC())
-              // console.log("🚀 ~ file: Pairs2.jsx:134 ~ putCurrentArr ~ arrBack", arrBack)
-        // }
       };
       
       
       const handleClick = () => {
         putCurrentArr();
         dispatch(initPairsAC());
-        console.log("HELLO");
       }
 
       React.useEffect(() => {
