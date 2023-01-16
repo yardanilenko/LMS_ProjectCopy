@@ -27,6 +27,8 @@ function ChatLayout() {
                 sx={{width: {sm: drawerWidth}, flexShrink: {sm: 0}}}
                 aria-label="mailbox folders"
             >
+                <div style={{height:"40px"}}></div>
+                <Divider />
                 {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
                 <Search handleOpenChat={handleOpenChat}/>
                 <Chats handleOpenChat={handleOpenChat}/>
