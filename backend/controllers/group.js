@@ -1,4 +1,4 @@
-const {Group, User, UserInfo} = require ('../db/models');
+const {Group, User} = require ('../db/models');
 
 
 exports.group = async (req, res) => {
