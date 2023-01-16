@@ -1,20 +1,19 @@
-const {Group, User, UserInfo} = require ('../db/models');
+const {Group, UserInfo} = require ('../db/models');
 
 
-exports.group = async (req, res) => {
+exports.groupnames = async (req, res) => {
   try {
     const group_id = req.params.id;
-    const group = await Group.findAll({
+    const groupnames = await Group.findAll({
       where: {
         id: group_id
       },
       include: { 
-        model : User , 
+        model : UserInfo , 
       },
   });
-    res.send(group);
+    res.send(groupnames);
   } catch (error) {
       console.log('ERROR LIST==>', error.message);
   }
 }
-

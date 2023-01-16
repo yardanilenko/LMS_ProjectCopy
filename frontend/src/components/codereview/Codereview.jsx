@@ -8,18 +8,23 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import Button from '@mui/material/Button';
+import Alert from '@mui/material/Alert';
+import IconButton from '@mui/material/IconButton';
+import Collapse from '@mui/material/Collapse';
+import CloseIcon from '@mui/icons-material/Close';
 
 export default function Codereview() {
     const [groups, setGroups] = useState();
-    const [groupsinput, setGroupsinput] = useState();
+    const [groupsinput, setGroupsinput] = useState('');
     const [students, setStudents] = useState([
         {label: 'Выберите группу', id: 14}])
     const [studentsinput, setStudentsinput] = useState()
+    const [open, setOpen] = React.useState(false);
 
 
 
-    const userId = 6
     const createEvent = async () => {
+      setOpen(true)
         await fetch(
             "/createevent",
             {
@@ -29,7 +34,7 @@ export default function Codereview() {
                 },
                 body: JSON.stringify({
                     name: "code-review",
-                    user_id: userId,
+                    // user_id: userId,
                     description: theme,
                     member_id: studentsinput.id,
                     start: `${valuedate.toISOString().substring(0, 10)}${valuetimestart.toISOString().substring(10)}`,
@@ -62,13 +67,13 @@ export default function Codereview() {
         const dataFetch = async () => {
           const data = await (
             await fetch(
-              `/groups/${groupsinput}`
+              `/groupsnames/${groupsinput}`
             )
           ).json();
           // set state when the data received
-          console.log(data[0].Users)
-          setStudents(data[0].Users.map(({ id, login }) => ({
-            label: login,
+          console.log(data)
+          setStudents(data[0].UserInfos.map(({ id, name, surname }) => ({
+            label: `${name} ${surname}`,
             id:id
             }))
             );
@@ -104,8 +109,26 @@ export default function Codereview() {
     //     setValuetimeend(newValue);
     //   };
     // console.log(valuedate.toISOString().substring(10))
-    console.log(students)
   return (<>
+      <Collapse in={open}>
+        <Alert
+          action={
+            <IconButton
+              aria-label="close"
+              color="inherit"
+              size="small"
+              onClick={() => {
+                setOpen(false);
+              }}
+            >
+              <CloseIcon fontSize="inherit" />
+            </IconButton>
+          }
+          sx={{ mb: 2 }}
+        >
+          Встреча успешно запланирована!
+        </Alert>
+      </Collapse>
   <LocalizationProvider dateAdapter={AdapterDayjs}>
      <Autocomplete
       disablePortal
@@ -118,18 +141,21 @@ export default function Codereview() {
     <Autocomplete
       disablePortal
       id="combo-box-demo"
+      disabled = {!groupsinput}
       options={students}
       onChange={formHandlerStudent}
       sx={{ width: 300 }}
       renderInput={(params) => <TextField {...params} label="Студент" />}
     />
-              <DesktopDatePicker
+             <div> 
+             <DesktopDatePicker
           label="Дата"
           inputFormat="MM/DD/YYYY"
           value={valuedate}
           onChange={handleChangeDate}
           renderInput={(params) => <TextField {...params} />}
         />
+        </div>
               <TimePicker
         label="Время начала"
         value={valuetimestart}
@@ -146,14 +172,15 @@ export default function Codereview() {
         }}
         renderInput={(params) => <TextField {...params} />}
       />
+      <div>
               <TextField
               onChange={handleChangeTheme}
           id="outlined-multiline-flexible"
           label="Тема код-ревью"
           multiline
           maxRows={4}
-
-        />
+        />        
+      </div>
               <Button variant="contained" color="success" onClick={createEvent}>
         Назначить встречу
       </Button>
