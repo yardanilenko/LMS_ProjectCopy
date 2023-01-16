@@ -16,6 +16,7 @@ import PrivateRoutes from "./components/privateRoutes/PrivateRoutes";
 import Login from "./pages/login/Login";
 import Logout from "./pages/logout/Logout";
 import Materials from './components/materials/Materials';
+import ChatLayout from "../src/pages/chat/ChatLayout";
 
 
 function App() {
@@ -33,7 +34,7 @@ function App() {
                                 <Route path="/profile" element={<Profile/>}/>
                                 <Route path="profileedit" element={<Profileedit/>}/>
                                 <Route path="/lectures" element={<Materials/>}/>
-                                <Route path="/chats" element={<div>Чаты</div>}/>
+                                <Route path="/chats" element={<ChatLayout />}/>
                                 <Route path="/votes" element={<VoteList/>}/>
                                 <Route path="/votes/create" element={<VoteForm/>}/>
                                 <Route path="/votes/:id" element={<VoteBlank/>}/>

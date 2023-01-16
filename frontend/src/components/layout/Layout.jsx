@@ -114,8 +114,8 @@ function Layout({children}) {
             <List>
                 <NavItem open={open} to="/calendar" icon={<CalendarMonthIcon />}>Календарь</NavItem>
                 <NavItem open={open} to="/review" icon={<RemoveRedEyeIcon />}>Код ревью</NavItem>
-                <NavItem open={open} to="/chats" icon={<MarkUnreadChatAltIcon />}>Чаты</NavItem>
                 <NavItem open={open} to="/lectures">Материалы лекции</NavItem>
+                <NavItem open={open} to="/chats" icon={<MarkUnreadChatAltIcon />}>Чаты</NavItem>
                 <NavItem open={open} to="/votes" icon={<ThumbsUpDownIcon />}>Голосования</NavItem>
                 <NavItem open={open} to="/pairs" icon={<PeopleAltIcon />}>Пары</NavItem>
                 <NavItem open={open} to="/groups" icon={<GroupsIcon />}>Группы</NavItem>
