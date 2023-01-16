@@ -46,7 +46,7 @@ export default function Group() {
     
     const group = useSelector((store) => store.group);
     const users = useSelector((store) => store.userInfo);
-    console.log("🚀 ~ file: Group.jsx:47 ~ Group ~ users", users)
+   console.log("🚀 ~ file: Group.jsx:47 ~ Group ~ users", users)
     console.log("🚀 ~ file: Group.jsx:44 ~ Group ~ group", group)
 
     useEffect(() => {
