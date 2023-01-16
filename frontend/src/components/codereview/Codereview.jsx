@@ -72,9 +72,9 @@ export default function Codereview() {
           ).json();
           // set state when the data received
           console.log(data)
-          setStudents(data[0].UserInfos.map(({ id, name, surname }) => ({
+          setStudents(data[0].UserInfos.map(({ user_id, name, surname }) => ({
             label: `${name} ${surname}`,
-            id:id
+            id:user_id
             }))
             );
         };
