@@ -1,5 +1,5 @@
 import { Box, Divider, Grid, List, ListItem, ListItemText, TableBody, TableCell, tableCellClasses, TableRow } from '@mui/material';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { styled } from '@mui/material/styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { initVikiAC } from '../../store/viki/actionsCreators';
@@ -32,7 +32,7 @@ export default function Viki() {
     const viki = useSelector((store) => store.viki);
     console.log("🚀 ~ file: Viki.jsx:9 ~ Viki ~ viki", viki)
 
-    const initialState = viki[0]?.page;
+    const initialState = viki[0].page;
 
     const[page, setPage] = useState(initialState);
 
@@ -40,11 +40,10 @@ export default function Viki() {
       setPage(item)
     }
 
-    React.useEffect(() => {
+    useEffect(() => {
         dispatch(initVikiAC());
       }, []);
 
-      // <div>{viki[0].page}</div>
   return (
     <Box>
       <Grid container spacing={2} columns={16}>
@@ -57,11 +56,11 @@ export default function Viki() {
             }}
           >
         <TableBody>
-            {viki?.map((item) =>
+            {viki.map((item) =>
               {return (
               <StyledTableRow key={crypto.randomUUID()}>
                   <StyledTableCell align="center" component="th" scope="row" onClick={() => {getVikiPage(item.page)}}>
-                      {item.name || 'loading...'}
+                      {item.name}
                   </StyledTableCell>
               </StyledTableRow>
               )}
@@ -71,7 +70,7 @@ export default function Viki() {
       </Grid>
         <Grid item xs={12}>
           <ListItem>
-            {page || 'loading...'}
+            {page}
           </ListItem>
         </Grid>
       </Grid>
