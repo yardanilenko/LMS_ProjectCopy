@@ -23,7 +23,7 @@ const userinfoRoutes = require('./routes/userinfoRoutes');
 const groupChatsRouter = require('./routes/groupChats');
 const chatsRouter = require('./routes/chats');
 const searchRouter = require('./routes/search');
-
+const vikiRouter = require('./routes/viki');
 const arrayPairs = require('./routes/arrayPairs');
 const loginRoutes = require('./routes/login');
 const logoutRoutes = require('./routes/logout');
@@ -94,7 +94,7 @@ app.use('/', userinfoRoutes);
 app.use('/', groupChatsRouter);
 app.use('/', chatsRouter);
 app.use('/', searchRouter);
-
+app.use('/', vikiRouter);
 app.use('/', arrayPairs);
 app.use('/', loginRoutes);
 app.use('/', logoutRoutes);
