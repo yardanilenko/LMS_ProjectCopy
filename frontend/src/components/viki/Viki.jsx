@@ -32,7 +32,7 @@ export default function Viki() {
     const viki = useSelector((store) => store.viki);
     console.log("🚀 ~ file: Viki.jsx:9 ~ Viki ~ viki", viki)
 
-    const initialState = viki[0].page;
+    const initialState = viki[0]?.page;
 
     const[page, setPage] = useState(initialState);
 
@@ -57,11 +57,11 @@ export default function Viki() {
             }}
           >
         <TableBody>
-            {viki.map((item) =>
+            {viki?.map((item) =>
               {return (
               <StyledTableRow key={crypto.randomUUID()}>
                   <StyledTableCell align="center" component="th" scope="row" onClick={() => {getVikiPage(item.page)}}>
-                      {item.name}
+                      {item.name || 'loading...'}
                   </StyledTableCell>
               </StyledTableRow>
               )}
@@ -71,7 +71,7 @@ export default function Viki() {
       </Grid>
         <Grid item xs={12}>
           <ListItem>
-            {page}
+            {page || 'loading...'}
           </ListItem>
         </Grid>
       </Grid>
