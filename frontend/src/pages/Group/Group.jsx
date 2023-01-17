@@ -46,7 +46,7 @@ export default function Group() {
     
     const group = useSelector((store) => store.group);
     const users = useSelector((store) => store.userInfo);
-    console.log("🚀 ~ file: Group.jsx:47 ~ Group ~ users", users)
+   console.log("🚀 ~ file: Group.jsx:47 ~ Group ~ users", users)
     console.log("🚀 ~ file: Group.jsx:44 ~ Group ~ group", group)
 
     useEffect(() => {
@@ -55,13 +55,7 @@ export default function Group() {
     }, []);
 
     const nameGroup = group[0] !== undefined ? group[0].name : "testName";
-    const nameUser = (users !== undefined && users.length) ? users.name : "Список ещё не сформирован";
-    const surnameUser = (users !== undefined && users.length) ? users.surname : "Список ещё не сформирован";
-
-    const myGroup = group[0] !== undefined ? group[0].Users : [{login: "testLogin"}];
-    // console.log("🚀 ~ file: Group.jsx:54 ~ Group ~ myGroup", myGroup)
-
-    
+ 
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">

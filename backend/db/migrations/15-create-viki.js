@@ -2,7 +2,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('UserChats', {
+    await queryInterface.createTable('Vikis', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -12,22 +12,8 @@ module.exports = {
       name: {
         type: Sequelize.TEXT
       },
-      user_id: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: "Users",
-          key: "id",
-        },
-      },
-      room_id: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: "Rooms",
-          key: "id",
-        },
-      },
-      isGroup: {
-        type: Sequelize.BOOLEAN,
+      page: {
+        type: Sequelize.TEXT
       },
       createdAt: {
         allowNull: false,
@@ -40,6 +26,6 @@ module.exports = {
     });
   },
   async down(queryInterface) {
-    await queryInterface.dropTable('UserChats');
+    await queryInterface.dropTable('Vikis');
   }
 };

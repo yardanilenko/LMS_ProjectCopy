@@ -1,0 +1,1 @@
+export const INIT_GROUP_CHATS = "INIT_GROUP_CHATS";

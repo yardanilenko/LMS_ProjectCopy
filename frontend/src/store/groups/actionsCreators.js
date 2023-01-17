@@ -1,4 +1,4 @@
-import {INIT_GROUPS, INIT_GROUP} from "./actionsTypes";
+import {INIT_GROUPS} from "./actionsTypes";
 
 export const initGroupsAC = () => async (dispatch) => {
     try {

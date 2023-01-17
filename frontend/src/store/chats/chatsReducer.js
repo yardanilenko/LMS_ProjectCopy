@@ -1,9 +1,9 @@
-import {INIT_GROUPS} from "./actionsTypes";
+import {INIT_CHATS} from "./actionsTypes";
 
 const initialState = [];
-export default function groupsReducer(state = initialState, action) {
+export default function chatIdReducer(state = initialState, action) {
     switch (action.type) {
-        case INIT_GROUPS : {
+        case INIT_CHATS : {
             return action.payload;
         }
         default :

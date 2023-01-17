@@ -4,16 +4,17 @@ import ScrollToBottom, {useScrollToBottom} from "react-scroll-to-bottom";
 import io from "socket.io-client";
 import InputEmoji from 'react-input-emoji';
 import {css} from '@emotion/css';
+import {useSelector} from "react-redux";
+import Divider from '@mui/material/Divider';
 
-function classNames(...classes) {
-    return classes.filter(Boolean).join(' ')
-}
 
 const ROOT_CSS = css({
-    height: window.innerHeight - 160,
+    height: window.innerHeight - 210,
 });
 
-function Chat({chatID}) {
+function Chat() {
+
+    const chatId= useSelector((store) => store.chatId)
 
     const [currentMessage, setCurrentMessage] = useState('');
     const [messages, setMessages] = useState([]);
@@ -25,18 +26,18 @@ function Chat({chatID}) {
     const [isPublic, setIsPublic] = useState(false);
 
     useEffect(() => {
-        if (!chatID) return;
+        if (!chatId) return;
         const socket = io('http://localhost:3100');
-        socket.emit('join_contact', {chatID});
+        socket.emit('join_contact', {chatId});
         setSocket(socket);
         return () => {
             socket.close();
         }
-    }, [chatID]);
+    }, [chatId]);
 
     useEffect(() => {
-        if (!chatID) return;
-        fetch(`/api/chats/${chatID}`, {
+        if (!chatId) return;
+        fetch(`/api/chats/${chatId}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -49,19 +50,19 @@ function Chat({chatID}) {
             }
         }).then((data) => {
             setMessages(data.messages);
-            setChatName(data.chat_name);
+            setChatName(data.name);
             setOurId(data.our_id);
             setIsPublic(data.isPublic);
         })
 
         // {messages:[], chat_name: "Main public"}
-    }, [chatID]);
+    }, [chatId]);
 
     const sendMessage = async () => {
         scrollToBottom();
         if (currentMessage !== "") {
             const messageData = {
-                chatID,
+                chatId,
                 user_id: ourId,
                 message: currentMessage,
                 time: new Date(Date.now()).toLocaleString(),
@@ -81,7 +82,7 @@ function Chat({chatID}) {
         }
     }, [socket]);
 
-    if (!chatID) {
+    if (!chatId) {
         return (
             <div style={{display: "flex", width: "100%", height: "100%", justifyContent: "center"}}>
                 <h1 style={{textAlign: "center", color: "#b7b7b7", fontSize: "24px"}}>Please select a chat or search new
@@ -92,7 +93,7 @@ function Chat({chatID}) {
 
     return (
         <div>
-            <div style={{padding: "24px", borderBottom: "1px solid #b7b7b7"}}>
+            <div style={{paddingBottom: "14px"}}>
                 <img
                     style={{
                         display: "inline",
@@ -100,7 +101,7 @@ function Chat({chatID}) {
                         height: "24px",
                         borderRadius: "50%",
                         marginLeft: "8px",
-                        marginBottom: "24px",
+                        marginBottom: "-5px",
                         backgroundColor: "#b7b7b7",
                     }}
                     src={`https://avatars.dicebear.com/api/bottts/${chatName}.svg`}
@@ -108,16 +109,16 @@ function Chat({chatID}) {
                 />
                 <span style={{marginLeft: "8px", fontWeight: "bold", color: "#d7a7eb"}}>{chatName}</span>
             </div>
+            <Divider />
             <div className="">
                 <ScrollToBottom className={ROOT_CSS}>
                     {messages.map((message, index) => {
                         return (
                             <div
-                                className={
-                                    classNames(
-                                        ourId === message.user_id ? "text-right " : "text-left",
-                                        "w-full"
-                                    )}
+                                style={{
+                                    textAlign: ourId === message.user_id ? "right" : "left",
+                                    width: "100%",
+                                }}
                                 key={index}>
                                 {isPublic && ourId !== message.user_id && (
                                     <img
@@ -135,11 +136,17 @@ function Chat({chatID}) {
                                     />
                                 )}
                                 <span
-                                    className={
-                                        classNames(
-                                            ourId === message.user_id ? "bg-amber-200" : "bg-violet-200",
-                                            "max-w-lg inline-block rounded-lg p-3 m-4"
-                                        )}
+                                    style={{
+                                        color: ourId === message.user_id ? "red" : "green",
+                                        fontWeight: "bold",
+                                        fontSize: "16px",
+                                        textAlign: "left",
+                                        display: "inline-block",
+                                        borderRadius: "8px",
+                                        padding: "8px",
+                                        margin: "8px",
+
+                                    }}
                                 >
                                     {isPublic && ourId !== message.user_id && (
                                         <span
@@ -148,7 +155,7 @@ function Chat({chatID}) {
                                                 fontSize: "10px",
                                                 color: "#b7b7b7"
                                             }}
-                                            >{message.user_name}</span>
+                                        >{message.user_name}</span>
                                     )}
                                     <span style={{fontSize: "14px"}}>{message.message}</span>
                                     <span
@@ -157,11 +164,11 @@ function Chat({chatID}) {
                                             fontSize: "10px",
                                             color: "#b7b7b7"
                                         }}
-                                        >{message.time}</span>
+                                    >{message.time}</span>
                                        <span>{new Date(message.time).getHours() + ":" + new Date(message.time).getMinutes()} </span>
                             </span>
-                    </div>
-                    )
+                            </div>
+                        )
                     })}
                 </ScrollToBottom>
             </div>
