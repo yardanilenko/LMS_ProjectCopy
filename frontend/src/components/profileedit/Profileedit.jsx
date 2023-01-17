@@ -198,7 +198,7 @@ const sendFile = async () => {
       <Button variant="contained" color="success" onClick={sendFile}>Изменить аватар</Button>
       <Divider />
 
-      <Button variant="contained" color="success" onClick={updateInfo}>Cохранить</Button>
+      <Button variant="contained" color="success" onClick={updateInfo}>Cохранить </Button>
 
   </Grid>
   </Grid>
