@@ -7,6 +7,7 @@ import materialsReducer from "./materials/materialsReducer";
 import userInfoReducer from "./userInfo/userInfoReducer";
 import chatIdReducer from "./chatId/chatIdReducer";
 import chatsReducer from "./chats/chatsReducer";
+import groupChatsReducer from "./groupChats/groupChatsReducer";
 
 
 export default combineReducers({
@@ -18,4 +19,5 @@ export default combineReducers({
     userInfo: userInfoReducer,
     chatId: chatIdReducer,
     chats: chatsReducer,
+    groupChats: groupChatsReducer,
 });
