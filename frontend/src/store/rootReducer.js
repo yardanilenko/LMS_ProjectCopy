@@ -5,7 +5,7 @@ import pairsReducer from "./pairs/pairsReducer";
 import profileReducer from "./profile/profileReducer";
 import materialsReducer from "./materials/materialsReducer";
 import userInfoReducer from "./userInfo/userInfoReducer";
-import vikiReducer from "./viki/vikiReducer";
+import wikiReducer from "./wiki/wikiReducer";
 
 
 export default combineReducers({
@@ -15,5 +15,5 @@ export default combineReducers({
     profile: profileReducer,
     materials: materialsReducer,
     userInfo: userInfoReducer,
-    viki: vikiReducer
+    wiki: wikiReducer
 });
