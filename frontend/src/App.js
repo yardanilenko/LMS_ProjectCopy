@@ -20,6 +20,7 @@ import Contacts from './pages/Contacts/Contacts';
 import Universalprofile from './components/universalprofile/universalprofile';
 import ChatLayout from "../src/pages/chat/ChatLayout";
 import Wiki from './components/wiki/Wiki';
+import MyApp from './components/wikiCreator/wikiCreator';
 
 
 function App() {
@@ -48,6 +49,7 @@ function App() {
                                 <Route path="/groups/:id" element={<Group/>}/>
                                 <Route path="/wiki" element={<Wiki/>}/>
                                 <Route path="/contacts" element={<Contacts/>}/>
+                                <Route path="/myapp" element={<MyApp/>}/>
                                 <Route path="/logout" element={<Logout />}/>
                             </Routes>
                         </Layout>

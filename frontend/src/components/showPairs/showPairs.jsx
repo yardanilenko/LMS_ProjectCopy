@@ -41,7 +41,10 @@ export default function ShowPairs() {
 
   
   const pairs = useSelector((store) => store.pair);
+  // console.log("🚀 ~ file: showPairs.jsx:44 ~ ShowPairs ~ pairs", pairs)
   const groups = useSelector((store) => store.group);
+  const users = useSelector((store) => store.userInfo);
+  // console.log("🚀 ~ file: showPairs.jsx:46 ~ ShowPairs ~ users", users)
 
   const groupName = groups[0]?.name;
 
@@ -77,17 +80,21 @@ let myArray
 
 let a = pairs !== undefined ? pairs.filter(el => el.group_id === myId) : [];
 
+// console.log("AAAAAA", a);
+
 
 if (pairs !== undefined && pairs.length > 0 && a.length) {
 
   let b = a.pop();
+  // console.log("🚀 ~ file: showPairs.jsx:89 ~ ShowPairs ~ b", b)
   
   let c = b.data;
 
 let getArr = JSON.parse(c); 
+// console.log("🚀 ~ file: showPairs.jsx:91 ~ ShowPairs ~ getArr", getArr)
 
 let getRowUl = (row) => {
-    let ul = <ul key={crypto.randomUUID()}>{row?.map((el) => <li key={crypto.randomUUID()}>{el.join('-')}</li> )}</ul>;
+    let ul = <ul key={crypto.randomUUID()}>{row?.map((el) => <li key={crypto.randomUUID()}>{el?.join('-')}</li> )}</ul>;
     return ul;
   }
 
