@@ -9,10 +9,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useState, useEffect} from 'react';
 import { initMaterialsAC } from '../../store/materials/actionsCreators';
+import { useNavigate } from 'react-router-dom';
 
 export default function Materials() {
 
-  const [file, setFile] = useState('');
+  const navigate = useNavigate();
+  const [file, setFile] = useState();
   const initialState = { name: '', url: '', groups: [] }
   const [datainput, setDatainput] = useState(initialState);
 
@@ -51,7 +53,9 @@ export default function Materials() {
 const sendFile = async () => {
   try {
     const data = new FormData()
-    data.append('file', file, file.name)
+    // data.append('file', file, file.name)
+    data.append('file', file[0])
+    data.append('file', file[1])
     data.append('url', datainput.url)
     data.append('name', datainput.name)
     data.append('group_id', datainput.groups[0].id)
@@ -79,6 +83,7 @@ const sendFile = async () => {
     const dispatch = useDispatch();
     const {id} = useParams();
     const group = useSelector((store) => store.materials);
+    // console.log(';;;;;;;',group)
     const preventDefault = (event) => event.preventDefault();
 
 
@@ -98,10 +103,15 @@ const sendFile = async () => {
 
 
         function handleChangeFile (event) {
-          setFile(event.target.files[0])
+          // setFile(file.push(event.target.files))
+          let fholoList = [];
+          const files = event.target.files;
+          const filesList = Array.from(files).filter((el) => fholoList.every(e => e.name !== el.name));
+          fholoList.push(...filesList);
+          setFile(fholoList)
         }
 
-        // console.log(datainput)
+        console.log(file)
   return (
     <>
     <Grid container spacing={2} columns={16}>
@@ -119,9 +129,11 @@ const sendFile = async () => {
       }}
       onClick={preventDefault}
     >
-      <Link href="#" underline="hover">
-        {'underline="hover1'}
-      </Link>
+    {group.map((item,id) => 
+    {return (      <Link onClick={() => {navigate(`/lectures/${item.id}`)}} underline="hover">
+        {item.name}
+      </Link>)}
+    )}
     </Box>
     </Grid>
     <Grid item xs={8}>
@@ -148,7 +160,7 @@ const sendFile = async () => {
         Дополнительные материалы
         <input 
         // hidden accept="image/*" multiple type="file" 
-        type="file" hidden accept="application/pdf, application/zip, application/vnd.rar" onChange={handleChangeFile}/>
+        multiple type="file" hidden accept="application/pdf, application/zip, application/vnd.rar" onChange={handleChangeFile}/>
       </Button>
       <Autocomplete
         multiple
@@ -156,7 +168,7 @@ const sendFile = async () => {
         name="groups"
         // value={valuegroups}
         onChange={(event,value) => {
-          console.log(event,value)
+          // console.log(event,value)
               setDatainput((preMy) => ({ ...preMy, groups: value }))
         }}
         options={edited}
