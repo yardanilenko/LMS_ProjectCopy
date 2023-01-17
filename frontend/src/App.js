@@ -19,6 +19,7 @@ import Materials from './components/materials/Materials';
 import Contacts from './pages/Contacts/Contacts';
 import Universalprofile from './components/universalprofile/universalprofile';
 import ChatLayout from "../src/pages/chat/ChatLayout";
+import Viki from './components/viki/Viki';
 
 
 function App() {
@@ -45,7 +46,7 @@ function App() {
                                 <Route path="/userinfo/:id" element={<Universalprofile/>}/>
                                 <Route path="/groups" element={<Groups/>}/>
                                 <Route path="/groups/:id" element={<Group/>}/>
-                                <Route path="/wiki" element={<div>Вики</div>}/>
+                                <Route path="/wiki" element={<Viki/>}/>
                                 <Route path="/contacts" element={<Contacts/>}/>
                                 <Route path="/logout" element={<Logout />}/>
                             </Routes>

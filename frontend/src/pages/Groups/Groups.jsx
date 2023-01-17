@@ -60,9 +60,9 @@ export default function Groups() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {groups.map((item, idx) =>
+          {groups.map((item) =>
             {return (
-            <StyledTableRow key={item.id}>
+            <StyledTableRow key={crypto.randomUUID()}>
                 <StyledTableCell align="center" component="th" scope="row" onClick={() => {navigate(`/groups/${item.id}`); getGroup(item.id)}}>
                     {item.name}
                 </StyledTableCell>
