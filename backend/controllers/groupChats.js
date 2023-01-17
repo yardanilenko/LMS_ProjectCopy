@@ -13,7 +13,8 @@ exports.findOrCreateGroup = async (req, res) => {
                 defaults: {
                     room_id: id,
                     user_id: req.session.currentUserId,
-                    name: name
+                    name: name,
+                    isGroup: true,
                 }
             })
             res.json({

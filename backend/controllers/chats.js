@@ -35,12 +35,14 @@ exports.findOrCreateChat = async (req, res) => {
             } = await UserChat.create({
                 user_id: currentUserId,
                 room_id: newRoom.id,
-                name: login
+                name: login,
+                isGroup: false,
             });
             await UserChat.create({
                 user_id: userId,
                 room_id: newRoom.id,
-                name: currentUserName
+                name: currentUserName,
+                isGroup: false,
             });
             res.json({
                 id,
@@ -71,7 +73,8 @@ exports.findAllChatsForCurrentUser = async (req, res) => {
             const chats = await UserChat.findAll({
                 attributes: ['id', 'name'],
                 where: {
-                    user_id: req.session.currentUserId
+                    user_id: req.session.currentUserId,
+                    isGroup: false,
                 }
             })
             res.json({
