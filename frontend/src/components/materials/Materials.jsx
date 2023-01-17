@@ -58,7 +58,7 @@ const sendFile = async () => {
     data.append('file', file[1])
     data.append('url', datainput.url)
     data.append('name', datainput.name)
-    data.append('group_id', datainput.groups[0].id)
+    data.append('group_id', datainput.groups)
     // setAvatar(img.name)
     await fetch('/uploadfile', {
       method: 'POST',
@@ -89,7 +89,7 @@ const sendFile = async () => {
 
 
     const edited = group.map(({ id, name }) => ({
-        title: name,
+        label: name,
         id:id
         }))
 
@@ -163,26 +163,17 @@ const sendFile = async () => {
         multiple type="file" hidden accept="application/pdf, application/zip, application/vnd.rar" onChange={handleChangeFile}/>
       </Button>
       <Autocomplete
-        multiple
-        id="tags-standard"
-        name="groups"
-        // value={valuegroups}
-        onChange={(event,value) => {
+      disablePortal
+      id="combo-box-demo"
+      options={edited}
+      onChange={(event,value) => {
           // console.log(event,value)
-              setDatainput((preMy) => ({ ...preMy, groups: value }))
+              setDatainput((preMy) => ({ ...preMy, groups: value.id }))
+              console.log(datainput)
         }}
-        options={edited}
-        getOptionLabel={(option) => option?.title}
-        // defaultValue={[top100Films[13]]}
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            variant="standard"
-            label="Выберите группы"
-            placeholder="Группы"
-          />
-        )}
-      />
+      sx={{ width: 300 }}
+      renderInput={(params) => <TextField {...params} label="Группа" />}
+    />
       <Button variant="contained" color="success" onClick={sendFile}
     //   onClick={updateInfo}
       >Опубликовать

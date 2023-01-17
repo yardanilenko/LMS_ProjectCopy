@@ -19,7 +19,7 @@ import Materials from './components/materials/Materials';
 import Contacts from './pages/Contacts/Contacts';
 import Universalprofile from './components/universalprofile/universalprofile';
 import ChatLayout from "../src/pages/chat/ChatLayout";
-import Materialslist from './components/materialslist/materialslist';
+import Materialslist from './components/materialslist/Materialslist';
 
 
 function App() {

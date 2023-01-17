@@ -8,6 +8,12 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
+import styles from './Materialslist.module.css'
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import FileDownloadIcon from '@mui/icons-material/FileDownload';
 
 export default function Materialslist() {
   const [data, setData] = useState();
@@ -57,12 +63,20 @@ export default function Materialslist() {
     {data?.map((item) => {
       return (
         <> 
-        { item.Files[0].url.includes('youtube') ? (<>
-        <Card sx={{ minWidth: 275 }}>
+        { item.Files[0].url.includes('youtube') ? (
+          <>
+          <Accordion>
+          <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+        >
+          <Typography sx={{ fontSize: 25 }} color="text.secondary">{item.name}</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+        <Card className={styles.card} sx={{ minWidth: 275 }}>
       <CardContent>
-        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-          {item.name}
-        </Typography>
+        <div>
         <iframe
       width="290"
       height="190"
@@ -71,16 +85,19 @@ export default function Materialslist() {
       frameborder="0"
       allowFullScreen
     />
+    </div>
         <Link href={`${item.Files[0].url}`} underline="hover">
-        {'Видео лекции'}
+        {'Перейти к видео лекции'}
       </Link>
         {item?.Files.map((i) => {
           return (
             <>
         <div>
+            
         <Link href={`http://localhost:3100/downloadfile/${i.name}`} underline="hover">
-        {i.name}
+        {i.name}<FileDownloadIcon/>
       </Link>
+      
       </div>
       </>
           )
@@ -90,22 +107,30 @@ export default function Materialslist() {
         {/* <Button size="small">Learn More</Button> */}
       </CardActions>
     </Card>
+    </AccordionDetails>
+    </Accordion>
     </>) : (
 <>
-        <Card sx={{ minWidth: 275 }}>
+<Accordion>
+<AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+        >
+          <Typography sx={{ fontSize: 25 }} color="text.secondary">{item.name}</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+        <Card className={styles.card} sx={{ minWidth: 275 }}>
       <CardContent>
-        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-          {item.name}
-        </Typography>
-        <Link href={`${item.Files[0].url}`} underline="hover">
-        {'Видео лекции'}
+        <Link sx={{ fontSize: 25 }} href={`${item.Files[0].url}`} underline="hover">
+        {'Перейти к видео лекции'}
       </Link>
         {item?.Files.map((i) => {
           return (
             <>
         <div>
         <Link href={`http://localhost:3100/downloadfile/${i.name}`} underline="hover">
-        {i.name}
+        {i.name}<FileDownloadIcon/>
       </Link>
       </div>
       </>
@@ -116,7 +141,8 @@ export default function Materialslist() {
         {/* <Button size="small">Learn More</Button> */}
       </CardActions>
     </Card>
-
+    </AccordionDetails>
+</Accordion>
     </>)
         }
     </>
