@@ -17,7 +17,8 @@ module.exports = (sequelize, DataTypes) => {
   UserChat.init({
     name: DataTypes.TEXT,
     user_id: DataTypes.INTEGER,
-    room_id: DataTypes.INTEGER
+    room_id: DataTypes.INTEGER,
+    isGroup: DataTypes.BOOLEAN
   }, {
     sequelize,
     modelName: 'UserChat',
