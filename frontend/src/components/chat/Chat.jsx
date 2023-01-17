@@ -5,10 +5,11 @@ import io from "socket.io-client";
 import InputEmoji from 'react-input-emoji';
 import {css} from '@emotion/css';
 import {useSelector} from "react-redux";
+import Divider from '@mui/material/Divider';
 
 
 const ROOT_CSS = css({
-    height: window.innerHeight - 160,
+    height: window.innerHeight - 210,
 });
 
 function Chat() {
@@ -92,7 +93,7 @@ function Chat() {
 
     return (
         <div>
-            <div style={{padding: "24px", borderBottom: "1px solid #b7b7b7"}}>
+            <div style={{paddingBottom: "14px"}}>
                 <img
                     style={{
                         display: "inline",
@@ -100,7 +101,7 @@ function Chat() {
                         height: "24px",
                         borderRadius: "50%",
                         marginLeft: "8px",
-                        marginBottom: "24px",
+                        marginBottom: "-5px",
                         backgroundColor: "#b7b7b7",
                     }}
                     src={`https://avatars.dicebear.com/api/bottts/${chatName}.svg`}
@@ -108,6 +109,7 @@ function Chat() {
                 />
                 <span style={{marginLeft: "8px", fontWeight: "bold", color: "#d7a7eb"}}>{chatName}</span>
             </div>
+            <Divider />
             <div className="">
                 <ScrollToBottom className={ROOT_CSS}>
                     {messages.map((message, index) => {

@@ -29,7 +29,7 @@ function ChatLayout() {
             </Box>
             <Box
                 component="main"
-                sx={{flexGrow: 1, p: 3, width: {sm: `calc(100% - ${drawerWidth}px)`}}}
+                sx={{flexGrow: 1, paddingLeft:"24px", width: {sm: `calc(100% - ${drawerWidth}px)`}}}
             >
                 <Chat />
             </Box>
