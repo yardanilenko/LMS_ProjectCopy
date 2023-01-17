@@ -11,7 +11,7 @@ const dbCheck = require('./db/dbCheck');
 const cors = require("cors");
 const http = require('http');
 const {Server} = require('socket.io');
-const {UserChat, History} = require('./db/models');
+const {UserChat, Message} = require('./db/models');
 
 
 // импорт роутов
@@ -61,7 +61,7 @@ io.on('connection', (socket) => {
   });
   socket.on("send_message", async (data) => {
     const chat = await UserChat.findOne({where: {id: data.chatID}});
-    await History.create({room_id: chat.dataValues.room_id, message: data.message, user_id: chat.dataValues.user_id});
+    await Message.create({room_id: chat.dataValues.room_id, text: data.message, user_id: chat.dataValues.user_id, isRead: false});
     socket.to(chat.dataValues.room_id).emit("receive_message", data)
   });
   socket.on('disconnect', () => {
