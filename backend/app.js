@@ -30,6 +30,8 @@ const logoutRoutes = require('./routes/logout');
 const avatarupload = require('./routes/avatarupload');
 const createEventsRoutes = require('./routes/createEvents');
 const fileupload = require('./routes/fileupload');
+const lecturesall = require('./routes/lecturesall');
+const downloadfile = require('./routes/downloadfile');
 
 // вызов функции проверки соединения с базой данных
 dbCheck();
@@ -101,6 +103,8 @@ app.use('/', logoutRoutes);
 app.use('/', avatarupload);
 app.use('/', createEventsRoutes);
 app.use('/', fileupload);
+app.use('/', lecturesall);
+app.use('/', downloadfile);
 
 
 const PORT = process.env.PORT || 3100;

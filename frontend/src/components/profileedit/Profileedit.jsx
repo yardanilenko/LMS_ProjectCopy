@@ -77,6 +77,7 @@ const sendFile = async () => {
             )
           ).json();
           // set state when the data received
+          console.log(123)
           setData(data);
           setImgSrc(`/images/${data?.photo}`)
           // setCity(data.city)
