@@ -6,8 +6,10 @@ import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import ImageIcon from "@mui/icons-material/Image";
 import ListItemText from "@mui/material/ListItemText";
+import {setChatIdAC} from "../../store/chatId/actionsCreators";
+import {useDispatch} from "react-redux";
 
-function Contacts({handleOpenChat}) {
+function Contacts() {
 
     const [chats, setChats] = useState([]);
 
@@ -33,18 +35,21 @@ function Contacts({handleOpenChat}) {
             <h3>Contacts</h3>
             <List sx={{ width: '100%', maxWidth: 360}}>
                 {chats && chats.map((chat) => (
-                    <ContactItem chat={chat} handleOpenChat={handleOpenChat}/>
+                    <ContactItem chat={chat} />
                 ))}
             </List>
         </div>
     );
 }
 
-function ContactItem({chat, handleOpenChat}) {
+function ContactItem({chat}) {
+
+    const dispatch = useDispatch();
+
     return (
         <ListItem key={chat.id}
                   onClick={() => {
-                      handleOpenChat(chat.id, chat.name);
+                      dispatch(setChatIdAC(chat.id));
                   }}>
             <ListItemAvatar>
                 <Avatar>
