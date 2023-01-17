@@ -1,5 +1,5 @@
 import React from 'react';
-import{useState, useEffect} from "react";
+import{useEffect} from "react";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
@@ -7,28 +7,17 @@ import Avatar from "@mui/material/Avatar";
 import ImageIcon from "@mui/icons-material/Image";
 import ListItemText from "@mui/material/ListItemText";
 import {setChatIdAC} from "../../store/chatId/actionsCreators";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {initChatsAC} from "../../store/chats/actionsCreators";
 
 function Contacts() {
 
-    const [chats, setChats] = useState([]);
+    const dispatch = useDispatch();
+    const chats = useSelector((store) => store.chats);
 
     useEffect(() => {
-        fetchChats();
+       dispatch(initChatsAC());
     }, []);
-
-    const fetchChats = () => {
-        fetch('/api/chats', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-        }).then(res => res.json())
-            .then(data => {
-                setChats(data.chats)
-            })
-    }
-
 
     return (
         <div>
