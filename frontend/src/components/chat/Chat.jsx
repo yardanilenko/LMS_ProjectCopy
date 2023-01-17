@@ -113,11 +113,10 @@ function Chat({chatID}) {
                     {messages.map((message, index) => {
                         return (
                             <div
-                                className={
-                                    classNames(
-                                        ourId === message.user_id ? "text-right " : "text-left",
-                                        "w-full"
-                                    )}
+                                style={{
+                                    textAlign: ourId === message.user_id ? "right" : "left",
+                                    width: "100%",
+                                }}
                                 key={index}>
                                 {isPublic && ourId !== message.user_id && (
                                     <img
@@ -135,11 +134,17 @@ function Chat({chatID}) {
                                     />
                                 )}
                                 <span
-                                    className={
-                                        classNames(
-                                            ourId === message.user_id ? "bg-amber-200" : "bg-violet-200",
-                                            "max-w-lg inline-block rounded-lg p-3 m-4"
-                                        )}
+                                    style={{
+                                        color: ourId === message.user_id ? "red" : "green",
+                                        fontWeight: "bold",
+                                        fontSize: "16px",
+                                        textAlign: "left",
+                                        display: "inline-block",
+                                        borderRadius: "8px",
+                                        padding: "8px",
+                                        margin: "8px",
+
+                                    }}
                                 >
                                     {isPublic && ourId !== message.user_id && (
                                         <span
@@ -148,7 +153,7 @@ function Chat({chatID}) {
                                                 fontSize: "10px",
                                                 color: "#b7b7b7"
                                             }}
-                                            >{message.user_name}</span>
+                                        >{message.user_name}</span>
                                     )}
                                     <span style={{fontSize: "14px"}}>{message.message}</span>
                                     <span
@@ -157,11 +162,11 @@ function Chat({chatID}) {
                                             fontSize: "10px",
                                             color: "#b7b7b7"
                                         }}
-                                        >{message.time}</span>
+                                    >{message.time}</span>
                                        <span>{new Date(message.time).getHours() + ":" + new Date(message.time).getMinutes()} </span>
                             </span>
-                    </div>
-                    )
+                            </div>
+                        )
                     })}
                 </ScrollToBottom>
             </div>
