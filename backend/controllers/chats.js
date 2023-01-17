@@ -35,15 +35,17 @@ exports.findOrCreateChat = async (req, res) => {
             } = await UserChat.create({
                 user_id: currentUserId,
                 room_id: newRoom.id,
-                name: login,
+                name: userId === currentUserId ? "Сохраненные сообщения" : login,
                 isGroup: false,
             });
-            await UserChat.create({
-                user_id: userId,
-                room_id: newRoom.id,
-                name: currentUserName,
-                isGroup: false,
-            });
+            if (userId !== currentUserId) {
+                await UserChat.create({
+                    user_id: userId,
+                    room_id: newRoom.id,
+                    name: currentUserName,
+                    isGroup: false,
+                });
+            }
             res.json({
                 id,
                 name
