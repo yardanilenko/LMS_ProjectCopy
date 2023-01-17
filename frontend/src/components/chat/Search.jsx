@@ -2,6 +2,7 @@ import React from 'react';
 import AsyncSelect from 'react-select/async';
 import {setChatIdAC} from "../../store/chatId/actionsCreators";
 import {useDispatch} from "react-redux";
+import {initChatsAC} from "../../store/chats/actionsCreators";
 
 function Search() {
 
@@ -43,6 +44,7 @@ function Search() {
                         .then((response) => response.json())
                         .then((json) => {
                             dispatch(setChatIdAC(json.id))
+                            dispatch(initChatsAC())
                         })
                 }}
                 isClearable
