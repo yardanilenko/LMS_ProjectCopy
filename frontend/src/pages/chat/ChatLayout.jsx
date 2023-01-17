@@ -6,19 +6,11 @@ import Chats from "../../components/chat/Chats"
 import Contacts from "../../components/chat/Contacts"
 import Search from "../../components/chat/Search"
 import Chat from "../../components/chat/Chat";
-import {useState} from "react";
 
 
 const drawerWidth = 240;
 
 function ChatLayout() {
-
-    const [chatID, setChatID] = useState(null);
-
-    const handleOpenChat = (chatID) => {
-        setChatID(chatID);
-    }
-
     return (
         <Box sx={{display: 'flex'}}>
             <CssBaseline/>
@@ -30,16 +22,16 @@ function ChatLayout() {
                 <div style={{height:"40px"}}></div>
                 <Divider />
                 {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-                <Search handleOpenChat={handleOpenChat}/>
-                <Chats handleOpenChat={handleOpenChat}/>
+                <Search />
+                <Chats />
                 <Divider/>
-                <Contacts handleOpenChat={handleOpenChat}/>
+                <Contacts />
             </Box>
             <Box
                 component="main"
                 sx={{flexGrow: 1, p: 3, width: {sm: `calc(100% - ${drawerWidth}px)`}}}
             >
-                <Chat chatID={chatID}/>
+                <Chat />
             </Box>
         </Box>
     );
