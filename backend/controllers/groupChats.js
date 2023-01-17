@@ -4,16 +4,16 @@ const {UserChat, Room} = require('../db/models');
 exports.findOrCreateGroup = async (req, res) => {
     try {
         if (req.session.currentUserName) {
-            const {room_id, room_name} = req.body;
+            const {id, name} = req.body;
             const [row] = await UserChat.findOrCreate({
                 where: {
-                    room_id,
+                    room_id: id,
                     user_id: req.session.currentUserId,
                 },
                 defaults: {
-                    room_id,
+                    room_id: id,
                     user_id: req.session.currentUserId,
-                    chat_name: room_name
+                    name: name
                 }
             })
             res.json({
