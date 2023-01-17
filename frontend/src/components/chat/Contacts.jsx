@@ -1,50 +1,44 @@
 import React from 'react';
-import{useState, useEffect} from "react";
+import{useEffect} from "react";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import ImageIcon from "@mui/icons-material/Image";
 import ListItemText from "@mui/material/ListItemText";
+import {setChatIdAC} from "../../store/chatId/actionsCreators";
+import {useDispatch, useSelector} from "react-redux";
+import {initChatsAC} from "../../store/chats/actionsCreators";
 
-function Contacts({handleOpenChat}) {
+function Contacts() {
 
-    const [chats, setChats] = useState([]);
+    const dispatch = useDispatch();
+    const chats = useSelector((store) => store.chats);
 
     useEffect(() => {
-        fetchChats();
+       dispatch(initChatsAC());
     }, []);
-
-    const fetchChats = () => {
-        fetch('/api/chats', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-        }).then(res => res.json())
-            .then(data => {
-                setChats(data.chats)
-            })
-    }
-
 
     return (
         <div>
             <h3>Contacts</h3>
             <List sx={{ width: '100%', maxWidth: 360}}>
                 {chats && chats.map((chat) => (
-                    <ContactItem chat={chat} handleOpenChat={handleOpenChat}/>
+                    <ContactItem chat={chat} />
                 ))}
             </List>
         </div>
     );
 }
 
-function ContactItem({chat, handleOpenChat}) {
+function ContactItem({chat}) {
+
+    const dispatch = useDispatch();
+
     return (
         <ListItem key={chat.id}
                   onClick={() => {
-                      handleOpenChat(chat.id, chat.name);
+                      dispatch(setChatIdAC(chat.id));
                   }}>
             <ListItemAvatar>
                 <Avatar>

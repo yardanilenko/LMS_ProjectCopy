@@ -11,7 +11,7 @@ const dbCheck = require('./db/dbCheck');
 const cors = require("cors");
 const http = require('http');
 const {Server} = require('socket.io');
-const {UserChat, History} = require('./db/models');
+const {UserChat, Message} = require('./db/models');
 
 
 // импорт роутов
@@ -50,8 +50,8 @@ const io = new Server(server, {
 
 io.on('connection', (socket) => {
   console.log(socket.id);
-  socket.on("join_contact", async ({chatID}) => {
-    const chat = await UserChat.findOne({where: {id: chatID}});
+  socket.on("join_contact", async ({chatId}) => {
+    const chat = await UserChat.findOne({where: {id: chatId}});
     console.log(chat.dataValues.room_id);
     socket.join(chat.dataValues.room_id);
   });
@@ -60,8 +60,8 @@ io.on('connection', (socket) => {
     socket.join(roomName)
   });
   socket.on("send_message", async (data) => {
-    const chat = await UserChat.findOne({where: {id: data.chatID}});
-    await History.create({room_id: chat.dataValues.room_id, message: data.message, user_id: chat.dataValues.user_id});
+    const chat = await UserChat.findOne({where: {id: data.chatId}});
+    await Message.create({room_id: chat.dataValues.room_id, text: data.message, user_id: chat.dataValues.user_id, isRead: false});
     socket.to(chat.dataValues.room_id).emit("receive_message", data)
   });
   socket.on('disconnect', () => {

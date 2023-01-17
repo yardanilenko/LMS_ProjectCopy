@@ -1,32 +1,22 @@
 import React from 'react';
-import {useState, useEffect} from "react";
+import {useEffect} from "react";
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import ImageIcon from '@mui/icons-material/Image';
+import {setChatIdAC} from "../../store/chatId/actionsCreators";
+import {useDispatch, useSelector} from "react-redux";
+import {initGroupChatsAC} from "../../store/groupChats/actionsCreators";
 
-function Chats({handleOpenChat}) {
+function Chats() {
 
-    const [chats, setChats] = useState([]);
+    const dispatch = useDispatch();
+    const chats = useSelector((store) => store.groupChats);
 
     useEffect(() => {
-        fetch('/api/groupChats', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-        }).then(res => {
-            if (res.status === 200) {
-                return res.json();
-            } else {
-                return {rooms: []};
-            }
-
-        }).then(data => {
-            setChats(data.rooms)
-        })
+        dispatch(initGroupChatsAC());
     }, []);
 
     const handleOpenGroupChat = (id, name) => {
@@ -46,7 +36,7 @@ function Chats({handleOpenChat}) {
                 throw new Error('Error');
             }
         }).then((data) => {
-            handleOpenChat(data.id);
+            dispatch(setChatIdAC(data.id))
         })
     }
 

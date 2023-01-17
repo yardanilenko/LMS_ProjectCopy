@@ -26,6 +26,9 @@ module.exports = {
           key: "id",
         },
       },
+      isGroup: {
+        type: Sequelize.BOOLEAN,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
@@ -36,7 +39,7 @@ module.exports = {
       }
     });
   },
-  async down(queryInterface, Sequelize) {
+  async down(queryInterface) {
     await queryInterface.dropTable('UserChats');
   }
 };
