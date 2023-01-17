@@ -1,7 +1,11 @@
 import React from 'react';
 import AsyncSelect from 'react-select/async';
+import {setChatIdAC} from "../../store/chatId/actionsCreators";
+import {useDispatch} from "react-redux";
 
-function Search({handleOpenChat}) {
+function Search() {
+
+    const dispatch = useDispatch();
 
     const promiseOptions = (inputValue) =>
         new Promise((resolve, reject) => {
@@ -38,7 +42,7 @@ function Search({handleOpenChat}) {
                     })
                         .then((response) => response.json())
                         .then((json) => {
-                            handleOpenChat(json.id);
+                            dispatch(setChatIdAC(json.id))
                         })
                 }}
                 isClearable
