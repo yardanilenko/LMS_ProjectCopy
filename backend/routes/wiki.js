@@ -1,9 +1,9 @@
 const express = require('express');
 const route = express.Router();
-const { viki } = require('../controllers/viki')
+const { wiki } = require('../controllers/wiki')
 
 route
-    .get('/viki', viki)
+    .get('/wiki', wiki)
 
 
 module.exports = route;

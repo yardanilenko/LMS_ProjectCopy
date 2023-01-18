@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Viki extends Model {
+  class Wiki extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -13,12 +13,12 @@ module.exports = (sequelize, DataTypes) => {
 
     // }
   }
-  Viki.init({
+  Wiki.init({
     name: DataTypes.TEXT,
     page: DataTypes.TEXT
   }, {
     sequelize,
-    modelName: 'Viki',
+    modelName: 'Wiki',
   });
-  return Viki;
+  return Wiki;
 };
