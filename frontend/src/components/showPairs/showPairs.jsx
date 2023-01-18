@@ -98,20 +98,46 @@ let getRowUl = (row) => {
     return ul;
   }
 
+  function getShuffledArr(array) {
+    let result = [], source = array.concat([]);
+    // console.log("🚀 ~ file: ButtonSendPairs.jsx:10 ~ getShuffledArr ~ source", source)
+  
+    while (source.length) {
+      let index = Math.floor((Math.random()-0.5) * source.length);
+      result.push(source.splice(index, 1)[0]);
+   }
+  
+    if(result === array){
+        result.reverse();
+    }
+  
+    return result;
+  }
+
 let getRowsArr = () => {
   const days = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница'];
+  const phrase = 'Solo';
+  let ranRows = [];
+  for (let i = 0; i < 20; i++) {
+    if(i < 12){
+      ranRows.push(getRowUl(getArr[i]));
+    } else {
+      ranRows.push(phrase);
+    }
+  }
+  let newRanRows = getShuffledArr(ranRows)
   let myRows = [];
     myRows = [
   createData(days[0], days[0], days[0], days[0]),
-  createData(getRowUl(getArr[0]), getRowUl(getArr[1]), getRowUl(getArr[2]), getRowUl(getArr[3])),
+  createData(newRanRows[0], newRanRows[1], newRanRows[2], newRanRows[3]),
   createData(days[1], days[1], days[1], days[1]),
-  createData(getRowUl(getArr[4]), getRowUl(getArr[5]), getRowUl(getArr[6]), getRowUl(getArr[7])),
+  createData(newRanRows[4], newRanRows[5], newRanRows[6], newRanRows[7]),
   createData(days[2], days[2], days[2], days[2]),
-  createData('Solo', 'Solo', 'Solo', 'Solo'),
+  createData(newRanRows[8], newRanRows[9], newRanRows[10], newRanRows[11]),
   createData(days[3], days[3], days[3], days[3]),
-  createData('Solo', 'Solo', 'Solo', 'Solo'),
+  createData(newRanRows[12], newRanRows[13], newRanRows[14], newRanRows[15]),
   createData(days[4], days[4], days[4], days[4]),
-  createData(getRowUl(getArr[8]), getRowUl(getArr[9]), getRowUl(getArr[10]), getRowUl(getArr[11])),
+  createData(newRanRows[16], newRanRows[17], newRanRows[18], newRanRows[19]),
 ];
 return myRows;
 }
@@ -143,7 +169,7 @@ let rows = (pairs !== undefined && myArray !== undefined && pairs.length > 0) ? 
           <TableRow>
             <StyledTableCell style={{ backgroundColor: "#44014C"}}>Неделя 1</StyledTableCell>
             <StyledTableCell style={{ backgroundColor: "#44014C"}} align="center">Неделя 2</StyledTableCell>
-            <StyledTableCell style={{ backgroundColor: "#44014C"}} align="center">Неделя 3</StyledTableCell>
+            <StyledTableCell style={{ backgroundColor: "#44014C"}} align="right">Неделя 3</StyledTableCell>
             <StyledTableCell style={{ backgroundColor: "#44014C"}} align="right">Неделя 4</StyledTableCell>
           </TableRow>
         </TableHead>
@@ -154,7 +180,7 @@ let rows = (pairs !== undefined && myArray !== undefined && pairs.length > 0) ? 
                 {row.week1}
               </StyledTableCell>
               <StyledTableCell align="center">{row.week2}</StyledTableCell>
-              <StyledTableCell align="center">{row.week3}</StyledTableCell>
+              <StyledTableCell align="right">{row.week3}</StyledTableCell>
               <StyledTableCell align="right">{row.week4}</StyledTableCell>
             </StyledTableRow>
           ))}
