@@ -85,6 +85,11 @@ exports.getVoteById = async (req, res) => {
                 user_id,
             }
         });
+        const groupMembersCount = await User.count({
+            where: {
+                group_id: vote.group_id
+            }
+        });
         const allAnswers = await Answer.findAll({
             where: {
                 vote_id: req.params.id,
@@ -94,7 +99,8 @@ exports.getVoteById = async (req, res) => {
             ...vote.dataValues,
             isAnswered: !!answer,
             answer: answer ? answer.dataValues : null,
-            allAnswers: allAnswers.map(item => JSON.parse(item.dataValues.data))
+            allAnswers: allAnswers.map(item => JSON.parse(item.dataValues.data)),
+            groupMembersCount
         });
     } catch (error) {
         console.log('ERROR GET==>', error.message);
