@@ -33,7 +33,7 @@ export default function Codereview() {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    name: "code-review",
+                    name: "Код-ревью",
                     // user_id: userId,
                     description: theme,
                     member_id: studentsinput.id,
@@ -147,7 +147,7 @@ export default function Codereview() {
       sx={{ width: 300 }}
       renderInput={(params) => <TextField {...params} label="Студент" />}
     />
-             <div> 
+             <div>
              <DesktopDatePicker
           label="Дата"
           inputFormat="MM/DD/YYYY"
@@ -179,7 +179,7 @@ export default function Codereview() {
           label="Тема код-ревью"
           multiline
           maxRows={4}
-        />        
+        />
       </div>
               <Button variant="contained" color="success" onClick={createEvent}>
         Назначить встречу
