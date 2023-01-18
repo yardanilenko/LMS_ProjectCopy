@@ -45,7 +45,7 @@ export default function FormDialog({handleClick}) {
         <DialogTitle id="form-dialog-title">Формирование групп</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Задайте необходимое количество студентов для группового программирования. Состав группы должен быть в пределах от 2 до 6 человек.
+            Задайте необходимое количество студентов для группового программирования. Состав группы должен быть в пределах от 2 до 10 человек.
           </DialogContentText>
           <TextField
             required
@@ -57,9 +57,7 @@ export default function FormDialog({handleClick}) {
             label="Количество студентов"
             onChange={formHandler}
             type="number"
-            maxlength="2"
-            data-min="2" 
-            max="6" 
+            InputProps={{ inputProps: { min: 2, max: 10 } }}
             fullWidth
           />
         </DialogContent>
