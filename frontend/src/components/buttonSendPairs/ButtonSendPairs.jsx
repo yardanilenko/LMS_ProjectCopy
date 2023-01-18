@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import Button from '@mui/material/Button';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -24,21 +24,21 @@ function getShuffledArr(array) {
     return result;
   }
   
-  function getPairs(arr, num = 4){
+  function getPairs(arr, num = 2){
       const res = getShuffledArr(arr)
-      console.log("🚀 ~ file: ButtonSendPairs.jsx:28 ~ getPairs ~ res", res)
+      // console.log("🚀 ~ file: ButtonSendPairs.jsx:28 ~ getPairs ~ res", res)
       let pairs = [];
       for (let i = 0; i < res.length; i=i+num) { 
         if(res.length % 2 === 0){
         pairs.push(res.slice(i, i+num).map((el) => el.name + ' ' + el.surname));
         } else {
           const popped = res.pop();
-          console.log("🚀 ~ file: ButtonSendPairs.jsx:35 ~ getPairs ~ popped", popped)
+          // console.log("🚀 ~ file: ButtonSendPairs.jsx:35 ~ getPairs ~ popped", popped)
           pairs.push(res.slice(i, i+num).map((el) => el.name + ' ' + el.surname));
           pairs.at(-1).push(popped.name + ' ' + popped.surname)
         }
       }
-      console.log("🚀 ~ file: ButtonSendPairs.jsx:34 ~ getPairs ~ result", pairs)
+      // console.log("🚀 ~ file: ButtonSendPairs.jsx:34 ~ getPairs ~ result", pairs)
       return pairs;
   }
 
@@ -124,6 +124,16 @@ export default function ButtonSendPairs() {
         dispatch(initPairsAC());
         dispatch(initUserInfoAC(id));
       }
+      
+
+    //     const thisHandleClick = useCallback(
+    //   (num) => {
+    //     putCurrentArr(num);
+    //     // dispatch(initPairsAC());
+    //     // dispatch(initUserInfoAC(id));
+    //   },
+    //   [],
+    // )
 
       React.useEffect(() => {
         dispatch(initGroupAC(id));
@@ -136,7 +146,7 @@ export default function ButtonSendPairs() {
         {/* <Button size="small" onClick={() => {handleClick()}}>
           Создать пары
         </Button> */}
-        <FormDialog putCurrentArr={putCurrentArr}/>    
+        <FormDialog handleClick={handleClick}/>    
       </>
   );
 }

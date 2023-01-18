@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
@@ -7,8 +7,22 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
-export default function FormDialog() {
+export default function FormDialog({handleClick}) {
+
+    console.log("thisHandleClick", handleClick);
   const [open, setOpen] = React.useState(false);
+
+  const initialState = {num: ''}
+    
+  const [input, setInput] = useState(initialState);
+  
+  let myNum = input.num;
+  console.log("🚀 ~ file: Form.jsx:20 ~ FormDialog ~ myNum", myNum)
+
+  const formHandler = (e) => {
+    setInput((preMy) => ({...preMy, [e.target.name]: e.target.value}))
+
+}
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -17,6 +31,10 @@ export default function FormDialog() {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const modalHandler = () => {
+    setInput(myNum)
+}
 
   return (
     <div>
@@ -33,15 +51,18 @@ export default function FormDialog() {
             autoFocus
             margin="dense"
             id="name"
+            name='inputnNum'
+            // value={myNum}
             label="Количество студентов"
+            onChange={formHandler}
             type="number"
-            min="0" 
-            max="5" 
+            min="2" 
+            max="6" 
             fullWidth
           />
         </DialogContent>
         <DialogActions>
-            <Button onClick={handleClose} color="primary">
+            <Button onClick={() => {handleClick(+input.num); handleClose()}} color="primary">
                 Подтвердить
             </Button>
             <Button onClick={handleClose} color="primary">
