@@ -110,7 +110,7 @@ function VoteBlank() {
                     <div style={{display:"flex"}}>
                         <BackButton sx={{width: ""}}/>
                         <div style={{display: "inline-block", textAlign: "center", width: "100%"}}>
-                            <h1>{vote.name}</h1>
+                            <h1 style={{paddingRight: "60px"}}>{vote.name}</h1>
                         </div>
                     </div>
             )}
