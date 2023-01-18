@@ -1,25 +1,52 @@
-const {Vote, Answer} = require("../db/models");
+const {Vote, Answer, Group, User} = require("../db/models");
 
 exports.allVotes = async (req, res) => {
-   const user_id = req.session.currentUserId
-    try {
-        const allVotes = await Vote.findAll({
-                where: {
-                    user_id
+    const user_id = req.session.currentUserId
+    const user_role = req.session.currentRole
+    const {group_id} = await User.findByPk(user_id)
+    if (user_role === 'teacher') {
+        try {
+            const allVotes = await Vote.findAll({
+                    where: {
+                        user_id
+                    },
+                    include: [
+                        {
+                            model: Group,
+                            attributes: ['name']
+                        }]
                 }
-            }
-        );
-        res.json(allVotes)
-    } catch (error) {
-        console.log('ERROR LIST==>', error.message);
+            );
+            res.json(allVotes)
+        } catch (error) {
+            console.log('ERROR LIST==>', error.message);
+        }
+    } else {
+        try {
+            const allVotes = await Vote.findAll({
+                    where: {
+                        group_id: group_id
+                    },
+                    include: [
+                        {
+                            model: Answer,
+                        }],
+                    order: [
+                        ['createdAt', 'DESC']
+                    ],
+                },
+            );
+            res.json(allVotes)
+        } catch (error) {
+            console.log('ERROR LIST==>', error.message);
+        }
     }
-}
+};
 
 exports.createVote = async (req, res) => {
     const user_id = req.session.currentUserId
     try {
         const newVote = await Vote.create({
-            // TODO: user is from session
             user_id,
             name: req.body.name,
             data: JSON.stringify(req.body.data),
@@ -49,8 +76,7 @@ exports.deleteVote = async (req, res) => {
 }
 
 exports.getVoteById = async (req, res) => {
-    // TODO: user id from session
-    const user_id = 1;
+    const user_id = req.session.currentUserId
     try {
         const vote = await Vote.findByPk(req.params.id);
         const answer = await Answer.findOne({
@@ -76,8 +102,7 @@ exports.getVoteById = async (req, res) => {
 };
 
 exports.createVoteAnswer = async (req, res) => {
-    const user_id = 1;
-    //TODO: user id from session
+    const user_id = req.session.currentUserId
     const {id} = req.params;
     const data = JSON.stringify(req.body.data);
     try {
