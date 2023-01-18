@@ -106,12 +106,14 @@ function VoteBlank() {
     return (
         <div>
             {vote?.name && (
-                <>
-                    <h1>{vote.name}</h1>
-                   <BackButton />
-                    </>
+                    <div style={{display:"flex"}}>
+                        <BackButton sx={{width: ""}}/>
+                        <div style={{display: "inline-block", textAlign: "center", width: "100%"}}>
+                            <h1>{vote.name}</h1>
+                        </div>
+                    </div>
             )}
-            {vote?.isAnswered === false && profile.userRole === "student" &&(
+            {vote?.isAnswered === false && profile.userRole === "student" && (
                 <>
                     <div style={{display: "flex", justifyContent: "center"}}>
                         <FormGroup>
@@ -138,12 +140,21 @@ function VoteBlank() {
                 </>
             )}
             {(vote.isAnswered || profile.userRole === "teacher") && (
-                <div style={{width: "600px",margin: "0 auto", display:"flex", justifyContent:"center", flexDirection:"column"}}>
+                <div style={{
+                    width: "600px",
+                    margin: "0 auto",
+                    display: "flex",
+                    justifyContent: "center",
+                    flexDirection: "column"
+                }}>
                     <h1>Результаты</h1>
-                    <div style={{textAlign:"center"}}>
-                    <Button  variant="contained" onClick={handleUpdate}>Обновить</Button>
+                    <div style={{textAlign: "center"}}>
+                        <Button variant="contained" onClick={handleUpdate}>Обновить</Button>
                     </div>
-                    <div style={{textAlign:"center", margin:"40px 0"}}>Ответили {vote?.allAnswers?.length} из {vote?.groupMembersCount}</div>
+                    <div style={{
+                        textAlign: "center",
+                        margin: "40px 0"
+                    }}>Ответили {vote?.allAnswers?.length} из {vote?.groupMembersCount}</div>
                     <Doughnut data={data}/>
                 </div>
             )}
