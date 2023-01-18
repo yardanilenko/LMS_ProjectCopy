@@ -13,17 +13,28 @@ import { initGroupsAC } from '../../store/groups/actionsCreators';
 import { initUserInfoAC } from '../../store/userInfo/actionsCreators';
 import { useNavigate } from 'react-router-dom';
 
-export default function Materials() {
+export default function Materials2() {
 
   const navigate = useNavigate();
   const [file, setFile] = useState();
   const initialState = { name: '', url: '', groups: [] }
   const [datainput, setDatainput] = useState(initialState);
   const [groupid, setGroupid] = useState();
-  // const getUserRole = useSelector((store) => store.profile.userRole);
-  const getUserRole = useSelector((store) => store);
+  const getUserRole = useSelector((store) => store.profile.userRole);
+  // const getUserRole = useSelector((store) => store.userInfo[0].groupId);
   const getUserId = useSelector((store) => store.profile.userId);
-  console.log(getUserId)
+  // console.log(getUserRole)
+ 
+  
+  useEffect(() => {
+    dispatch(initMaterialsAC());
+    dispatch(initGroupsAC());
+    dispatch(initUserInfoAC(getUserId));
+    // const getUserGroupId = useSelector((store) => store);
+  }, []);
+  
+  const getUserGroupId = useSelector((store) => store);
+  console.log(getUserGroupId)
 
   useEffect(() => {
     // fetch data
@@ -34,12 +45,22 @@ export default function Materials() {
         )
       ).json();
       // set state when the data received
+      console.log(data.Group.id)
       setGroupid(data.Group.id);
-
+      // if (groupid){
+      //   navigate(`/lectures/${groupid}`);
+      // } else {
+      //   navigate(`/lectures/123`)
+      // }
     };
     dataFetch();
+
   }, []);
-  // console.log(datainput.groups[0].id)
+
+  useEffect(() => {
+  navigate(`/lectures/${groupid ? groupid : ''}`);
+  }, [groupid]);
+
   console.log(groupid)
 
 //   const sendMaterial = async () => {
@@ -117,11 +138,11 @@ const sendFile = async () => {
     //     { title: 'The Shawshank Redemption', year: 1994 },
     //     { title: 'The Godfather', year: 1972 }]
 
-        useEffect(() => {
-            dispatch(initMaterialsAC());
-            dispatch(initGroupsAC());
-            dispatch(initUserInfoAC(getUserId));
-        }, []);
+        // useEffect(() => {
+        //     dispatch(initMaterialsAC());
+        //     dispatch(initGroupsAC());
+        //     dispatch(initUserInfoAC(getUserId));
+        // }, []);
 
 
         function handleChangeFile (event) {
@@ -135,7 +156,7 @@ const sendFile = async () => {
 
   return (
     <>
-    { (getUserRole !== 'teacher') ? (
+    { (getUserRole === 'teacher') ? (
     <Grid container spacing={2} columns={16}>
     <Grid item xs={8}>
     <h2>Архив лекций</h2>
@@ -202,7 +223,8 @@ const sendFile = async () => {
       </Button>
     </Grid>
     </Grid>
-    ) : (<div>123</div>)}
+    ) : (<div>Идет загрузка ....</div>)
+    }
     </>
   )
 }
