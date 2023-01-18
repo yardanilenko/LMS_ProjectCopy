@@ -156,8 +156,6 @@ let rows = (pairs !== undefined && myArray !== undefined && pairs.length > 0) ? 
   return (
     <TableContainer component={Paper}>
       
-      <Table style={{tableLayout: 'fixed', width: '100%'}} sx={{ minWidth: 700 }} aria-label="customized table">
-        <TableHead>
           <TableRow >
               <TableCell style={{ display: 'table-cell', alignItems: 'center', width: "5%", minHeight: "50px"}} align="left" colSpan={0}>
               <BackButton/>
@@ -166,6 +164,8 @@ let rows = (pairs !== undefined && myArray !== undefined && pairs.length > 0) ? 
                 {groupName}
               </TableCell>
             </TableRow>
+      <Table style={{tableLayout: 'fixed', width: '100%'}} sx={{ minWidth: 700 }} aria-label="customized table">
+        <TableHead>
           <TableRow>
             <StyledTableCell style={{ backgroundColor: "#44014C"}}>Неделя 1</StyledTableCell>
             <StyledTableCell style={{ backgroundColor: "#44014C"}} align="center">Неделя 2</StyledTableCell>
