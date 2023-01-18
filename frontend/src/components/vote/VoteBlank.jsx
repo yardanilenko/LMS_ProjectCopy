@@ -22,8 +22,9 @@ function VoteBlank() {
     const [checkedOptions, setCheckedOptions] = useState({});
 
     const checkedCount = Object.values(checkedOptions).filter(Boolean).length;
+
     const variants = vote?.data?.options ? vote?.data?.options?.map(i => i.name) : [];
-    const summary = vote.allAnswers ? getSummary(vote.allAnswers, variants) : {};
+    const summary = vote.allAnswers ? getSummary(vote.allAnswers.map(answer => answer.answer ), variants) : {};
     const summaryAnswers = Object.values(summary);
 
     const loadVote = () => {
@@ -80,7 +81,7 @@ function VoteBlank() {
         labels: variants,
         datasets: [
             {
-                label: '# of Votes',
+                label: 'кол-во голосов',
                 data: summaryAnswers,
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
@@ -158,6 +159,14 @@ function VoteBlank() {
                     <Doughnut data={data}/>
                 </div>
             )}
+            {profile.userRole === "teacher" &&
+                <ul style={{textAlign: "center", marginTop: "30px"}}>
+                    {vote?.allAnswers?.map(answer => (
+                       <li style={{listStyleType:"none"}} key={answer} >{answer?.item?.User?.UserInfos[0]?.name + " " + answer?.item?.User?.UserInfos[0]?.surname + ": " + answer?.answer?.join(", ") + "; "}
+                          </li>
+                    ))}
+                </ul>
+            }
         </div>
     );
 }
