@@ -5,7 +5,7 @@ module.exports = {
     queryInterface.addColumn(
         'Answers',
         'vote_id',{
-          type: Sequelize.STRING,
+          type: Sequelize.INTEGER,
         })
   },
 
