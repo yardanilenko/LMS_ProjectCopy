@@ -8,7 +8,7 @@ import chatsReducer from "./chats/chatsReducer";
 import groupChatsReducer from "./groupChats/groupChatsReducer";
 import materialsReducer from "./materials/materialsReducer";
 import userInfoReducer from "./userInfo/userInfoReducer";
-import vikiReducer from "./viki/vikiReducer";
+import wikiReducer from "./wiki/wikiReducer";
 
 
 export default combineReducers({
@@ -21,5 +21,5 @@ export default combineReducers({
     chats: chatsReducer,
     groupChats: groupChatsReducer,
     userInfo: userInfoReducer,
-    viki: vikiReducer
+    wiki: wikiReducer
 });

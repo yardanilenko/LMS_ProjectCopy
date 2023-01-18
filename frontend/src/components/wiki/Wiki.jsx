@@ -2,7 +2,7 @@ import { Box, Grid, List, ListItem, TableBody, TableCell, tableCellClasses, Tabl
 import React, { useEffect, useState } from 'react'
 import { styled } from '@mui/material/styles';
 import { useDispatch, useSelector } from 'react-redux';
-import { initVikiAC } from '../../store/viki/actionsCreators';
+import { initWikiAC } from '../../store/wiki/actionsCreators';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -29,19 +29,16 @@ export default function Viki() {
 
     const dispatch = useDispatch();
 
-    const viki = useSelector((store) => store.viki);
-    console.log("🚀 ~ file: Viki.jsx:9 ~ Viki ~ viki", viki)
+    const wiki = useSelector((store) => store.wiki);
 
-    const initialState = viki[0].page;
+    const[page, setPage] = useState(0);
 
-    const[page, setPage] = useState(initialState);
-
-    function getVikiPage(item){
+    function getWikiPage(item){
       setPage(item)
     }
 
     useEffect(() => {
-        dispatch(initVikiAC());
+        dispatch(initWikiAC());
       }, []);
 
   return (
@@ -56,10 +53,10 @@ export default function Viki() {
             }}
           >
         <TableBody>
-            {viki.map((item) =>
+            {wiki.map((item, idx) =>
               {return (
               <StyledTableRow key={crypto.randomUUID()}>
-                  <StyledTableCell align="center" component="th" scope="row" onClick={() => {getVikiPage(item.page)}}>
+                  <StyledTableCell align="center" component="th" scope="row" onClick={() => {getWikiPage(idx)}}>
                       {item.name}
                   </StyledTableCell>
               </StyledTableRow>
@@ -69,9 +66,9 @@ export default function Viki() {
           </List>
       </Grid>
         <Grid item xs={12}>
-          <ListItem>
-            {page}
-          </ListItem>
+          <p>
+            {wiki[page]?.page}
+          </p>
         </Grid>
       </Grid>
     </Box>
