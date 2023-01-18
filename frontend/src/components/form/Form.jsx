@@ -12,7 +12,7 @@ export default function FormDialog({handleClick}) {
     console.log("thisHandleClick", handleClick);
   const [open, setOpen] = React.useState(false);
 
-  const initialState = {num: ''}
+  const initialState = {num: 2}
     
   const [input, setInput] = useState(initialState);
   
@@ -41,11 +41,11 @@ export default function FormDialog({handleClick}) {
       <Button variant="outlined" color="primary" onClick={handleClickOpen}>
         Сгруппировать
       </Button>
-      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+      <Dialog open={open} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Формирование групп</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Задайте необходимое количество студентов для группового программирования. По умолчанию формируются группы по 2 студента.
+            Задайте необходимое количество студентов для группового программирования. Состав группы должен быть в пределах от 2 до 6 человек.
           </DialogContentText>
           <TextField
             required
@@ -57,7 +57,8 @@ export default function FormDialog({handleClick}) {
             label="Количество студентов"
             onChange={formHandler}
             type="number"
-            min="2" 
+            maxlength="2"
+            data-min="2" 
             max="6" 
             fullWidth
           />
