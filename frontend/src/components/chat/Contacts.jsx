@@ -36,7 +36,7 @@ function ContactItem({chat}) {
     const dispatch = useDispatch();
 
     return (
-        <ListItem key={chat.id}
+        <ListItem sx={{cursor:"pointer"}} key={chat.id}
                   onClick={() => {
                       dispatch(setChatIdAC(chat.id));
                   }}>

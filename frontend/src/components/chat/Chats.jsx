@@ -54,7 +54,7 @@ function Chats() {
 
 function ChatItem({chat, handleOpenGroupChat}) {
     return (
-        <ListItem key={chat.id}
+        <ListItem sx={{cursor:"pointer"}} key={chat.id}
                   onClick={() => {
             handleOpenGroupChat(chat.id, chat.name);
         }}>

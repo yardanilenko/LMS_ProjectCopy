@@ -122,9 +122,11 @@ function VoteList() {
 
     return (
         <div>
-        <Button onClick={() => navigate("/votes/create")} variant="contained" startIcon={<AddIcon />}>
-            ADD
+            <div style={{display:"flex", justifyContent:"flex-end"}}>
+        <Button sx={{marginBottom:"20px"}} onClick={() => navigate("/votes/create")} variant="contained" startIcon={<AddIcon />}>
+            Добавить
         </Button>
+            </div>
         <TableContainer component={Paper}>
             <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
                 <TableBody>
