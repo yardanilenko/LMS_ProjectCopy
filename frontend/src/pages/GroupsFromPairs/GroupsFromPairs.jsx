@@ -63,7 +63,7 @@ export default function GroupsFromPairs() {
           {groups.map((item, idx) =>
             {return (
             <StyledTableRow key={item.id}>
-                <StyledTableCell align="center" component="th" scope="row" onClick={() => {navigate(`/pairs/${item.id}`); getGroup(item.id)}}>
+                <StyledTableCell style={{ cursor: "pointer"}} align="center" component="th" scope="row" onClick={() => {navigate(`/pairs/${item.id}`); getGroup(item.id)}}>
                     {item.name}
                 </StyledTableCell>
             </StyledTableRow>

@@ -58,22 +58,26 @@ export default function Group() {
  
   return (
     <TableContainer component={Paper}>
-      <Table style={{tableLayout: 'fixed', width: '100%'}} sx={{ minWidth: 700 }} aria-label="customized table">
-        <TableHead>
-          <TableRow>
-              <TableCell style={{ display: 'table-cell', alignItems: 'center', width: "5%", minHeight: "50px"}} align="left" colSpan={0}>
+      <Table>
+        <tbody>
+          <TableRow style={{ minHeight: "100px", maxHeight: "100px"}}>
+              <TableCell style={{ display: 'table-cell', alignItems: 'center', width: "5%"}} align="left">
               <BackButton/>
               </TableCell>
-              <TableCell style={{ display: 'table-cell', color: "white", backgroundColor: "black", alignItems: 'center', width: "95%", minHeight: "50px"}} align="center" colSpan={4}>
+              <TableCell style={{ display: 'table-cell', color: "white", backgroundColor: "black", alignItems: 'center', width: "95%"}} align="center" colSpan={4}>
               {nameGroup}
               </TableCell>
             </TableRow>
+          </tbody>
+      </Table>
+      <Table style={{tableLayout: 'fixed', width: '100%'}} sx={{ minWidth: 700 }} aria-label="customized table">
+        <TableHead>
         </TableHead>
         <TableBody>
           {users.map((item) =>
             {return (
             <StyledTableRow key={crypto.randomUUID()}>
-                <StyledTableCell style={{ display: 'table-cell', justifyContent: 'center', alignItems: 'center', width: "100%", minHeight: "50px"}} align="center" colSpan={5} component="th" scope="row" onClick={() => {navigate(`/userinfo/${item.user_id}`)}}>
+                <StyledTableCell style={{ display: 'table-cell', justifyContent: 'center', alignItems: 'center', cursor: "pointer", width: "100%", minHeight: "50px"}} align="center" colSpan={5} component="th" scope="row" onClick={() => {navigate(`/userinfo/${item.user_id}`)}}>
                     {item.name ? (item.name + ' ' + item.surname) : "Список студентов ещё не сформирован"}
                 </StyledTableCell>
             </StyledTableRow>
@@ -84,3 +88,5 @@ export default function Group() {
     </TableContainer>
   );
 }
+
+

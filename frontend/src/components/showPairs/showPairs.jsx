@@ -149,21 +149,20 @@ myArray = getRowsArr();
 let rows = (pairs !== undefined && myArray !== undefined && pairs.length > 0) ? myArray : firstArr;
 
 
-// React.useEffect(() => {
-//   dispatch(initPairsAC());
-// }, []);
-
   return (
     <TableContainer component={Paper}>
-      
-          <TableRow >
-              <TableCell style={{ display: 'table-cell', alignItems: 'center', width: "5%", minHeight: "50px"}} align="left" colSpan={0}>
+      <Table>
+        <tbody>
+          <TableRow sx='padding:0'>
+              <TableCell style={{ display: 'table-cell', alignItems: 'center', width: "5%"}} align="left" colSpan={0}>
               <BackButton/>
               </TableCell>
-              <TableCell style={{ display: 'table-cell', color: "white", backgroundColor: "black", alignItems: 'center', width: "95%", minHeight: "50px"}} align="center" colSpan={4}>
+              <TableCell style={{ display: 'table-cell', color: "white", backgroundColor: "black", alignItems: 'center', width: "95%"}} align="center" colSpan={4}>
                 {groupName}
               </TableCell>
             </TableRow>
+        </tbody>
+      </Table>
       <Table style={{tableLayout: 'fixed', width: '100%'}} sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>

@@ -276,7 +276,7 @@ git reser --hard           // Отменить все изменения, т.е.
 
 const arrWiki = [MARCDOWN, MARCDOWN1, MARCDOWN2, MARCDOWN3, MARCDOWN4, MARCDOWN5]
 
-export default function Viki() {
+export default function Wiki() {
 
     const dispatch = useDispatch();
 
@@ -316,7 +316,7 @@ export default function Viki() {
             {wiki.map((item, idx) =>
               {return (
               <StyledTableRow key={crypto.randomUUID()}>
-                  <StyledTableCell align="center" component="th" scope="row" onClick={() => {getWikiPage(idx)}}>
+                  <StyledTableCell style={{ cursor: "pointer"}} align="center" component="th" scope="row" onClick={() => {getWikiPage(idx)}}>
                       {item.name}
                   </StyledTableCell>
               </StyledTableRow>
