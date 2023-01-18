@@ -21,7 +21,6 @@ import Universalprofile from './components/universalprofile/universalprofile';
 import ChatLayout from "../src/pages/chat/ChatLayout";
 import Materialslist from './components/materialslist/Materialslist';
 import Wiki from './components/wiki/Wiki';
-import MyApp from './components/wikiCreator/wikiCreator';
 
 
 
@@ -52,7 +51,6 @@ function App() {
                                 <Route path="/groups/:id" element={<Group/>}/>
                                 <Route path="/wiki" element={<Wiki/>}/>
                                 <Route path="/contacts" element={<Contacts/>}/>
-                                <Route path="/myapp" element={<MyApp/>}/>
                                 <Route path="/logout" element={<Logout />}/>
                             </Routes>
                         </Layout>
