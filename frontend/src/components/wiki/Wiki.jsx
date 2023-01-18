@@ -276,7 +276,7 @@ git reser --hard           // Отменить все изменения, т.е.
 
 const arrWiki = [MARCDOWN, MARCDOWN1, MARCDOWN2, MARCDOWN3, MARCDOWN4, MARCDOWN5]
 
-export default function Viki() {
+export default function Wiki() {
 
     const dispatch = useDispatch();
 

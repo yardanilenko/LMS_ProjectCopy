@@ -28,7 +28,7 @@ export default function Profile() {
           // set state when the data received
           setData(data);
           setImgSrc(`/images/${data.photo}`)
-          console.log(data.Group.name)
+          console.log(data)
         };
         dataFetch();
       }, []);

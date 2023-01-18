@@ -17,6 +17,7 @@ import FileDownloadIcon from '@mui/icons-material/FileDownload';
 
 export default function Materialslist() {
   const [data, setData] = useState();
+  // const [studentid, setStudentid] = useState();
     const {id} = useParams();
 
     useEffect(() => {
@@ -154,7 +155,5 @@ export default function Materialslist() {
     }
     </>
   
-  
-  
-  )
+)
 }

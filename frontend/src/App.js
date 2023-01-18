@@ -16,6 +16,7 @@ import PrivateRoutes from "./components/privateRoutes/PrivateRoutes";
 import Login from "./pages/login/Login";
 import Logout from "./pages/logout/Logout";
 import Materials from './components/materials/Materials';
+import Materials2 from './components/materials2/Materials2';
 import Contacts from './pages/Contacts/Contacts';
 import Universalprofile from './components/universalprofile/universalprofile';
 import ChatLayout from "../src/pages/chat/ChatLayout";
@@ -38,7 +39,7 @@ function App() {
                                 <Route path="/review" element={<Codereview/>}/>
                                 <Route path="/profile" element={<Profile/>}/>
                                 <Route path="profileedit" element={<Profileedit/>}/>
-                                <Route path="/lectures" element={<Materials/>}/>
+                                <Route path="/lectures" element={<Materials2/>}/>
                                 <Route path="/lectures/:id" element={<Materialslist/>}/>
                                 <Route path="/chats" element={<ChatLayout />}/>
                                 <Route path="/votes" element={<VoteList/>}/>

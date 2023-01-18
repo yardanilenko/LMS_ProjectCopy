@@ -28,6 +28,8 @@ import {styled, useTheme} from '@mui/material/styles';
 import MuiAppBar from '@mui/material/AppBar';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ContactsIcon from '@mui/icons-material/Contacts';
+import { useDispatch, useSelector } from 'react-redux';
+
 
 const drawerWidth = 240;
 
@@ -97,6 +99,8 @@ const Drawer = styled(MuiDrawer, {shouldForwardProp: (prop) => prop !== 'open'})
 );
 
 function Layout({children}) {
+    const getUserRole = useSelector((store) => store.profile.userRole);
+    console.log(getUserRole)
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
 
@@ -107,7 +111,7 @@ function Layout({children}) {
     const handleDrawerClose = () => {
         setOpen(false);
     };
-    const drawer = (
+    const drawer = (getUserRole === "teacher") ? (
         <div>
             <Toolbar/>
             <Divider/>
@@ -120,15 +124,30 @@ function Layout({children}) {
                 <NavItem open={open} to="/pairs" icon={<PeopleAltIcon/>}>Пары</NavItem>
                 <NavItem open={open} to="/groups" icon={<GroupsIcon/>}>Группы</NavItem>
                 <NavItem open={open} to="/wiki" icon={<AutoStoriesIcon/>}>Вики</NavItem>
-                <NavItem open={open} to="/contacts" icon={<ContactsIcon/>}>Контакты</NavItem>
             </List>
             <Divider/>
             <List>
-                <NavItem open={open} to="/profile" icon={<AccountCircleIcon/>}>Профиль</NavItem>
                 <NavItem open={open} to="/logout" icon={<LogoutIcon/>}>Выйти</NavItem>
             </List>
         </div>
-    );
+    ) : (        <div>
+        <Toolbar/>
+        <Divider/>
+        <List>
+            <NavItem open={open} to="/calendar" icon={<CalendarMonthIcon/>}>Календарь</NavItem>
+            <NavItem open={open} to="/lectures">Материалы лекции</NavItem>
+            <NavItem open={open} to="/chats" icon={<MarkUnreadChatAltIcon/>}>Чаты</NavItem>
+            <NavItem open={open} to="/votes" icon={<ThumbsUpDownIcon/>}>Голосования</NavItem>
+            <NavItem open={open} to="/pairs" icon={<PeopleAltIcon/>}>Пары</NavItem>
+            <NavItem open={open} to="/wiki" icon={<AutoStoriesIcon/>}>Вики</NavItem>
+            <NavItem open={open} to="/contacts" icon={<ContactsIcon/>}>Контакты</NavItem>
+        </List>
+        <Divider/>
+        <List>
+            <NavItem open={open} to="/profile" icon={<AccountCircleIcon/>}>Профиль</NavItem>
+            <NavItem open={open} to="/logout" icon={<LogoutIcon/>}>Выйти</NavItem>
+        </List>
+    </div>);
 
     return (
         <Box sx={{display: 'flex'}}>
