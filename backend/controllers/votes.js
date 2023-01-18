@@ -1,4 +1,4 @@
-const {Vote, Answer, Group, User} = require("../db/models");
+const {Vote, Answer, Group, User, UserInfo} = require("../db/models");
 
 exports.allVotes = async (req, res) => {
     const user_id = req.session.currentUserId
@@ -93,19 +93,34 @@ exports.getVoteById = async (req, res) => {
         const allAnswers = await Answer.findAll({
             where: {
                 vote_id: req.params.id,
-            }
+            },
+            include: [
+                {
+                    model: User,
+                    attributes: ['id'],
+                    include: [
+                        {
+                            model: UserInfo,
+                           attributes: ['name', 'surname']
+                        }]
+                }]
         });
         res.json({
             ...vote.dataValues,
             isAnswered: !!answer,
             answer: answer ? answer.dataValues : null,
-            allAnswers: allAnswers.map(item => JSON.parse(item.dataValues.data)),
+            allAnswers: allAnswers.map(item => ({
+                answer: JSON.parse(item.dataValues.data),
+                item: item.dataValues,
+            })),
             groupMembersCount
         });
-    } catch (error) {
+    } catch
+        (error) {
         console.log('ERROR GET==>', error.message);
     }
-};
+}
+;
 
 exports.createVoteAnswer = async (req, res) => {
     const user_id = req.session.currentUserId
