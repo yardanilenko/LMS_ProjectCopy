@@ -137,7 +137,7 @@ function Chat() {
                                 )}
                                 <span
                                     style={{
-                                        color: ourId === message.user_id ? "red" : "green",
+                                        backgroundColor: ourId === message.user_id ? "rgba(22,118,210,0.3)" : "rgba(22,118,210,0.1)",
                                         fontWeight: "bold",
                                         fontSize: "16px",
                                         textAlign: "left",
