@@ -6,6 +6,8 @@ import Checkbox from '@mui/material/Checkbox';
 import {Doughnut} from 'react-chartjs-2';
 import {Chart as ChartJS, ArcElement, Tooltip, Legend} from 'chart.js';
 import {useParams} from "react-router-dom";
+import {useSelector} from "react-redux";
+import BackButton from "../backButton/BackButton";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -14,6 +16,8 @@ function VoteBlank() {
 
     const {id} = useParams();
 
+    const profile = useSelector((store) => store.profile);
+
     const [vote, setVote] = useState({});
     const [checkedOptions, setCheckedOptions] = useState({});
 
@@ -21,8 +25,6 @@ function VoteBlank() {
     const variants = vote?.data?.options ? vote?.data?.options?.map(i => i.name) : [];
     const summary = vote.allAnswers ? getSummary(vote.allAnswers, variants) : {};
     const summaryAnswers = Object.values(summary);
-    console.log("summaryAnswers", summaryAnswers);
-    console.log("variants", variants);
 
     const loadVote = () => {
         fetch(`/api/votes/${id}`, {
@@ -51,6 +53,10 @@ function VoteBlank() {
             [event.target.name]: event.target.checked,
         });
     };
+
+    const handleUpdate = () => {
+        loadVote();
+    }
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -100,9 +106,14 @@ function VoteBlank() {
     return (
         <div>
             {vote?.name && (
-                <h1>{vote.name}</h1>
+                    <div style={{display:"flex"}}>
+                        <BackButton sx={{width: ""}}/>
+                        <div style={{display: "inline-block", textAlign: "center", width: "100%"}}>
+                            <h1>{vote.name}</h1>
+                        </div>
+                    </div>
             )}
-            {vote?.isAnswered === false && (
+            {vote?.isAnswered === false && profile.userRole === "student" && (
                 <>
                     <div style={{display: "flex", justifyContent: "center"}}>
                         <FormGroup>
@@ -128,9 +139,22 @@ function VoteBlank() {
                     </div>
                 </>
             )}
-            {vote.isAnswered && (
-                <div style={{width: "600px",margin: "0 auto", display:"flex", justifyContent:"center", flexDirection:"column"}}>
+            {(vote.isAnswered || profile.userRole === "teacher") && (
+                <div style={{
+                    width: "600px",
+                    margin: "0 auto",
+                    display: "flex",
+                    justifyContent: "center",
+                    flexDirection: "column"
+                }}>
                     <h1>Результаты</h1>
+                    <div style={{textAlign: "center"}}>
+                        <Button variant="contained" onClick={handleUpdate}>Обновить</Button>
+                    </div>
+                    <div style={{
+                        textAlign: "center",
+                        margin: "40px 0"
+                    }}>Ответили {vote?.allAnswers?.length} из {vote?.groupMembersCount}</div>
                     <Doughnut data={data}/>
                 </div>
             )}

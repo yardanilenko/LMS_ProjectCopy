@@ -10,6 +10,7 @@ import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import {useNavigate} from "react-router-dom";
 import ButtonGroup from '@mui/material/ButtonGroup';
+import BackButton from "../backButton/BackButton";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -88,7 +89,12 @@ function VoteForm() {
             margin: 'auto',
         }}>
             <form onSubmit={handleSubmit(onSubmit)}>
-                <h1>Создать голосование </h1>
+                <div style={{display: "flex"}}>
+                    <BackButton/>
+                    <div style={{display: "inline-block", textAlign: "center", width: "100%"}}>
+                        <h1>Создать голосование </h1>
+                    </div>
+                </div>
                 <TextField
                     fullWidth
                     required
@@ -96,23 +102,23 @@ function VoteForm() {
                     label="Тема голосования"
                     {...register(`title`, {required: true})}
                 />
-                <div style={{margin: "30px 0",display:"flex",justifyContent:"space-between"}}>
-                <TextField
-                    sx={{width: "45%"}}
-                    required
-                    id="outlined-required"
-                    label="Минимальное кол-во голосов"
-                    {...register(`min`, {required: true})}
-                />
-                <TextField
-                    sx={{width: "45%"}}
-                    required
-                    id="outlined-required"
-                    label="Максимальное кол-во голосов"
-                    {...register(`max`, {required: true})}
-                />
+                <div style={{margin: "30px 0", display: "flex", justifyContent: "space-between"}}>
+                    <TextField
+                        sx={{width: "45%"}}
+                        required
+                        id="outlined-required"
+                        label="Минимальное кол-во голосов"
+                        {...register(`min`, {required: true})}
+                    />
+                    <TextField
+                        sx={{width: "45%"}}
+                        required
+                        id="outlined-required"
+                        label="Максимальное кол-во голосов"
+                        {...register(`max`, {required: true})}
+                    />
                 </div>
-                <div  style={{marginBottom: "20px"}}>
+                <div style={{marginBottom: "20px"}}>
                     {fields.map((item, index) => {
                         return (
                             <div key={item.id} style={{display: "flex"}}>
@@ -137,81 +143,81 @@ function VoteForm() {
                         );
                     })}
                 </div>
-                <section style={{textAlign:"center"}}>
-                <ButtonGroup variant="contained" aria-label="outlined primary button group">
-                    <Button
-                        variant="contained"
-                        type="button"
-                        onClick={() => {
-                            append({name: ""});
-                        }}
-                    >
-                        append
-                    </Button>
-                    <Button
-                        variant="contained"
-                        type="button"
-                        onClick={() =>
-                            prepend({
-                                name: ""
-                            })
-                        }
-                    >
-                        prepend
-                    </Button>
+                <section style={{textAlign: "center"}}>
+                    <ButtonGroup variant="contained" aria-label="outlined primary button group">
+                        <Button
+                            variant="contained"
+                            type="button"
+                            onClick={() => {
+                                append({name: ""});
+                            }}
+                        >
+                            append
+                        </Button>
+                        <Button
+                            variant="contained"
+                            type="button"
+                            onClick={() =>
+                                prepend({
+                                    name: ""
+                                })
+                            }
+                        >
+                            prepend
+                        </Button>
 
-                    <Button
-                        variant="contained"
-                        type="button"
-                        onClick={() =>
-                            reset({
-                                title: "",
-                                min: "",
-                                max: "",
-                                options: [{name: ""}]
-                            })
-                        }
-                    >
-                        reset
-                    </Button>
-                </ButtonGroup>
+                        <Button
+                            variant="contained"
+                            type="button"
+                            onClick={() =>
+                                reset({
+                                    title: "",
+                                    min: "",
+                                    max: "",
+                                    options: [{name: ""}]
+                                })
+                            }
+                        >
+                            reset
+                        </Button>
+                    </ButtonGroup>
                 </section>
-                <div style={{display:"flex", justifyContent:"center"}}>
-                <Controller
-                    name={`access`}
-                    control={control}
-                    render={({field}) => (
-                <FormControl sx={{m: 1, width: 300, margin:"30px 0"}}>
-                    <InputLabel id="groupSelectLabel">Доступ</InputLabel>
-                    <Select
-                        labelId="groupSelectLabel"
-                        value={field.value}
-                        onChange={field.onChange}
-                        input={<OutlinedInput label="Доступ"/>}
-                        // renderValue={() => (
-                        //     <Box sx={{display: 'flex', flexWrap: 'wrap', gap: 0.5}}>
-                        //         {selected.map((value) => (
-                        //             <Chip key={value} label={groups.find(i => i.id === value).name} />
-                        //         ))}
-                        //     </Box>
-                        // )}
-                        MenuProps={MenuProps}
-                    >
-                        {groups.map((group) => (
-                            <MenuItem
-                                key={group.id}
-                                value={group.id}
-                            >
-                                {group.name}
-                            </MenuItem>
-                        ))}
-                    </Select>
-                </FormControl>
+                <div style={{display: "flex", justifyContent: "center"}}>
+                    <Controller
+                        name={`access`}
+                        control={control}
+                        render={({field}) => (
+                            <FormControl sx={{m: 1, width: 300, margin: "30px 0"}}>
+                                <InputLabel id="groupSelectLabel">Доступ</InputLabel>
+                                <Select
+                                    labelId="groupSelectLabel"
+                                    value={field.value}
+                                    onChange={field.onChange}
+                                    input={<OutlinedInput label="Доступ"/>}
+                                    // renderValue={() => (
+                                    //     <Box sx={{display: 'flex', flexWrap: 'wrap', gap: 0.5}}>
+                                    //         {selected.map((value) => (
+                                    //             <Chip key={value} label={groups.find(i => i.id === value).name} />
+                                    //         ))}
+                                    //     </Box>
+                                    // )}
+                                    MenuProps={MenuProps}
+                                >
+                                    {groups.map((group) => (
+                                        <MenuItem
+                                            key={group.id}
+                                            value={group.id}
+                                        >
+                                            {group.name}
+                                        </MenuItem>
+                                    ))}
+                                </Select>
+                            </FormControl>
                         )}
                     />
                 </div>
-                <div style={{textAlign:"center"}}>
-                <Button variant="contained" type="submit">Создать</Button>
+                <div style={{textAlign: "center"}}>
+                    <Button variant="contained" type="submit">Создать</Button>
                 </div>
             </form>
         </Box>
