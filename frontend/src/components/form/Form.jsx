@@ -33,7 +33,7 @@ export default function FormDialog({handleClick}) {
   };
 
   const modalHandler = () => {
-    setInput(myNum)
+    setInput(initialState)
 }
 
   return (
@@ -48,11 +48,12 @@ export default function FormDialog({handleClick}) {
             Задайте необходимое количество студентов для группового программирования. По умолчанию формируются группы по 2 студента.
           </DialogContentText>
           <TextField
+            required
             autoFocus
             margin="dense"
             id="name"
-            name='inputnNum'
-            // value={myNum}
+            name='num'
+            value={myNum}
             label="Количество студентов"
             onChange={formHandler}
             type="number"
@@ -62,7 +63,7 @@ export default function FormDialog({handleClick}) {
           />
         </DialogContent>
         <DialogActions>
-            <Button onClick={() => {handleClick(+input.num); handleClose()}} color="primary">
+            <Button onClick={() => {handleClick(+input.num); modalHandler(); handleClose()}} color="primary">
                 Подтвердить
             </Button>
             <Button onClick={handleClose} color="primary">
