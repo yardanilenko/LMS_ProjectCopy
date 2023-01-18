@@ -24,11 +24,10 @@ import Typography from '@mui/material/Typography';
 import {NavLink} from "react-router-dom";
 import LogoutIcon from '@mui/icons-material/Logout';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import { styled, useTheme } from '@mui/material/styles';
+import {styled, useTheme} from '@mui/material/styles';
 import MuiAppBar from '@mui/material/AppBar';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ContactsIcon from '@mui/icons-material/Contacts';
-import Contacts from '../../pages/Contacts/Contacts';
 
 const drawerWidth = 240;
 
@@ -53,7 +52,7 @@ const closedMixin = (theme) => ({
     },
 });
 
-const DrawerHeader = styled('div')(({ theme }) => ({
+const DrawerHeader = styled('div')(({theme}) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-end',
@@ -64,7 +63,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 
 const AppBar = styled(MuiAppBar, {
     shouldForwardProp: (prop) => prop !== 'open',
-})(({ theme, open }) => ({
+})(({theme, open}) => ({
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(['width', 'margin'], {
         easing: theme.transitions.easing.sharp,
@@ -80,8 +79,8 @@ const AppBar = styled(MuiAppBar, {
     }),
 }));
 
-const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
-    ({ theme, open }) => ({
+const Drawer = styled(MuiDrawer, {shouldForwardProp: (prop) => prop !== 'open'})(
+    ({theme, open}) => ({
         width: drawerWidth,
         flexShrink: 0,
         whiteSpace: 'nowrap',
@@ -113,20 +112,20 @@ function Layout({children}) {
             <Toolbar/>
             <Divider/>
             <List>
-                <NavItem open={open} to="/calendar" icon={<CalendarMonthIcon />}>Календарь</NavItem>
-                <NavItem open={open} to="/review" icon={<RemoveRedEyeIcon />}>Код ревью</NavItem>
+                <NavItem open={open} to="/calendar" icon={<CalendarMonthIcon/>}>Календарь</NavItem>
+                <NavItem open={open} to="/review" icon={<RemoveRedEyeIcon/>}>Код ревью</NavItem>
                 <NavItem open={open} to="/lectures">Материалы лекции</NavItem>
-                <NavItem open={open} to="/chats" icon={<MarkUnreadChatAltIcon />}>Чаты</NavItem>
-                <NavItem open={open} to="/votes" icon={<ThumbsUpDownIcon />}>Голосования</NavItem>
-                <NavItem open={open} to="/pairs" icon={<PeopleAltIcon />}>Пары</NavItem>
-                <NavItem open={open} to="/groups" icon={<GroupsIcon />}>Группы</NavItem>
-                <NavItem open={open} to="/wiki" icon={<AutoStoriesIcon />}>Вики</NavItem>
-                <NavItem open={open} to="/contacts" icon={<ContactsIcon />}>Контакты</NavItem>
+                <NavItem open={open} to="/chats" icon={<MarkUnreadChatAltIcon/>}>Чаты</NavItem>
+                <NavItem open={open} to="/votes" icon={<ThumbsUpDownIcon/>}>Голосования</NavItem>
+                <NavItem open={open} to="/pairs" icon={<PeopleAltIcon/>}>Пары</NavItem>
+                <NavItem open={open} to="/groups" icon={<GroupsIcon/>}>Группы</NavItem>
+                <NavItem open={open} to="/wiki" icon={<AutoStoriesIcon/>}>Вики</NavItem>
+                <NavItem open={open} to="/contacts" icon={<ContactsIcon/>}>Контакты</NavItem>
             </List>
             <Divider/>
             <List>
-                <NavItem open={open} to="/profile" icon={<AccountCircleIcon />}>Профиль</NavItem>
-                <NavItem open={open} to="/logout" icon={<LogoutIcon />}>Выйти</NavItem>
+                <NavItem open={open} to="/profile" icon={<AccountCircleIcon/>}>Профиль</NavItem>
+                <NavItem open={open} to="/logout" icon={<LogoutIcon/>}>Выйти</NavItem>
             </List>
         </div>
     );
@@ -143,8 +142,10 @@ function Layout({children}) {
                         aria-label="open drawer"
                         edge="start"
                         onClick={handleDrawerOpen}
-                        sx={{ marginRight: 5,
-                            ...(open && { display: 'none' }),}}
+                        sx={{
+                            marginRight: 5,
+                            ...(open && {display: 'none'}),
+                        }}
                     >
                         <MenuIcon/>
                     </IconButton>
@@ -154,21 +155,21 @@ function Layout({children}) {
                 </Toolbar>
             </AppBar>
             <Drawer
-                    variant="permanent"
-                    open={open}
-                >
-                    <DrawerHeader>
-                        <IconButton onClick={handleDrawerClose}>
-                            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-                        </IconButton>
-                    </DrawerHeader>
-                    {drawer}
-                </Drawer>
+                variant="permanent"
+                open={open}
+            >
+                <DrawerHeader>
+                    <IconButton onClick={handleDrawerClose}>
+                        {theme.direction === 'rtl' ? <ChevronRightIcon/> : <ChevronLeftIcon/>}
+                    </IconButton>
+                </DrawerHeader>
+                {drawer}
+            </Drawer>
             <Box
                 component="main"
                 sx={{flexGrow: 1, p: 3}}
             >
-                <DrawerHeader />
+                <DrawerHeader/>
                 {children}
             </Box>
         </Box>
@@ -178,12 +179,14 @@ function Layout({children}) {
 const NavItem = ({to, children, icon, open}) => {
     return (
         <NavLink to={to} style={{textDecoration: 'none', color: 'inherit'}}>
-                <ListItem disablePadding sx={{ display: 'block' }}>
-                    <ListItemButton  sx={{
+            {({isActive}) => (
+                <ListItem disablePadding sx={{display: 'block'}}>
+                    <ListItemButton sx={{
                         minHeight: 48,
                         justifyContent: open ? 'initial' : 'center',
                         px: 2.5,
-                    }}>
+                    }}
+                                    selected={isActive}>
                         <ListItemIcon sx={{
                             minWidth: 0,
                             mr: open ? 3 : 'auto',
@@ -191,9 +194,10 @@ const NavItem = ({to, children, icon, open}) => {
                         }}>
                             {icon || <InboxIcon/>}
                         </ListItemIcon>
-                        <ListItemText primary={children} sx={{ opacity: open ? 1 : 0 }}/>
+                        <ListItemText primary={children} sx={{opacity: open ? 1 : 0}}/>
                     </ListItemButton>
                 </ListItem>
+            )}
         </NavLink>
     )
 }
