@@ -63,7 +63,7 @@ export default function Groups() {
           {groups.map((item) =>
             {return (
             <StyledTableRow key={crypto.randomUUID()}>
-                <StyledTableCell align="center" component="th" scope="row" onClick={() => {navigate(`/groups/${item.id}`); getGroup(item.id)}}>
+                <StyledTableCell style={{ cursor: "pointer"}} align="center" component="th" scope="row" onClick={() => {navigate(`/groups/${item.id}`); getGroup(item.id)}}>
                     {item.name}
                 </StyledTableCell>
             </StyledTableRow>

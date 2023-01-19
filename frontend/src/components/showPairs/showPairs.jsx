@@ -33,7 +33,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 export default function ShowPairs() {
-  // const dispatch = useDispatch();
 
   const {id} = useParams();
 
@@ -41,11 +40,8 @@ export default function ShowPairs() {
 
   
   const pairs = useSelector((store) => store.pair);
-  // console.log("🚀 ~ file: showPairs.jsx:44 ~ ShowPairs ~ pairs", pairs)
   const groups = useSelector((store) => store.group);
   const users = useSelector((store) => store.userInfo);
-  // console.log("🚀 ~ file: showPairs.jsx:46 ~ ShowPairs ~ users", users)
-
   const groupName = groups[0]?.name;
 
   function createData(week1, week2, week3, week4) {
@@ -80,18 +76,14 @@ let myArray
 
 let a = pairs !== undefined ? pairs.filter(el => el.group_id === myId) : [];
 
-// console.log("AAAAAA", a);
-
 
 if (pairs !== undefined && pairs.length > 0 && a.length) {
 
   let b = a.pop();
-  // console.log("🚀 ~ file: showPairs.jsx:89 ~ ShowPairs ~ b", b)
   
   let c = b.data;
 
 let getArr = JSON.parse(c); 
-// console.log("🚀 ~ file: showPairs.jsx:91 ~ ShowPairs ~ getArr", getArr)
 
 let getRowUl = (row) => {
     let ul = <ul key={crypto.randomUUID()}>{row?.map((el) => <li key={crypto.randomUUID()}>{el?.join('-')}</li> )}</ul>;
@@ -100,7 +92,6 @@ let getRowUl = (row) => {
 
   function getShuffledArr(array) {
     let result = [], source = array.concat([]);
-    // console.log("🚀 ~ file: ButtonSendPairs.jsx:10 ~ getShuffledArr ~ source", source)
   
     while (source.length) {
       let index = Math.floor((Math.random()-0.5) * source.length);
@@ -142,28 +133,36 @@ let getRowsArr = () => {
 return myRows;
 }
 
-myArray = getRowsArr();
+
+// function createMyArray(){
+  myArray = getRowsArr();
+  // console.log("🚀 ~ file: showPairs.jsx:139 ~ createMyArray ~ myArray", myArray)
+  // localStorage.setItem('myArray', JSON.stringify(myArray));
+  
+// }
 }
 
+// let thisArr = localStorage.getItem('myArray');
+// console.log("🚀 ~ file: showPairs.jsx:145 ~ ShowPairs ~ thisArr", thisArr)
 
 let rows = (pairs !== undefined && myArray !== undefined && pairs.length > 0) ? myArray : firstArr;
 
 
-// React.useEffect(() => {
-//   dispatch(initPairsAC());
-// }, []);
 
   return (
     <TableContainer component={Paper}>
-      
+      <Table>
+        <tbody>
           <TableRow >
-              <TableCell style={{ display: 'table-cell', alignItems: 'center', width: "5%", minHeight: "50px"}} align="left" colSpan={0}>
+              <TableCell style={{ display: 'table-cell', alignItems: 'center', width: "5%"}} align="left" colSpan={0}>
               <BackButton/>
               </TableCell>
-              <TableCell style={{ display: 'table-cell', color: "white", backgroundColor: "black", alignItems: 'center', width: "95%", minHeight: "50px"}} align="center" colSpan={4}>
+              <TableCell style={{ display: 'table-cell', color: "white", backgroundColor: "#44014C", alignItems: 'center', width: "95%"}} align="center" colSpan={4}>
                 {groupName}
               </TableCell>
             </TableRow>
+        </tbody>
+      </Table>
       <Table style={{tableLayout: 'fixed', width: '100%'}} sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
