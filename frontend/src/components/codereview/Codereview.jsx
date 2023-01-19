@@ -138,6 +138,7 @@ export default function Codereview() {
       sx={{ width: 300 }}
       renderInput={(params) => <TextField {...params} label="Группа" />}
     />
+    <br/>
     <Autocomplete
       disablePortal
       id="combo-box-demo"
@@ -148,6 +149,7 @@ export default function Codereview() {
       renderInput={(params) => <TextField {...params} label="Студент" />}
     />
              <div>
+             <br/>
              <DesktopDatePicker
           label="Дата"
           inputFormat="MM/DD/YYYY"
@@ -156,6 +158,7 @@ export default function Codereview() {
           renderInput={(params) => <TextField {...params} />}
         />
         </div>
+        <br/>
               <TimePicker
         label="Время начала"
         value={valuetimestart}
@@ -172,7 +175,8 @@ export default function Codereview() {
         }}
         renderInput={(params) => <TextField {...params} />}
       />
-      <div>
+      <br/>
+      <br/>
               <TextField
               onChange={handleChangeTheme}
           id="outlined-multiline-flexible"
@@ -180,7 +184,9 @@ export default function Codereview() {
           multiline
           maxRows={4}
         />
-      </div>
+        <br/>
+      
+      <br/>
               <Button variant="contained" color="success" onClick={createEvent}>
         Назначить встречу
       </Button>
