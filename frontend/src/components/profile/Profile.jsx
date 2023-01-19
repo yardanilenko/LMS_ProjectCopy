@@ -91,6 +91,7 @@ export default function Profile() {
         src={ImgSrc}
         sx={{ width: 250, height: 250 }}
       />
+      <br/>
       <Button variant="contained" onClick={() => navigate("/profileedit")}>Изменить информацию</Button>
   </Grid>
   </Grid>

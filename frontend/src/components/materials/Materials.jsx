@@ -160,6 +160,7 @@ const sendFile = async () => {
     </Grid>
     <Grid item xs={8}>
     <h2>Добавить материал</h2>
+    
     <TextField
           onChange={formHandler}
           id="outlined-multiline-flexible"
@@ -167,7 +168,6 @@ const sendFile = async () => {
           name="name"
           multiline
           maxRows={4}
-
         />
             <TextField
           onChange={formHandler}
@@ -184,6 +184,7 @@ const sendFile = async () => {
         // hidden accept="image/*" multiple type="file" 
         multiple type="file" hidden accept="application/pdf, application/zip, application/vnd.rar" onChange={handleChangeFile}/>
       </Button>
+      <br/>
       <Autocomplete
       disablePortal
       id="combo-box-demo"
