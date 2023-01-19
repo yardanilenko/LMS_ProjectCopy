@@ -42,7 +42,7 @@ function Chats() {
 
     return (
         <div>
-            <h3>Чат группы</h3>
+            <h3>Групповые чаты</h3>
             <List sx={{ width: '100%', maxWidth: 360 }}>
             {chats && chats.map((chat) => (
                 <ChatItem chat={chat} handleOpenGroupChat={handleOpenGroupChat}/>
