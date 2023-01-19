@@ -27,7 +27,6 @@ export default function Materials2() {
   const getUserRole = useSelector((store) => store.profile.userRole);
   // const getUserRole = useSelector((store) => store.userInfo[0].groupId);
   const getUserId = useSelector((store) => store.profile.userId);
-  // console.log(getUserRole)
   const [open, setOpen] = React.useState(false);
  
   
@@ -39,7 +38,6 @@ export default function Materials2() {
   }, []);
   
   const getUserGroupId = useSelector((store) => store);
-  console.log(getUserGroupId)
 
   useEffect(() => {
     // fetch data
@@ -50,7 +48,6 @@ export default function Materials2() {
         )
       ).json();
       // set state when the data received
-      console.log(data.Group.id)
       setGroupid(data.Group.id);
       // if (groupid){
       //   navigate(`/lectures/${groupid}`);
@@ -66,7 +63,6 @@ export default function Materials2() {
   navigate(`/lectures/${groupid ? groupid : ''}`);
   }, [groupid]);
 
-  console.log(groupid)
 
 //   const sendMaterial = async () => {
 //     try {
@@ -126,11 +122,9 @@ const sendFile = async () => {
   }
 
   
-  // console.log(datainput)
     const dispatch = useDispatch();
     const {id} = useParams();
     const group = useSelector((store) => store.materials);
-    // console.log(';;;;;;;',group)
     const preventDefault = (event) => event.preventDefault();
 
 
@@ -242,9 +236,7 @@ const sendFile = async () => {
       id="combo-box-demo"
       options={edited}
       onChange={(event,value) => {
-          // console.log(event,value)
               setDatainput((preMy) => ({ ...preMy, groups: value.id }))
-              console.log(datainput)
         }}
       sx={{ width: 300 }}
       renderInput={(params) => <TextField {...params} label="Группа" />}
