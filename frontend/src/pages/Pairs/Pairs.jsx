@@ -12,8 +12,8 @@ function Pairs() {
 
   const getUserRole = useSelector((store) => store.profile);
   const userRole = getUserRole.userRole;
-//   console.log("🚀 &&&&&?????? userRole", userRole)
 
+  
   useEffect(() => {
     dispatch(initPairsAC());
 }, []);

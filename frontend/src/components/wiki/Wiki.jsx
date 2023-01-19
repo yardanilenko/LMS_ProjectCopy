@@ -1,4 +1,4 @@
-import { Box, Grid, List, ListItem, TableBody, TableCell, tableCellClasses, TableRow } from '@mui/material';
+import { Box, Grid, List, ListItem, Table, TableBody, TableCell, tableCellClasses, TableRow } from '@mui/material';
 import React, { useEffect, useState } from 'react'
 import { styled } from '@mui/material/styles';
 import { useDispatch, useSelector } from 'react-redux';
@@ -113,7 +113,7 @@ Bootcamp:
 
 P.S. Вся команда Elbrus Bootcamp готова помочь в любое время и сделать ваше обучение максимально комфортным. Также, смело обращайтесь за советом и поддержкой к другим участникам кэмпа.`;
 
-const MARCDOWN2 = `**Инструкция по парному программированию**
+const MARCDOWN2 = `## Инструкция по парному программированию
 1. Работать в 1 форке репозитория. Напарника нужно добавить в Colloboratos репозитория.
 1. Роли меняются по таймеру каждые 30 минут
 1. Использовать 1 компьютер (второй нужно выключить, иначе можно уйти в соло-групповую работу) и монитор
@@ -235,7 +235,7 @@ const MARCDOWN4 = `## Работа над командным проектом
 * Нужно показать саму программу и код, рассказать об алгоритме работы, с какими трудностями столкнулась команда.
 * Будьте готовы отвечать на вопросы других команд`;
 
-const MARCDOWN5 = `Команды Git.
+const MARCDOWN5 = `## Команды Git.
 
 git init                   // Создать git-репозиторий в текущей папке.
 git status                 // Отобразить состояние текущий ветки репозитория в текущей папке.
@@ -281,8 +281,6 @@ export default function Wiki() {
     const dispatch = useDispatch();
 
     const wiki = useSelector((store) => store.wiki);
-    console.log("🚀 ~ file: Wiki.jsx:34 ~ Viki ~ wiki", wiki)
-
     const[idxPage, setIdxPage] = useState(0);
 
     function getWikiPage(item){
@@ -293,18 +291,12 @@ export default function Wiki() {
         dispatch(initWikiAC());
       }, []);
 
-      // let test = wiki[idxPage]?.page
-      // console.log("🚀 ~ file: Wiki.jsx:46 ~ Viki ~ test", test)
-
-      // const MARCDOWN1 = test;
-
-      // const MARCDOWN2 = `${test}`; 
       
 
   return (
     <Box>
       <Grid container spacing={2} columns={16}>
-        <Grid item xs={4}>
+        <Grid item xs={4} >
           <List
             sx={{
               width: '100%',
@@ -312,22 +304,22 @@ export default function Wiki() {
               bgcolor: 'background.paper',
             }}
           >
-        <TableBody>
+      <Table>
+        <TableBody style={{ position: 'fixed'}} >
             {wiki.map((item, idx) =>
               {return (
               <StyledTableRow key={crypto.randomUUID()}>
-                  <StyledTableCell align="center" component="th" scope="row" onClick={() => {getWikiPage(idx)}}>
+                  <StyledTableCell style={{ cursor: "pointer"}} align="center" component="th" scope="row" onClick={() => {getWikiPage(idx)}}>
                       {item.name}
                   </StyledTableCell>
               </StyledTableRow>
               )}
             )}
         </TableBody>
+      </Table>
           </List>
       </Grid>
         <Grid item xs={12}>
-
-            {/* {test} */}
             <ReactMarkdown>{arrWiki[idxPage]}</ReactMarkdown>
         </Grid>
       </Grid>

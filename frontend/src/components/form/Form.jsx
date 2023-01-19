@@ -9,7 +9,6 @@ import DialogTitle from '@mui/material/DialogTitle';
 
 export default function FormDialog({handleClick}) {
 
-    console.log("thisHandleClick", handleClick);
   const [open, setOpen] = React.useState(false);
 
   const initialState = {num: 2}
@@ -17,10 +16,10 @@ export default function FormDialog({handleClick}) {
   const [input, setInput] = useState(initialState);
   
   let myNum = input.num;
-  console.log("🚀 ~ file: Form.jsx:20 ~ FormDialog ~ myNum", myNum)
-
   const formHandler = (e) => {
-    setInput((preMy) => ({...preMy, [e.target.name]: e.target.value}))
+    if(e.target.value >= 2 && e.target.value <= 10){
+      setInput((preMy) => ({...preMy, [e.target.name]: e.target.value}))
+    }
 
 }
 
@@ -35,6 +34,13 @@ export default function FormDialog({handleClick}) {
   const modalHandler = () => {
     setInput(initialState)
 }
+
+  function functionalBlock(){
+    handleClick(+input.num); 
+    localStorage.setItem('Flag', 'Yes');
+    modalHandler(); 
+    handleClose()
+  }
 
   return (
     <div>
@@ -57,12 +63,11 @@ export default function FormDialog({handleClick}) {
             label="Количество студентов"
             onChange={formHandler}
             type="number"
-            InputProps={{ inputProps: { min: 2, max: 10 } }}
             fullWidth
           />
         </DialogContent>
         <DialogActions>
-            <Button onClick={() => {handleClick(+input.num); modalHandler(); handleClose()}} color="primary">
+            <Button onClick={functionalBlock} color="primary">
                 Подтвердить
             </Button>
             <Button onClick={handleClose} color="primary">
