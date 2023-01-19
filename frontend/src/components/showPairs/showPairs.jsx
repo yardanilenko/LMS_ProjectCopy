@@ -7,9 +7,10 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import BackButton from '../../components/backButton/BackButton';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { Typography } from '@mui/material';
+import BackButtonWhite from '../backButtonWhite/BackButtonWhite';
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -154,33 +155,33 @@ let rows = (pairs !== undefined && myArray !== undefined && pairs.length > 0) ? 
       <Table>
         <tbody>
           <TableRow >
-              <TableCell style={{ display: 'table-cell', alignItems: 'center', width: "5%"}} align="left" colSpan={0}>
-              <BackButton/>
-              </TableCell>
-              <TableCell style={{ display: 'table-cell', color: "white", backgroundColor: "#44014C", alignItems: 'center', width: "95%"}} align="center" colSpan={4}>
-                {groupName}
-              </TableCell>
-            </TableRow>
+            <TableCell style={{ display: 'flex', position: 'relative', color: "white", backgroundColor: "#44014C", alignItems: 'center'}} align="center" colSpan={4}>
+              <BackButtonWhite sx={{position: 'absolute', color: 'white'}}/>
+              <div style={{display: "inline-block", textAlign: "center", width: "100%"}}>
+                <Typography variant="h6" align="center" sx={{fontWeight: 'bold'}}>{groupName}</Typography>
+              </div>
+            </TableCell>
+          </TableRow>
         </tbody>
       </Table>
       <Table style={{tableLayout: 'fixed', width: '100%'}} sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell style={{ backgroundColor: "#44014C"}}>Неделя 1</StyledTableCell>
-            <StyledTableCell style={{ backgroundColor: "#44014C"}} align="center">Неделя 2</StyledTableCell>
-            <StyledTableCell style={{ backgroundColor: "#44014C"}} align="center">Неделя 3</StyledTableCell>
-            <StyledTableCell style={{ backgroundColor: "#44014C"}} align="right">Неделя 4</StyledTableCell>
+            <StyledTableCell style={{ backgroundColor: "#44014C"}} align="center"> <Typography sx={{fontWeight: 'bold'}}>Неделя 1</Typography></StyledTableCell>
+            <StyledTableCell style={{ backgroundColor: "#44014C"}} align="center"><Typography sx={{fontWeight: 'bold'}}>Неделя 2</Typography></StyledTableCell>
+            <StyledTableCell style={{ backgroundColor: "#44014C"}} align="center"><Typography sx={{fontWeight: 'bold'}}>Неделя 3</Typography></StyledTableCell>
+            <StyledTableCell style={{ backgroundColor: "#44014C"}} align="center"><Typography sx={{fontWeight: 'bold'}}>Неделя 4</Typography></StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.map((row) => (
             <StyledTableRow key={crypto.randomUUID()}>
-              <StyledTableCell component="th" scope="row">
-                {row.week1}
+              <StyledTableCell component="th" scope="row" align="center">
+              <Typography>{row.week1}</Typography>
               </StyledTableCell>
-              <StyledTableCell align="center">{row.week2}</StyledTableCell>
-              <StyledTableCell align="center">{row.week3}</StyledTableCell>
-              <StyledTableCell align="right">{row.week4}</StyledTableCell>
+              <StyledTableCell align="center"><Typography>{row.week2}</Typography></StyledTableCell>
+              <StyledTableCell align="center"><Typography>{row.week3}</Typography></StyledTableCell>
+              <StyledTableCell align="center"><Typography>{row.week4}</Typography></StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>
