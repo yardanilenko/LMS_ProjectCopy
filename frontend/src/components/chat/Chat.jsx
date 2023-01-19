@@ -84,7 +84,7 @@ function Chat() {
 
     if (!chatId) {
         return (
-            <div style={{display: "flex", width: "50%", height: "50%", justifyContent: "center", border:"1px solid #e0e0e0", margin:"200px auto",padding:"0 24px", alignItems:"center"}}>
+            <div style={{display: "flex", width: "50%", justifyContent: "center", border:"1px solid #e0e0e0", margin:"200px auto",padding:"24px", alignItems:"center"}}>
                 <h1 style={{textAlign: "center", color: "#b7b7b7", fontSize: "24px"}}>Пожалуйста, выберите чат или новый контакт из поиска...</h1>
             </div>
         )

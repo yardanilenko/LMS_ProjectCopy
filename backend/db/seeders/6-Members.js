@@ -133,7 +133,7 @@ module.exports = {
             },
             {
                 user_id: 7,
-                event_id: 21,
+                event_id: 22,
                 createdAt: new Date(),
                 updatedAt: new Date()
             },

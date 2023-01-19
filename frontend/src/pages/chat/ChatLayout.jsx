@@ -16,7 +16,7 @@ function ChatLayout() {
             <CssBaseline/>
             <Box
                 component="nav"
-                sx={{width: {sm: drawerWidth}, flexShrink: {sm: 0}, paddingRight:"24px", borderRight:"1px solid #e0e0e0"}}
+                sx={{width: {sm: drawerWidth}, flexShrink: {sm: 0}, height:`calc(100vh - 120px)`, paddingRight:"24px", borderRight:"1px solid #e0e0e0"}}
                 aria-label="mailbox folders"
             >
                 <div style={{height:"40px"}}></div>
