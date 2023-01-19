@@ -11,6 +11,7 @@ import FormControl from '@mui/material/FormControl';
 import {useNavigate} from "react-router-dom";
 import ButtonGroup from '@mui/material/ButtonGroup';
 import BackButton from "../backButton/BackButton";
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -121,7 +122,7 @@ function VoteForm() {
                 <div style={{marginBottom: "20px"}}>
                     {fields.map((item, index) => {
                         return (
-                            <div key={item.id} style={{display: "flex"}}>
+                            <div key={item.id} style={{display: "flex", marginBottom:"10px", alignItems:"center"}}>
                                 <Controller
                                     name={`options.${index}.name`}
                                     control={control}
@@ -131,14 +132,11 @@ function VoteForm() {
                                             value={field.value}
                                             onChange={field.onChange}
                                             fullWidth
-                                            style={{marginBottom: "10px"}}
                                             placeholder="Введите вариант ответа"
                                         />
                                     )}
                                 />
-                                <Button variant="contained" type="button" onClick={() => remove(index)}>
-                                    Delete
-                                </Button>
+                                    <DeleteIcon sx={{cursor:"pointer"}} color="action" fontSize="large"  onClick={() => remove(index)}/>
                             </div>
                         );
                     })}
