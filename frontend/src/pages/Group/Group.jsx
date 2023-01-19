@@ -42,12 +42,9 @@ export default function Group() {
     const navigate = useNavigate();
 
     const {id} = useParams();
-    // console.log("🚀 ~ file: Group.jsx:42 ~ Group ~ id", id)
     
     const group = useSelector((store) => store.group);
     const users = useSelector((store) => store.userInfo);
-    console.log("🚀 ~ file: Group.jsx:49 ~ Group ~ users", users)
-
 
     useEffect(() => {
         dispatch(initGroupAC(id));
@@ -64,7 +61,7 @@ export default function Group() {
               <TableCell style={{ display: 'table-cell', alignItems: 'center', width: "5%"}} align="left">
               <BackButton/>
               </TableCell>
-              <TableCell style={{ display: 'table-cell', color: "white", backgroundColor: "black", alignItems: 'center', width: "95%"}} align="center" colSpan={4}>
+              <TableCell style={{ display: 'table-cell', color: "white", backgroundColor: "#44014C", alignItems: 'center', width: "95%"}} align="center" colSpan={4}>
               {nameGroup}
               </TableCell>
             </TableRow>

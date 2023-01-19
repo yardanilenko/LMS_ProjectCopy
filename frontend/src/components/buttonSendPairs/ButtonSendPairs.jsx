@@ -1,5 +1,4 @@
 import React, { useCallback } from 'react';
-import Button from '@mui/material/Button';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { initGroupAC } from '../../store/group/actionsCreators';
@@ -10,7 +9,6 @@ import FormDialog from '../form/Form';
 
 function getShuffledArr(array) {
     let result = [], source = array.concat([]);
-    // console.log("🚀 ~ file: ButtonSendPairs.jsx:10 ~ getShuffledArr ~ source", source)
   
     while (source.length) {
       let index = Math.floor((Math.random()-0.5) * source.length);
@@ -26,26 +24,22 @@ function getShuffledArr(array) {
   
   function getPairs(arr, num = 2){
       const res = getShuffledArr(arr)
-      // console.log("🚀 ~ file: ButtonSendPairs.jsx:28 ~ getPairs ~ res", res)
       let pairs = [];
       for (let i = 0; i < res.length; i=i+num) { 
         if(res.length % 2 === 0){
         pairs.push(res.slice(i, i+num).map((el) => el.name + ' ' + el.surname));
         } else {
           const popped = res.pop();
-          // console.log("🚀 ~ file: ButtonSendPairs.jsx:35 ~ getPairs ~ popped", popped)
           pairs.push(res.slice(i, i+num).map((el) => el.name + ' ' + el.surname));
           pairs.at(-1).push(popped.name + ' ' + popped.surname)
         }
       }
-      // console.log("🚀 ~ file: ButtonSendPairs.jsx:34 ~ getPairs ~ result", pairs)
       return pairs;
   }
 
 
   function getJustPairs(arr){
     const res = getShuffledArr(arr)
-    // console.log("🚀 ~ file: ButtonSendPairs.jsx:25 ~ getPairs ~ res", res)
     const pairs = [];
     let idx = Math.floor((Math.random()-0.5) * arr.length)
     for (let i = 0; i < res.length/2; i++) { 
@@ -67,13 +61,8 @@ export default function ButtonSendPairs() {
     const {id} = useParams();
     
     const group = useSelector((store) => store.group);
-    // console.log("🚀 ~ file: ButtonSendPairs.jsx:45 ~ ButtonSendPairs ~ group", group)
     const users = useSelector((store) => store.userInfo);
-    // console.log("🚀 ~ file: ButtonSendPairs.jsx:47 ~ ButtonSendPairs ~ users", users)
-
     const myGroup = group[0]?.Users;
-    // console.log("🚀 ~ file: ButtonSendPairs.jsx:48 ~ ButtonSendPairs ~ myGroup", myGroup)
-
     const myGroupName = group[0]?.name;
 
 
@@ -89,7 +78,6 @@ export default function ButtonSendPairs() {
           myArrPairs.push(row)
         }
       }
-      // console.log("🚀 ~ file: ButtonSendPairs.jsx:93 ~ getMyPairs ~ myArrPairs", myArrPairs)
         return myArrPairs;
       }
       }
@@ -98,8 +86,6 @@ export default function ButtonSendPairs() {
       const putCurrentArr = async (num) => {
         
         const getArr = getMyPairs(num);
-        // console.log("🚀 ~ file: ButtonSendPairs.jsx:94 ~ putCurrentArr ~ getArr", getArr)
-
           
           const response = await fetch(
             `http://localhost:3100/pairs`,
