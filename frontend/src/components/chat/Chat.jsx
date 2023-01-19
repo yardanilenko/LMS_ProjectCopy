@@ -65,7 +65,7 @@ function Chat() {
                 chatId,
                 user_id: ourId,
                 message: currentMessage,
-                time: new Date(Date.now()).toLocaleString(),
+                time: new Date(Date.now()).toISOString(),
                 user_name: userName,
             }
             await socket.emit('send_message', messageData);
@@ -137,7 +137,7 @@ function Chat() {
                                 )}
                                 <span
                                     style={{
-                                        backgroundColor: ourId === message.user_id ? "rgba(22,118,210,0.3)" : "rgba(22,118,210,0.1)",
+                                        backgroundColor: ourId === message.user_id ? "rgba(253,224,4, 0.1)" : "rgba(22,118,210,0.1)",
                                         fontWeight: "bold",
                                         fontSize: "16px",
                                         textAlign: "left",
@@ -164,8 +164,7 @@ function Chat() {
                                             fontSize: "10px",
                                             color: "#b7b7b7"
                                         }}
-                                    >{message.time}</span>
-                                       <span>{new Date(message.time).getHours() + ":" + new Date(message.time).getMinutes()} </span>
+                                    >{new Date(message.time).toLocaleTimeString()}</span>
                             </span>
                             </div>
                         )
