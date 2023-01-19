@@ -6,6 +6,6 @@ exports.groups = async (req, res) => {
     const groups = await Group.findAll({ raw: true });
     res.send(groups);
   } catch (error) {
-      console.log('ERROR LIST==>', error.message);
+      console.log('ERROR GROUPSS==>', error.message);
   }
 }
