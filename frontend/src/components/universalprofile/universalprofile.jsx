@@ -30,7 +30,7 @@ export default function Universalprofile() {
           // set state when the data received
           setData(data);
           setImgSrc(`/images/${data.photo}`)
-          console.log(data.Group.name)
+          console.log(data)
           console.log(data)
         };
         dataFetch();

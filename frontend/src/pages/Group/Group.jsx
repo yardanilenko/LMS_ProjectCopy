@@ -58,13 +58,13 @@ export default function Group() {
  
   return (
     <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 700 }} aria-label="customized table">
+      <Table style={{tableLayout: 'fixed', width: '100%'}} sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
-              <TableCell style={{ display: 'table-cell', alignItems: 'center', width: "10%", minHeight: "50px"}} align="left" colSpan={0}>
+              <TableCell style={{ display: 'table-cell', alignItems: 'center', width: "5%", minHeight: "50px"}} align="left" colSpan={0}>
               <BackButton/>
               </TableCell>
-              <TableCell style={{ display: 'table-cell', color: "white", backgroundColor: "black", alignItems: 'center', width: "90%", minHeight: "50px"}} align="center" colSpan={4}>
+              <TableCell style={{ display: 'table-cell', color: "white", backgroundColor: "black", alignItems: 'center', width: "95%", minHeight: "50px"}} align="center" colSpan={4}>
               {nameGroup}
               </TableCell>
             </TableRow>

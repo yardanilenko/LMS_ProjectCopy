@@ -156,20 +156,20 @@ let rows = (pairs !== undefined && myArray !== undefined && pairs.length > 0) ? 
   return (
     <TableContainer component={Paper}>
       
-      <Table sx={{ minWidth: 700 }} aria-label="customized table">
-        <TableHead>
           <TableRow >
-              <TableCell style={{ display: 'table-cell', alignItems: 'center', width: "20%", minHeight: "50px"}} align="left" colSpan={0}>
+              <TableCell style={{ display: 'table-cell', alignItems: 'center', width: "5%", minHeight: "50px"}} align="left" colSpan={0}>
               <BackButton/>
               </TableCell>
-              <TableCell style={{ display: 'table-cell', color: "white", backgroundColor: "black", alignItems: 'center', width: "80%", minHeight: "50px"}} align="center" colSpan={4}>
+              <TableCell style={{ display: 'table-cell', color: "white", backgroundColor: "black", alignItems: 'center', width: "95%", minHeight: "50px"}} align="center" colSpan={4}>
                 {groupName}
               </TableCell>
             </TableRow>
+      <Table style={{tableLayout: 'fixed', width: '100%'}} sx={{ minWidth: 700 }} aria-label="customized table">
+        <TableHead>
           <TableRow>
             <StyledTableCell style={{ backgroundColor: "#44014C"}}>Неделя 1</StyledTableCell>
             <StyledTableCell style={{ backgroundColor: "#44014C"}} align="center">Неделя 2</StyledTableCell>
-            <StyledTableCell style={{ backgroundColor: "#44014C"}} align="right">Неделя 3</StyledTableCell>
+            <StyledTableCell style={{ backgroundColor: "#44014C"}} align="center">Неделя 3</StyledTableCell>
             <StyledTableCell style={{ backgroundColor: "#44014C"}} align="right">Неделя 4</StyledTableCell>
           </TableRow>
         </TableHead>
@@ -180,7 +180,7 @@ let rows = (pairs !== undefined && myArray !== undefined && pairs.length > 0) ? 
                 {row.week1}
               </StyledTableCell>
               <StyledTableCell align="center">{row.week2}</StyledTableCell>
-              <StyledTableCell align="right">{row.week3}</StyledTableCell>
+              <StyledTableCell align="center">{row.week3}</StyledTableCell>
               <StyledTableCell align="right">{row.week4}</StyledTableCell>
             </StyledTableRow>
           ))}
