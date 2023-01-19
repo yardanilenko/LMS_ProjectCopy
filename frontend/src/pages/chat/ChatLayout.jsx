@@ -16,7 +16,7 @@ function ChatLayout() {
             <CssBaseline/>
             <Box
                 component="nav"
-                sx={{width: {sm: drawerWidth}, flexShrink: {sm: 0}}}
+                sx={{width: {sm: drawerWidth}, flexShrink: {sm: 0}, paddingRight:"24px", borderRight:"1px solid #e0e0e0"}}
                 aria-label="mailbox folders"
             >
                 <div style={{height:"40px"}}></div>
@@ -29,7 +29,7 @@ function ChatLayout() {
             </Box>
             <Box
                 component="main"
-                sx={{flexGrow: 1, paddingLeft:"24px", width: {sm: `calc(100% - ${drawerWidth}px)`}}}
+                sx={{flexGrow: 1, width: {sm: `calc(100% - ${drawerWidth}px)`}}}
             >
                 <Chat />
             </Box>
