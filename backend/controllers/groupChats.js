@@ -1,5 +1,5 @@
 const {Op} = require('sequelize');
-const {UserChat, Room} = require('../db/models');
+const {UserChat, Room, User} = require('../db/models');
 
 exports.findOrCreateGroup = async (req, res) => {
     try {
@@ -31,10 +31,15 @@ exports.findOrCreateGroup = async (req, res) => {
 
 exports.getPublicRooms = async (req, res) => {
     try {
-        const rooms = await Room.findAll({
-            where: {
+        const user = await User.findByPk(req.session.currentUserId);
+        const condition = {
                 name: {[Op.ne]: null},
-            }
+        }
+        if (req.session.currentRole === 'student') {
+            condition.group_id = user.group_id;
+        }
+        const rooms = await Room.findAll({
+            where: condition
         });
         res.json({rooms});
     } catch (error) {

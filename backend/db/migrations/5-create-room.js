@@ -12,6 +12,15 @@ module.exports = {
       name: {
         type: Sequelize.TEXT
       },
+      group_id: {
+        type: Sequelize.INTEGER,
+        references: {
+        model: "Groups",
+        key: "id",
+      },
+          onDelete: 'cascade',
+          onUpdate: 'cascade',
+        },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
@@ -22,7 +31,7 @@ module.exports = {
       }
     });
   },
-  async down(queryInterface, Sequelize) {
+  async down(queryInterface) {
     await queryInterface.dropTable('Rooms');
   }
 };

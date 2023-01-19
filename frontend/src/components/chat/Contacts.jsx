@@ -21,7 +21,7 @@ function Contacts() {
 
     return (
         <div>
-            <h3>Contacts</h3>
+            <h3>Личные сообщения</h3>
             <List sx={{ width: '100%', maxWidth: 360}}>
                 {chats && chats.map((chat) => (
                     <ContactItem chat={chat} />
@@ -36,7 +36,7 @@ function ContactItem({chat}) {
     const dispatch = useDispatch();
 
     return (
-        <ListItem sx={{cursor:"pointer"}} key={chat.id}
+        <ListItem sx={{cursor:"pointer", borderBottom:"1px solid #e0e0e0"}} key={chat.id}
                   onClick={() => {
                       dispatch(setChatIdAC(chat.id));
                   }}>
