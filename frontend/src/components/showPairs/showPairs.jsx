@@ -35,6 +35,8 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 export default function ShowPairs() {
 
+  const [groupname, setGroupname] = React.useState();
+
   const {id} = useParams();
 
   const myId = +id;
@@ -43,6 +45,7 @@ export default function ShowPairs() {
   const pairs = useSelector((store) => store.pair);
   const groups = useSelector((store) => store.group);
   const users = useSelector((store) => store.userInfo);
+  const getUserRole = useSelector((store) => store.profile.userRole);
   const groupName = groups[0]?.name;
 
   function createData(week1, week2, week3, week4) {
@@ -148,6 +151,20 @@ return myRows;
 
 let rows = (pairs !== undefined && myArray !== undefined && pairs.length > 0) ? myArray : firstArr;
 
+React.useEffect(() => {
+  const dataFetch = async () => {
+    const data = await (
+      await fetch(
+        "/userinfo"
+      )
+    ).json();
+    setGroupname(data.Group.name);
+    console.log('DATA', data);
+  };
+  dataFetch();
+
+}, []);
+
 
 
   return (
@@ -156,10 +173,16 @@ let rows = (pairs !== undefined && myArray !== undefined && pairs.length > 0) ? 
         <tbody>
           <TableRow >
             <TableCell style={{ display: 'flex', position: 'relative', color: "white", backgroundColor: "#44014C", alignItems: 'center'}} align="center" colSpan={4}>
+            { (getUserRole !== 'student') ? (
+              <>
               <BackButtonWhite sx={{position: 'absolute', color: 'white'}}/>
               <div style={{display: "inline-block", textAlign: "center", width: "100%"}}>
                 <Typography variant="h6" align="center" sx={{fontWeight: 'bold'}}>{groupName}</Typography>
               </div>
+              </>
+    ) : (<div style={{display: "inline-block", textAlign: "center", width: "100%"}}>
+    <Typography variant="h6" align="center" sx={{fontWeight: 'bold'}}>{groupname}</Typography>
+  </div>)}
             </TableCell>
           </TableRow>
         </tbody>
