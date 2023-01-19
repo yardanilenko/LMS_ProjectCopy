@@ -5,7 +5,6 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
-import ImageIcon from '@mui/icons-material/Image';
 import {setChatIdAC} from "../../store/chatId/actionsCreators";
 import {useDispatch, useSelector} from "react-redux";
 import {initGroupChatsAC} from "../../store/groupChats/actionsCreators";
@@ -59,9 +58,7 @@ function ChatItem({chat, handleOpenGroupChat}) {
             handleOpenGroupChat(chat.id, chat.name);
         }}>
             <ListItemAvatar>
-                <Avatar>
-                    <ImageIcon />
-                </Avatar>
+                <Avatar src={`https://avatars.dicebear.com/api/bottts/${chat.name}.svg`} />
             </ListItemAvatar>
             <ListItemText primary={chat.name} secondary="Recently" />
         </ListItem>
