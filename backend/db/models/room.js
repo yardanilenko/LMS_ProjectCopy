@@ -11,10 +11,12 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       this.hasMany(models.User, { foreignKey: "group_id" });
+      this.belongsTo(models.Group, { foreignKey: "group_id" });
     }
   }
   Room.init({
-    name: DataTypes.TEXT
+    name: DataTypes.TEXT,
+    group_id: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Room',

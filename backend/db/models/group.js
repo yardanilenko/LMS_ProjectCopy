@@ -15,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
       this.hasMany(models.Vote, { foreignKey: "group_id" });
       this.hasMany(models.UserInfo, { foreignKey: "group_id" });
       this.hasMany(models.ArrayPair, { foreignKey: "group_id" });
+      this.belongsTo(models.Room, { foreignKey: "group_id" });
     }
   }
   Group.init({
