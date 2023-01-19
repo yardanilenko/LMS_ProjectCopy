@@ -14,7 +14,7 @@ exports.group = async (req, res) => {
   });
     res.send(group);
   } catch (error) {
-      console.log('ERROR LIST==>', error.message);
+      console.log('ERROR GROUP==>', error.message);
   }
 }
 
