@@ -12,6 +12,10 @@ import { initMaterialsAC } from '../../store/materials/actionsCreators';
 import { initGroupsAC } from '../../store/groups/actionsCreators';
 import { initUserInfoAC } from '../../store/userInfo/actionsCreators';
 import { useNavigate } from 'react-router-dom';
+import Alert from '@mui/material/Alert';
+import IconButton from '@mui/material/IconButton';
+import Collapse from '@mui/material/Collapse';
+import CloseIcon from '@mui/icons-material/Close';
 
 export default function Materials2() {
 
@@ -24,6 +28,7 @@ export default function Materials2() {
   // const getUserRole = useSelector((store) => store.userInfo[0].groupId);
   const getUserId = useSelector((store) => store.profile.userId);
   // console.log(getUserRole)
+  const [open, setOpen] = React.useState(false);
  
   
   useEffect(() => {
@@ -92,6 +97,7 @@ export default function Materials2() {
 
 
 const sendFile = async () => {
+  setOpen(true)
   try {
     const data = new FormData()
     // data.append('file', file, file.name)
@@ -157,6 +163,26 @@ const sendFile = async () => {
   return (
     <>
     { (getUserRole === 'teacher') ? (
+      <>
+      <Collapse in={open}>
+        <Alert
+          action={
+            <IconButton
+              aria-label="close"
+              color="inherit"
+              size="small"
+              onClick={() => {
+                setOpen(false);
+              }}
+            >
+              <CloseIcon fontSize="inherit" />
+            </IconButton>
+          }
+          sx={{ mb: 2 }}
+        >
+          Лекция успешно добавлена!
+        </Alert>
+      </Collapse>
     <Grid container spacing={2} columns={16}>
     <Grid item xs={8}>
     <h2>Архив лекций</h2>
@@ -173,9 +199,9 @@ const sendFile = async () => {
       onClick={preventDefault}
     >
     {group.map((item,id) => 
-    {return (      <Link onClick={() => {navigate(`/lectures/${item.id}`)}} underline="hover">
+    {return (      <><Link onClick={() => {navigate(`/lectures/${item.id}`)}} underline="hover">
         {item.name}
-      </Link>)}
+      </Link><br/></>)}
     )}
     </Box>
     </Grid>
@@ -190,6 +216,8 @@ const sendFile = async () => {
           maxRows={4}
 
         />
+        <br/>
+        <br/>
             <TextField
           onChange={formHandler}
           id="outlined-multiline-flexible"
@@ -199,12 +227,16 @@ const sendFile = async () => {
           maxRows={4}
 
         />
+        <br/>
+        <br/>
               <Button variant="contained" component="label">
         Дополнительные материалы
         <input 
         // hidden accept="image/*" multiple type="file" 
         multiple type="file" hidden accept="application/pdf, application/zip, application/vnd.rar" onChange={handleChangeFile}/>
       </Button>
+      <br/>
+      <br/>
       <Autocomplete
       disablePortal
       id="combo-box-demo"
@@ -217,13 +249,14 @@ const sendFile = async () => {
       sx={{ width: 300 }}
       renderInput={(params) => <TextField {...params} label="Группа" />}
     />
+    <br/>
       <Button variant="contained" color="success" onClick={sendFile}
     //   onClick={updateInfo}
       >Опубликовать
       </Button>
     </Grid>
     </Grid>
-    ) : (<div>Идет загрузка ....</div>)
+    </>) : (<div>Идет загрузка ....</div>)
     }
     </>
   )
